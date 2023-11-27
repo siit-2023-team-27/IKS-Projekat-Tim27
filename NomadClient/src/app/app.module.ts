@@ -8,6 +8,8 @@ import {LayoutModule} from "./layout/layout.module";
 import {AccountModule} from "./account/account.module";
 import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
+import {AccommodationModule} from "./accommodation/accommodation.module";
+import {HttpClientModule, HttpClient} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     AccountModule,
     RouterOutlet,
     AppRoutingModule,
+    AccommodationModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
