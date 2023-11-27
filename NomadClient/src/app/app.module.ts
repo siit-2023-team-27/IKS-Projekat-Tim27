@@ -9,6 +9,8 @@ import {AccountModule} from "./account/account.module";
 import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {AccommodationModule} from "./accommodation/accommodation.module";
+import {HttpClientModule, HttpClient} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AccountModule,
     RouterOutlet,
     AppRoutingModule,
+    AccommodationModule,
+    HttpClientModule,
     NoopAnimationsModule,
   ],
   providers: [],

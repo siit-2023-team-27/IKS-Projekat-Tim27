@@ -20,6 +20,10 @@ export class NavigationComponent {
   faUser = faUser;
   faFileLines = faFileLines;
   faBars = faBars;
+  protected readonly faSearch = faSearch;
+  protected readonly faLocation = faLocation;
+  protected readonly faLocationArrow = faLocationArrow;
+  protected readonly faPeopleGroup = faPeopleGroup;
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
@@ -50,8 +54,4 @@ export class NavigationComponent {
     }
   }
 
-  protected readonly faSearch = faSearch;
-  protected readonly faLocation = faLocation;
-  protected readonly faLocationArrow = faLocationArrow;
-  protected readonly faPeopleGroup = faPeopleGroup;
 }
