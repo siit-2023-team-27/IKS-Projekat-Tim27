@@ -1,8 +1,8 @@
 <div class="w-full bg-nomad-light h-16 ">
   <div class="flex flex-row h-full justify-between 2xl:ml-80 2xl:mr-80 md:ml-32 md:mr-32 sm:ml-8 sm:mr-8 mr-4 gap-16 items-center">
-    <img src="../../../assets/images/logo.png" alt="Logo" class="object-scale-down h-12 cursor-pointer"/>
+    <img src="../../../assets/images/logo.png" alt="Logo" class="object-scale-down h-12 cursor-pointer hover:scale-125 duration-75 ease-in-out"/>
     <div class="flex flex-row md:gap-4 gap-16 items-center">
-      <div class="flex flex-row gap-2 items-center">
+      <div class="flex flex-row gap-2 items-center hover:scale-110 hover:text-gray-900">
         <fa-icon [routerLink]="['/login']" class="text-2xl cursor-pointer" [icon]="faPersonWalkingLuggage"></fa-icon>
         <p [routerLink]="['/login']" class="cursor-pointer ">LOGIN</p>
       </div>
@@ -10,7 +10,9 @@
     </div>
   </div>
 </div>
+
   <nav *ngIf="navBar" class="absolute w-full bg-nomad-nav-bar md:h-20 h-80 md:block ">
+
     <div class="flex md:flex-row h-full justify-between 2xl:ml-96 2xl:mr-96 md:ml-48 md:mr-48 sm:ml-16 sm:mr-16 items-center flex-col gap-8 top-[9%] ">
       <div class="flex flex-col items-center">
         <fa-icon [routerLink]="['/login']" class="text-2xl cursor-pointer" [icon]="faEnvelope"></fa-icon>
@@ -29,3 +31,5 @@
         <p [routerLink]="['/login']" class="text-white cursor-pointer">Profile</p>
       </div>
     </div>
+
+  </nav>

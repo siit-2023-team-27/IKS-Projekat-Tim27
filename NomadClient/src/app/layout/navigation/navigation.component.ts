@@ -28,14 +28,18 @@ export class NavigationComponent {
     this.getScreenWidth = window.innerWidth;
     if(this.getScreenWidth<=768){
       this.navBar=false;
+    }else{
+      this.navBar = true;
     }
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
-    
+
     if(this.getScreenWidth<=768){
       this.navBar=false;
+    }else {
+      this.navBar = true;
     }
   }
 }
