@@ -1,5 +1,11 @@
 import { Component, HostListener } from '@angular/core';
-import {faPersonWalkingLuggage, faBars} from "@fortawesome/free-solid-svg-icons";
+import {
+  faPersonWalkingLuggage,
+  faBars,
+  faMagnifyingGlass,
+  faSearch,
+  faLocation, faLocationArrow, faPeopleGroup
+} from "@fortawesome/free-solid-svg-icons";
 import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 
 @Component({
@@ -14,6 +20,11 @@ export class NavigationComponent {
   faUser = faUser;
   faFileLines = faFileLines;
   faBars = faBars;
+  protected readonly faSearch = faSearch;
+  protected readonly faLocation = faLocation;
+  protected readonly faLocationArrow = faLocationArrow;
+  protected readonly faPeopleGroup = faPeopleGroup;
+  faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
   navLinks = document.querySelector('.nav-links')
@@ -28,8 +39,8 @@ export class NavigationComponent {
     this.getScreenWidth = window.innerWidth;
     if(this.getScreenWidth<=768){
       this.navBar=false;
-    }else{
-      this.navBar = true;
+    }else {
+      this.navBar = true
     }
 }
   @HostListener('window:resize', ['$event'])
@@ -39,7 +50,8 @@ export class NavigationComponent {
     if(this.getScreenWidth<=768){
       this.navBar=false;
     }else {
-      this.navBar = true;
+      this.navBar = true
     }
   }
+
 }

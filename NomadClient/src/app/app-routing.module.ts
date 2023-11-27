@@ -9,7 +9,6 @@ import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/a
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'home', component: NavigationComponent},
   {path: 'accommodations', component: AccommodationCardsComponent}
 ]
 

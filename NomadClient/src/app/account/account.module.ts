@@ -9,7 +9,7 @@ import {RouterLink} from "@angular/router";
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
