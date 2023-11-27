@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {faPersonWalkingLuggage, faBars, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 import {
@@ -7,13 +7,23 @@ import {
   initTE,
   Select
 } from "tw-elements";
+import {User} from "../../infrastructure/auth/model/user.model";
+import {AuthService} from "../../infrastructure/auth/auth.service";
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
+
+   user: User = {
+    id: 0,
+    username: 'admin',
+    role: 'admin',
+  };
+  constructor() {}
+
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faHeart = faHeart;
   faEnvelope = faEnvelope;
@@ -23,7 +33,6 @@ export class NavigationComponent {
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
-  navLinks = document.querySelector('.nav-links')
   showDropDownMenu(){
     if (this.navBar){
       this.navBar=false;
@@ -40,10 +49,6 @@ export class NavigationComponent {
     }
 
     initTE({ Datepicker, Input, Select });
-    const datepickerDisablePast = document.getElementById('datepicker-disable-past');
-    new Datepicker(datepickerDisablePast, {
-      disablePast: true
-    });
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -54,5 +59,8 @@ export class NavigationComponent {
     }else {
       this.navBar = true
     }
+  }
+
+  onLogout(): void {
   }
 }
