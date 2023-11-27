@@ -1,0 +1,27 @@
+<div class = "content">
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+        <div fxFlex="25%" *ngFor="let accommodation of accommodations" >
+            <div
+            class=" bg-nomad-gray rounded-3xl">
+                <a href="#!">
+                    <img 
+                    class="rounded-3xl"
+                    src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"
+                    alt="" />
+                </a>
+                <div class="p-6">
+                    <h5
+                    class="mb-2 text-xl font-medium leading-tight ">
+                    {{accommodation.name}}
+                    </h5>
+                    <p class="mb-4 text-base ">
+                        $ {{accommodation.price}} Night
+                    </p>
+                    <p class="mb-4 text-base ">
+                        <fa-icon class="text-2xl cursor-pointer" [icon]="faStarHalfStroke"></fa-icon> {{accommodation.rating}}
+                    </p>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>

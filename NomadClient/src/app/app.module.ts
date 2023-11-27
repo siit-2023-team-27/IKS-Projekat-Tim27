@@ -8,11 +8,14 @@ import {LayoutModule} from "./layout/layout.module";
 import {AccountModule} from "./account/account.module";
 import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
+import { AllAccommodationComponent } from './all-accommodation/all-accommodation.component';
+import { FilterAccommodationComponent } from './filter-accommodation/filter-accommodation.component';
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    
+      ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
@@ -20,6 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
     AccountModule,
     RouterOutlet,
     AppRoutingModule,
+    AllAccommodationComponent,
+    FilterAccommodationComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
