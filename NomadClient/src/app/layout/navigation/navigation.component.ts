@@ -1,12 +1,12 @@
 import { Component, HostListener } from '@angular/core';
-import {faPersonWalkingLuggage, faBars, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
-import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 import {
-  Datepicker,
-  Input,
-  initTE,
-  Select
-} from "tw-elements";
+  faPersonWalkingLuggage,
+  faBars,
+  faMagnifyingGlass,
+  faSearch,
+  faLocation, faLocationArrow, faPeopleGroup
+} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 
 @Component({
   selector: 'app-navigation',
@@ -38,12 +38,6 @@ export class NavigationComponent {
     }else {
       this.navBar = true
     }
-
-    initTE({ Datepicker, Input, Select });
-    const datepickerDisablePast = document.getElementById('datepicker-disable-past');
-    new Datepicker(datepickerDisablePast, {
-      disablePast: true
-    });
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -55,4 +49,9 @@ export class NavigationComponent {
       this.navBar = true
     }
   }
+
+  protected readonly faSearch = faSearch;
+  protected readonly faLocation = faLocation;
+  protected readonly faLocationArrow = faLocationArrow;
+  protected readonly faPeopleGroup = faPeopleGroup;
 }

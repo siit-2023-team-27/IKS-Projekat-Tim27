@@ -1,0 +1,41 @@
+
+<div class="flex bg-white m-auto rounded-3xl p-7 items-center justify-around gap-8 shadow-2xl">
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      <fa-icon [icon]="faLocationArrow" class="pr-2"></fa-icon>
+      Where</mat-label>
+    <input type="text"
+           placeholder="Pick destination"
+           aria-label="Where"
+           matInput>
+
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      When</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      <fa-icon [icon]="faPeopleGroup" class="pr-2"></fa-icon>
+      Who</mat-label>
+    <input type="text"
+           placeholder="Who"
+           aria-label="Who"
+           matInput>
+
+  </mat-form-field>
+
+  <button class="rounded-3xl bg-nomad-darker text-white text-lg p-3 pl-6 pr-6 shadow-2xl hover:scale-110">
+    <fa-icon [icon]="faSearch" class="pr-3"></fa-icon>
+    Search</button>
+
+</div>
