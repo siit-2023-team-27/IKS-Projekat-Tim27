@@ -1,38 +1,33 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {faPersonWalkingLuggage, faBars, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
-import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
+import { Component, HostListener } from '@angular/core';
 import {
-  Datepicker,
-  Input,
-  initTE,
-  Select
-} from "tw-elements";
-import {User} from "../../infrastructure/auth/model/user.model";
-import {AuthService} from "../../infrastructure/auth/auth.service";
+  faPersonWalkingLuggage,
+  faBars,
+  faMagnifyingGlass,
+  faSearch,
+  faLocation, faLocationArrow, faPeopleGroup
+} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit{
-
-   user: User = {
-    id: 0,
-    username: 'admin',
-    role: 'admin',
-  };
-  constructor() {}
-
+export class NavigationComponent {
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faHeart = faHeart;
   faEnvelope = faEnvelope;
   faUser = faUser;
   faFileLines = faFileLines;
   faBars = faBars;
+  protected readonly faSearch = faSearch;
+  protected readonly faLocation = faLocation;
+  protected readonly faLocationArrow = faLocationArrow;
+  protected readonly faPeopleGroup = faPeopleGroup;
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
+  navLinks = document.querySelector('.nav-links')
   showDropDownMenu(){
     if (this.navBar){
       this.navBar=false;
@@ -47,8 +42,6 @@ export class NavigationComponent implements OnInit{
     }else {
       this.navBar = true
     }
-
-    initTE({ Datepicker, Input, Select });
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -61,6 +54,4 @@ export class NavigationComponent implements OnInit{
     }
   }
 
-  onLogout(): void {
-  }
 }

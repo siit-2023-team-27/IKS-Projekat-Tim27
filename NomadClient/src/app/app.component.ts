@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./infrastructure/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,13 @@ import {AuthService} from "./infrastructure/auth/auth.service";
 })
 export class AppComponent {
   title = 'NomadClient';
-  constructor(
-  ) {}
-  ngOnInit(): void {
-    //this.checkIfLogged();
-  }
-  onLogout(): void {
+  constructor(private router: Router) {}
+
+  isLoginPage(): boolean {
+    return this.router.url === "/login";
   }
 
-  private checkIfLogged(): void {
+  isRegisterPage(): boolean{
+    return this.router.url === "/register";
   }
 }
