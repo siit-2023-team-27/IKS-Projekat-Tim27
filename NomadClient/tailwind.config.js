@@ -11,7 +11,9 @@ module.exports = {
         'nomad-pink': "#B59DA4",
         'nomad-dark': '#551B14',
         'nomad-darker': '#421510',
-        'nomad-nav-bar':'#C3BBAB'
+        'nomad-nav-bar':'#C3BBAB',
+        'nomad-gray':'#b6b0b6',
+        'nomad-gray-hover':'#969296'
       }
     },
   },

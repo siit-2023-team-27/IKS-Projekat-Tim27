@@ -35,7 +35,6 @@ export class NavigationComponent {
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
-  navLinks = document.querySelector('.nav-links')
   showDropDownMenu(){
     if (this.navBar){
       this.navBar=false;

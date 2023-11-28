@@ -6,11 +6,13 @@ import {NavigationComponent} from "./layout/navigation/navigation.component";
 import {RegisterComponent} from "./account/register/register.component";
 import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/accommodation-cards.component";
 import {AuthGuard} from "./infrastructure/auth/auth.guard";
+import {ProfileComponent} from "./account/profile/profile.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'home', component: AccommodationCardsComponent}
+  {path: 'home', component: AccommodationCardsComponent},
+  {path: 'profile', component: ProfileComponent}
 ]
  // , canActivate: [AuthGuard]
 @NgModule({
