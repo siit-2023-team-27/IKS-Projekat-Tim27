@@ -10,13 +10,18 @@ import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { AllAccommodationComponent } from './all-accommodation/all-accommodation.component';
 import { FilterAccommodationComponent } from './filter-accommodation/filter-accommodation.component';
+import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import {BrowserAnimationsModule}  from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     
+    
       ],
   imports: [
+    AccommodationDetailsComponent,
     BrowserModule,
     FontAwesomeModule,
     LayoutModule,
@@ -24,7 +29,8 @@ import { FilterAccommodationComponent } from './filter-accommodation/filter-acco
     RouterOutlet,
     AppRoutingModule,
     AllAccommodationComponent,
-    FilterAccommodationComponent
+    FilterAccommodationComponent,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

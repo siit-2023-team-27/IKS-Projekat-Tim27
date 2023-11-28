@@ -17,10 +17,10 @@ export class AllAccommodationComponent implements OnInit {
   faStarHalfStroke = faStarHalfStroke
 	constructor() {
     this.accommodations = [
-      {_id : 0, description : "bla bla", name : "bla", rating : 4.9, price : 100},
-      {_id : 1, description : "bla bla", name : "bla", rating : 4.9, price : 100},
-      {_id : 2, description : "bla bla", name : "bla", rating : 4.9, price : 100},
-      {_id : 3, description : "bla bla", name : "bla", rating : 4.9, price : 100}
+      {_id : 0, description : "bla bla", name : "bla", rating : 4.9, price : 100, images: ["https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"], amenities : [{_id:0, name: "wifi", icon: "faStarHalfStroke"}]},
+      {_id : 0, description : "bla bla", name : "bla", rating : 4.9, price : 100, images: ["https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"], amenities : [{_id:0, name: "wifi", icon: "faStarHalfStroke"}]},
+      {_id : 0, description : "bla bla", name : "bla", rating : 4.9, price : 100, images: ["https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"], amenities : [{_id:0, name: "wifi", icon: "faStarHalfStroke"}]},
+      {_id : 0, description : "bla bla", name : "bla", rating : 4.9, price : 100, images: ["https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"], amenities : [{_id:0, name: "wifi", icon: "faStarHalfStroke"}]}
     ]
   }
 
