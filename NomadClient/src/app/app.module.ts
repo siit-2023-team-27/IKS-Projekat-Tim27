@@ -10,7 +10,10 @@ import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {AccommodationModule} from "./accommodation/accommodation.module";
-import {HttpClientModule, HttpClient} from "@angular/common/http";
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {JwtInterceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
+import {AuthModule} from "./infrastructure/auth/auth.module";
+import {AuthService} from "./infrastructure/auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -27,9 +30,14 @@ import {HttpClientModule, HttpClient} from "@angular/common/http";
     HttpClientModule,
     NoopAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true,
+  },AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

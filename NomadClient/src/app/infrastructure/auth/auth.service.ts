@@ -6,7 +6,11 @@ import {Router} from "@angular/router";
 import {TokenStorage} from "./jwt/token.service";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Login} from "./model/login.model";
-
+import {environment} from "../../../env/env";
+import {Injectable} from "@angular/core";
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService{
 
   user$ = new BehaviorSubject<User>({username: "", id:0, role:""});
@@ -15,8 +19,28 @@ export class AuthService{
               private tokenStorage: TokenStorage,
               private router: Router){}
 
-  login(){}
-  register(){}
+  login(login: Login): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(environment.apiHost + 'users/login', login)
+      .pipe(
+        tap((authenticationResponse) => {
+          this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
+          alert(authenticationResponse.id)
+          this.setUser();
+        })
+      );
+  }
+
+  // register(registration: Registration): Observable<AuthResponse> {
+  //   return this.http
+  //     .post<AuthResponse>(environment.apiHost + 'users', registration)
+  //     .pipe(
+  //       tap((authenticationResponse) => {
+  //         this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
+  //         this.setUser();
+  //       })
+  //     );
+  // }
   logout():void{
     this.router.navigate(['/home']).then(_=>{
       this.tokenStorage.clear();

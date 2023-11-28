@@ -13,8 +13,10 @@ export class LoginComponent {
   windowHeight: number = window.innerHeight;
   windowWidth: number = window.innerWidth;
   constructor(
+    private authService: AuthService,
     private router: Router
   ) {}
+
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -25,12 +27,18 @@ export class LoginComponent {
       password: this.loginForm.value.password || "",
     };
 
-    if(login.username == "admin" && login.password == "admin"){
-      this.router.navigate(['/home']);
-    }else {
-      alert(login.username)
+    // if(login.username == "admin" && login.password == "admin"){
+    //   this.router.navigate(['/accommodations']);
+    // }else {
+    //   alert(login.username)
+    // }
+    if (this.loginForm.valid) {
+      this.authService.login(login).subscribe({
+        next: () => {
+          this.router.navigate(['/accommodations']);
+        },
+      });
     }
-
     }
 
 }
