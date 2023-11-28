@@ -8,6 +8,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {Login} from "./model/login.model";
 import {environment} from "../../../env/env";
 import {Injectable} from "@angular/core";
+import {LoginResponse} from "./model/login.response.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,33 +20,21 @@ export class AuthService{
               private tokenStorage: TokenStorage,
               private router: Router){}
 
-  login(login: Login): Observable<AuthResponse> {
+  login(login: Login): Observable<LoginResponse> {
     return this.http
-      .post<AuthResponse>(environment.apiHost + 'users/login', login)
+      .post<LoginResponse>(environment.apiHost + 'users/login', login)
       .pipe(
         tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
-          alert(authenticationResponse.id)
+          this.tokenStorage.saveAccessToken(authenticationResponse.role);
           this.setUser();
         })
       );
   }
 
-  // register(registration: Registration): Observable<AuthResponse> {
-  //   return this.http
-  //     .post<AuthResponse>(environment.apiHost + 'users', registration)
-  //     .pipe(
-  //       tap((authenticationResponse) => {
-  //         this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
-  //         this.setUser();
-  //       })
-  //     );
-  // }
   logout():void{
-    this.router.navigate(['/home']).then(_=>{
-      this.tokenStorage.clear();
-      this.user$.next({username: "", id:0, role:""})
-    })
+    this.tokenStorage.clear();
+    this.user$.next({username: "", id:0, role:""})
+    this.router.navigate(['/home']);
   }
 
   checkIfLogged(){
@@ -56,15 +45,11 @@ export class AuthService{
     this.setUser();
   }
 
-  private setUser():void{
-    const jwtHelperService = new JwtHelperService();
-    const accessToken = this.tokenStorage.getAccessToken() || "";
+  private setUser(): void {
     const user: User = {
-      id: +jwtHelperService.decodeToken(accessToken).id,
-      username: jwtHelperService.decodeToken(accessToken).username,
-      role: jwtHelperService.decodeToken(accessToken)[
-        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-        ],
+      id: 0,
+      username: "",
+      role: this.tokenStorage.getAccessToken()|| "",
     };
     this.user$.next(user);
   }

@@ -27,18 +27,12 @@ export class LoginComponent {
       password: this.loginForm.value.password || "",
     };
 
-    // if(login.username == "admin" && login.password == "admin"){
-    //   this.router.navigate(['/accommodations']);
-    // }else {
-    //   alert(login.username)
-    // }
-    if (this.loginForm.valid) {
       this.authService.login(login).subscribe({
         next: () => {
-          this.router.navigate(['/accommodations']);
+          this.router.navigate(['/home']);
         },
       });
     }
-    }
+
 
 }

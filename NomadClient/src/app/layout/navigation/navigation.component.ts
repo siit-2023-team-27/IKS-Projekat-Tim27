@@ -4,6 +4,8 @@ import {
   faBars,
   faMagnifyingGlass,
   faSearch,
+  faBolt,
+  faList, faUsers,  faArrowRightFromBracket,
   faLocation, faLocationArrow, faPeopleGroup
 } from "@fortawesome/free-solid-svg-icons";
 import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
@@ -21,6 +23,10 @@ export class NavigationComponent {
   faEnvelope = faEnvelope;
   faUser = faUser;
   faFileLines = faFileLines;
+  faBolt = faBolt;
+  faArrowRightFromBracket= faArrowRightFromBracket;
+  faList = faList
+  faUsers = faUsers;
   faBars = faBars;
   protected readonly faSearch = faSearch;
   protected readonly faLocation = faLocation;
