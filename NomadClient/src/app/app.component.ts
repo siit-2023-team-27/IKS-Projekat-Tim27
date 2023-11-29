@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,13 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class AppComponent {
   title = 'NomadClient';
+  constructor(private router: Router) {}
+
+  isLoginPage(): boolean {
+    return this.router.url === "/login";
+  }
+
+  isRegisterPage(): boolean{
+    return this.router.url === "/register";
+  }
 }

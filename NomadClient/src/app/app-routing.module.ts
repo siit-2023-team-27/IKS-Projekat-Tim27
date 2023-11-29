@@ -5,14 +5,16 @@ import {LoginComponent} from "./account/login/login.component";
 import {NavigationComponent} from "./layout/navigation/navigation.component";
 import {RegisterComponent} from "./account/register/register.component";
 import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
+import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/accommodation-cards.component";
+import {AuthGuard} from "./infrastructure/auth/auth.guard";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
-  {path: 'home', component: NavigationComponent},
-  {path: 'accommodation-details', component: AccommodationDetailsComponent}
+  {path: 'accommodation-details', component: AccommodationDetailsComponent},
+  {path: 'home', component: AccommodationCardsComponent}
 ]
-
+ // , canActivate: [AuthGuard]
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
