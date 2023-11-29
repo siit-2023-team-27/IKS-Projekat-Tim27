@@ -1,0 +1,32 @@
+<div>
+    <h2 class = "font-roboto font-bold text-3xl underline pl-4">Reviews</h2>
+    <div  *ngFor="let review of reviews">
+        
+                <div fxLayout="row wrap"  fxLayoutGap="16px" class = "pt-5">
+                    <div fxFlex="4%">
+                        <div ><i class="fa fa-circle-user pb-5 text-3xl "></i> 
+                        </div>
+                    </div>
+                    <div fxFlex="60%">
+                        <div class="star-rating">
+                            <i class="fa fa-star text-3xl text-nomad-dark" *ngFor="let star of numSequence(review.rating)"></i>
+                            <i class="fa fa-star-half text-3xl text-nomad-dark" *ngIf="review.rating % 1 !== 0"></i>
+                        </div>
+                        <div class="font-bold text-3xl "> 
+                            {{review.name}}
+                        </div>
+                        
+                    
+                        <div font-thin>
+                            {{review.text}}
+                        </div>
+                    </div>
+                    <div fxFlex="10%">
+                        <button mat-mini-fab class="nomad-brown">        <i class="fa fa-exclamation text-3xl text-white"></i>
+
+                        </button>
+
+                    </div>
+                </div>
+                
+</div>

@@ -1,0 +1,29 @@
+<div class = "rounded-3xl bg-nomad-gray grid  lg:grid-cols-2 grid-cols-1 gap-1">
+    <div class=" p-8">
+        <h2><span class = "font-bold">$ {{price}}</span> Night</h2>
+        <mat-form-field subscriptSizing="dynamic">
+            <mat-label>
+              When</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date">
+              <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-calendar></mat-calendar>
+        </mat-form-field>
+    </div>
+    <div class="pt-10 mt-10 col">
+        <mat-form-field>
+        <mat-label>Guests</mat-label>
+        <mat-select>
+            <mat-option>1</mat-option>
+            <mat-option>2</mat-option>
+            <mat-option>3</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <br>
+        <button mat-button class="nomad-button">Reserve</button>
+    </div>
+    
+</div>
