@@ -5,5 +5,6 @@ export interface User {
   username:string
   password:string
   phoneNumber:string
-  role:string
+  userType:string
+  suspended:boolean
 }

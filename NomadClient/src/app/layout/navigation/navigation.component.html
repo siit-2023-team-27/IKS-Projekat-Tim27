@@ -1,6 +1,6 @@
 <div class="w-full bg-nomad-light h-16 ">
   <div class="flex flex-row h-full justify-between 2xl:ml-80 2xl:mr-80 md:ml-32 md:mr-32 sm:ml-8 sm:mr-8 mr-4 gap-16 items-center">
-    <img src="../../../assets/images/logo.png" alt="Logo" class="object-scale-down h-12 cursor-pointer"/>
+    <img [routerLink]="['/home']" src="../../../assets/images/logo.png" alt="Logo" class="object-scale-down h-12 cursor-pointer"/>
     <div class="flex flex-row md:gap-4 gap-16 items-center">
       <div *ngIf="user && user.role === ''" [routerLink]="['/login']" class="flex flex-row gap-2 items-center rounded-lg hover:bg-nomad-nav-bar h-12 w-24">
         <fa-icon  class="text-2xl cursor-pointer" [icon]="faPersonWalkingLuggage"></fa-icon>
@@ -56,4 +56,4 @@
   </div>
 </nav>
 
-<app-search-bar *ngIf="user && (user.role === 'GUEST' || user.role ==='')" class="w-full flex items-center justify-center bg-nomad-light pt-10 pb-10"></app-search-bar>
+<app-search-bar *ngIf="isHomePage()" class="w-full flex items-center justify-center bg-nomad-light pt-10 pb-10"></app-search-bar>

@@ -25,7 +25,7 @@ export class AuthService{
       .post<LoginResponse>(environment.apiHost + 'users/login', login)
       .pipe(
         tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse.role);
+          this.tokenStorage.saveAccessToken(authenticationResponse);
           this.setUser();
         })
       );
@@ -38,7 +38,7 @@ export class AuthService{
   }
 
   checkIfLogged(){
-    const accessToken = this.tokenStorage.getAccessToken();
+    const accessToken = this.tokenStorage.getRole();
     if (accessToken == null) {
       return;
     }
@@ -47,9 +47,9 @@ export class AuthService{
 
   private setUser(): void {
     const user: User = {
-      id: 0,
+      id: +(this.tokenStorage.getId()|| 0),
       username: "",
-      role: this.tokenStorage.getAccessToken()|| "",
+      role: this.tokenStorage.getRole()|| "",
     };
     this.user$.next(user);
   }
