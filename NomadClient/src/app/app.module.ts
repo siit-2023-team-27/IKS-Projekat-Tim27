@@ -8,6 +8,9 @@ import {LayoutModule} from "./layout/layout.module";
 import {AccountModule} from "./account/account.module";
 import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
+import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
+import {BrowserAnimationsModule}  from '@angular/platform-browser/animations';
+import { AccommodationDetailViewModule } from './accommodation-detail-view/accommodation-detail-view.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {AccommodationModule} from "./accommodation/accommodation.module";
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -17,15 +20,19 @@ import {AuthService} from "./infrastructure/auth/auth.service";
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    
+    
+      ],
   imports: [
+    AccommodationDetailViewModule,
     BrowserModule,
     FontAwesomeModule,
     LayoutModule,
     AccountModule,
     RouterOutlet,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AccommodationModule,
     HttpClientModule,
     NoopAnimationsModule,
