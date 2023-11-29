@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import {MaterialModule} from "../infrastructure/material/material.module";
 
 
 
@@ -22,7 +23,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     CommonModule,
     FontAwesomeModule,
     RouterLink,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule,
+    MaterialModule
 
   ],
   exports: [

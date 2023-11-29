@@ -1,0 +1,83 @@
+
+<div class="flex xl:flex-row flex-col  flex-wrap justify-between  pb-12 2xl:ml-80 2xl:mr-80 xl:ml-32 xl:mr-32 sm:ml-8 sm:mr-8 mr-4 xl:gap-16 gap-4 items-center">
+  <div class="flex flex-col items-center gap-20 2xl:mt-32 mt-12">
+  <div class="flex flex-row bg-gray-100 rounded-3xl py-16 px-10 items-center justify-around gap-8 shadow-2xl">
+    <p class="bg-nomad-dark py-5 px-8 text-5xl text-white decoration-solid rounded-full">{{user.firstName.charAt(0)}}</p>
+    <p class="text-xl decoration-solid">{{user.firstName}} {{user.lastName}}</p>
+  </div>
+    <button class="flex flex-row rounded-xl w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+      Delete account
+    </button>
+  </div>
+
+  <div class="flex flex-col 2xl:mt-24 mt-12  rounded-3xl  py-16 px-16 md:w-[60%]  w-[90%]  border border-gray-400">
+    <div *ngIf="!isEditMode" class="flex flex-col divide-y divide-gray-400 gap-2" >
+      <div>
+        <p class="pl-3">Name and Surname</p>
+        <p class="pl-3 pt-3">{{user.firstName}} {{user.lastName}}</p>
+      </div>
+      <div>
+        <p class="pl-3 pt-3">Adress</p>
+        <p class="pl-3 pt-3">{{user.address}}</p>
+      </div>
+      <div>
+        <p class="pl-3 pt-3">Phone number</p>
+        <p class="pl-3 pt-3">{{user.phoneNumber}}</p>
+      </div>
+
+      <div >
+        <p class="pl-3 pt-3">Username</p>
+        <p class="pl-3 pt-3">{{user.username}}</p>
+      </div>
+      <div class="pb-5"></div>
+      <button (click)="turnEditMode()" class="flex flex-row rounded-xl 2xl:w-[30%] w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+        Edit account
+      </button>
+    </div>
+
+
+    <div *ngIf="isEditMode" class="flex flex-col gap-2" >
+      <div class="flex flex-row gap-2">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input matInput value="{{user.firstName}}">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Surname</mat-label>
+          <input matInput value="{{user.lastName}}">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row ">
+        <mat-form-field class="example-full-width">
+          <mat-label>Adress</mat-label>
+          <input matInput value="{{user.address}}">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone number</mat-label>
+          <input matInput value="{{user.phoneNumber}}">
+        </mat-form-field>
+      </div>
+
+      <div class="flex flex-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Username</mat-label>
+          <input matInput value="{{user.username}}">
+        </mat-form-field>
+      </div>
+      <div class="pb-5"></div>
+      <div class="flex flex-row gap-8">
+        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+          Save
+        </button>
+        <button (click)="exitEditMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+
+    <p class="pl-3 pt-5 text-l underline decoration-solid">Change password</p>
+  </div>
+</div>

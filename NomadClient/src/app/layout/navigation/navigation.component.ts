@@ -11,6 +11,7 @@ import {
 import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
 import {User} from "../../infrastructure/auth/model/user.model";
 import {AuthService} from "../../infrastructure/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -18,6 +19,7 @@ import {AuthService} from "../../infrastructure/auth/auth.service";
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
+  constructor(private authService: AuthService, private router:Router) {}
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faHeart = faHeart;
   faEnvelope = faEnvelope;
@@ -35,7 +37,9 @@ export class NavigationComponent {
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
   getScreenWidth: any;
-  navLinks = document.querySelector('.nav-links')
+  isHomePage(): boolean {
+    return this.router.url === "/home";
+  }
   showDropDownMenu(){
     if (this.navBar){
       this.navBar=false;
@@ -68,7 +72,7 @@ export class NavigationComponent {
 
   user: User | undefined;
 
-  constructor(private authService: AuthService) {}
+
 
   onLogout(): void {
     this.authService.logout();
