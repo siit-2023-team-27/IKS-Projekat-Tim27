@@ -1,9 +1,9 @@
-interface Amenity{
+export interface Amenity{
 	_id: number;
 	name: string;
 	icon: string;
 }
-interface Review{
+export interface Review{
 	_id: number;
 	name: string;
 	text: string;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Accommodation } from '../model/accommodation.model';
+import { Accommodation } from '../../model/accommodation.model';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {CommonModule} from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -15,14 +15,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { MatInputModule } from '@angular/material/input';
-
+import { AccommodationDetailViewModule } from '../accommodation-detail-view.module';
 @Component({
   selector: 'app-accommodation-details',
   templateUrl: './accommodation-details.component.html',
-  styleUrls: ['./accommodation-details.component.css'],
-  imports : [MatGridListModule, CommonModule, MatCardModule, MatDividerModule, FlexLayoutModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FontAwesomeModule,
-     MatInputModule],
-  standalone:true
+  styleUrls: ['./accommodation-details.component.css']
   
 })
 
@@ -30,6 +27,7 @@ export class AccommodationDetailsComponent implements OnInit{
   
   @Input() accommodation: Accommodation;
   @Input() accommodations: Accommodation[];
+  // @ViewChild(google.maps.Map, { static: false }) map!: google.maps.Map;
   faWifi
   faStar
 	constructor() {
@@ -53,7 +51,5 @@ export class AccommodationDetailsComponent implements OnInit{
   ngOnInit() {
    
   }
-  numSequence(n: number): Array<number> { 
-    return Array(Math.floor(n)); 
-  } 
+   
 }

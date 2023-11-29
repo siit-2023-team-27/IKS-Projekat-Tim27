@@ -6,7 +6,7 @@ import {NavigationComponent} from "./layout/navigation/navigation.component";
 import {RegisterComponent} from "./account/register/register.component";
 import { AllAccommodationComponent } from './all-accommodation/all-accommodation.component';
 import { FilterAccommodationComponent } from './filter-accommodation/filter-accommodation.component';
-import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},

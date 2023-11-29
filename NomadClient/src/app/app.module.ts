@@ -10,8 +10,9 @@ import {RouterOutlet} from "@angular/router";
 import { AppRoutingModule } from './app-routing.module';
 import { AllAccommodationComponent } from './all-accommodation/all-accommodation.component';
 import { FilterAccommodationComponent } from './filter-accommodation/filter-accommodation.component';
-import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
 import {BrowserAnimationsModule}  from '@angular/platform-browser/animations';
+import { AccommodationDetailViewModule } from './accommodation-detail-view/accommodation-detail-view.module';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {BrowserAnimationsModule}  from '@angular/platform-browser/animations';
     
       ],
   imports: [
-    AccommodationDetailsComponent,
+    AccommodationDetailViewModule,
     BrowserModule,
     FontAwesomeModule,
     LayoutModule,
