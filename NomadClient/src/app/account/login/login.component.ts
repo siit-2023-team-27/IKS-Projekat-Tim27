@@ -10,8 +10,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  windowHeight: number = window.innerHeight;
-  windowWidth: number = window.innerWidth;
+  // windowHeight: number = window.innerHeight;
+  // windowWidth: number = window.innerWidth;
   constructor(
     private authService: AuthService,
     private router: Router

@@ -28,6 +28,7 @@ import {MaterialModule} from "../infrastructure/material/material.module";
   ],
   exports: [
     NavigationComponent,
+    SearchBarComponent,
   ]
 })
 export class LayoutModule { }

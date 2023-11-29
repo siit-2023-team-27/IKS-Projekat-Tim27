@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./account/login/login.component";
 import {NavigationComponent} from "./layout/navigation/navigation.component";
 import {RegisterComponent} from "./account/register/register.component";
+import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
 import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/accommodation-cards.component";
 import {AuthGuard} from "./infrastructure/auth/auth.guard";
 import {ProfileComponent} from "./account/profile/profile.component";
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'home', component: AccommodationCardsComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'accommodation-details', component: AccommodationDetailsComponent},
 ]
  // , canActivate: [AuthGuard]
 @NgModule({
