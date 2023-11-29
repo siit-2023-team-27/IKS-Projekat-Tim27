@@ -12,6 +12,9 @@ module.exports = {
         'nomad-dark': '#551B14',
         'nomad-darker': '#421510',
         'nomad-nav-bar':'#C3BBAB'
+      },
+      screens: {
+        'my-md': '1215px'
       }
     },
   },

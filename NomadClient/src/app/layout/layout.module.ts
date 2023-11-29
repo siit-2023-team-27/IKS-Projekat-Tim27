@@ -24,8 +24,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     RouterLink,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule,
   ],
-  exports: [
-    NavigationComponent,
-  ]
+    exports: [
+        NavigationComponent,
+        SearchBarComponent,
+    ]
 })
 export class LayoutModule { }

@@ -1,7 +1,7 @@
-<div [style.height.px]="windowHeight" [style.width.px]="windowWidth" class="flex items-center justify-around bg-black bg-opacity-75">
-  <div class="flex flex-col h-10/12 w-7/12 bg-nomad-pink rounded-3xl gap-8 items-center">
+<div class="flex w-full my-md:h-full items-center justify-around bg-black bg-opacity-75">
+  <div class="flex flex-col w-full my-md:w-7/12 bg-nomad-pink rounded-3xl gap-8 items-center">
     <p class="w-full text-4xl font-bold text-white text-center bg-black bg-opacity-20 pt-4 pb-4 rounded-3xl">Register Form</p>
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-col my-md:flex-row justify-between items-center">
       <div class="w-1/2 m-8 bg-black bg-opacity-5 p-5 rounded-md">
         <p class="text-2xl text-white font-bold p-2 pb-5">General information</p>
         <input class="w-3/4 bg-transparent border-b-2 border-gray-500 placeholder-gray-500 h-12 pl-3 ml-5  mb-4" type="text" placeholder="Name"/>
@@ -15,7 +15,7 @@
         <input class="w-3/4 bg-transparent border-b-2 border-gray-500 placeholder-gray-500 h-12 pl-3 ml-5  mb-4" type="text" placeholder="Create password"/>
         <input class="w-3/4 bg-transparent border-b-2 border-gray-500 placeholder-gray-500 h-12 pl-3 ml-5  mb-4" type="text" placeholder="Confirm password"/>
 
-        <button class="rounded-3xl bg-neutral-200 w-fit p-3 pl-24 pr-24 ml-5 mt-4">Register</button>
+        <button class="rounded-3xl bg-neutral-200 p-3 pl-8 pr-8 my-md:pl-16 my-md:pr-16 md:pl-20 md:pr-20 ml-5">Register</button>
       </div>
     </div>
 

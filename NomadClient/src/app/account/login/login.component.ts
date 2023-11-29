@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  windowHeight: number = window.innerHeight;
-  windowWidth: number = window.innerWidth;
+  // windowHeight: number = window.innerHeight;
+  // windowWidth: number = window.innerWidth;
 }
