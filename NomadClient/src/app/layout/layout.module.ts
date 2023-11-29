@@ -27,6 +27,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
   ],
   exports: [
     NavigationComponent,
+    SearchBarComponent,
   ]
 })
 export class LayoutModule { }
