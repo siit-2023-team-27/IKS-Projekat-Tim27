@@ -23,6 +23,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     FontAwesomeModule,
     RouterLink,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule,
+
   ],
     exports: [
         NavigationComponent,

@@ -4,9 +4,13 @@ import {
   faBars,
   faMagnifyingGlass,
   faSearch,
+  faBolt,
+  faList, faUsers,  faArrowRightFromBracket,
   faLocation, faLocationArrow, faPeopleGroup
 } from "@fortawesome/free-solid-svg-icons";
 import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
+import {User} from "../../infrastructure/auth/model/user.model";
+import {AuthService} from "../../infrastructure/auth/auth.service";
 
 @Component({
   selector: 'app-navigation',
@@ -19,6 +23,10 @@ export class NavigationComponent {
   faEnvelope = faEnvelope;
   faUser = faUser;
   faFileLines = faFileLines;
+  faBolt = faBolt;
+  faArrowRightFromBracket= faArrowRightFromBracket;
+  faList = faList
+  faUsers = faUsers;
   faBars = faBars;
   protected readonly faSearch = faSearch;
   protected readonly faLocation = faLocation;
@@ -42,6 +50,10 @@ export class NavigationComponent {
     }else {
       this.navBar = true
     }
+
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -52,6 +64,14 @@ export class NavigationComponent {
     }else {
       this.navBar = true
     }
+  }
+
+  user: User | undefined;
+
+  constructor(private authService: AuthService) {}
+
+  onLogout(): void {
+    this.authService.logout();
   }
 
 }
