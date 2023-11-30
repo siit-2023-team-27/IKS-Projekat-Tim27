@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { Review } from 'src/app/model/accommodation.model';
+import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 @Component({
   selector: 'app-accommodation-comments',
   templateUrl: './accommodation-comments.component.html',
@@ -8,10 +9,11 @@ import { Review } from 'src/app/model/accommodation.model';
 })
 export class AccommodationCommentsComponent {
   @Input() reviews?: Review[];
+  faCircleUser=faCircleUser;
   constructor(){
     this.reviews = [];
   }
-  numSequence(n: number): Array<number> { 
-    return Array(Math.floor(n)); 
+  numSequence(n: number): Array<number> {
+    return Array(Math.floor(n));
   }
 }

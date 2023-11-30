@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<nav *ngIf="navBar && user && user.role !==''" class="w-full bg-nomad-nav-bar md:h-20 h-80 md:block ">
+<nav *ngIf="navBar && user && user.role !==''" class="w-full bg-nomad-nav-bar md:h-20 h-80 md:block">
   <div class="flex md:flex-row h-full justify-between 2xl:ml-96 2xl:mr-96 md:ml-24 md:mr-24 sm:ml-16 sm:mr-16 items-center flex-col gap-8 top-[9%] ">
     <div *ngIf="user && (user.role === 'HOST' || user.role === 'GUEST' )" [routerLink]="['/login']" class="flex flex-col items-center hover:bg-nomad-light rounded-lg w-40">
       <fa-icon  class="text-2xl cursor-pointer" [icon]="faEnvelope"></fa-icon>
