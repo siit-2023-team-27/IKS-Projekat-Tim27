@@ -5,7 +5,7 @@
     <p class="bg-nomad-dark py-5 px-8 text-5xl text-white decoration-solid rounded-full">{{user.firstName.charAt(0)}}</p>
     <p class="text-xl decoration-solid">{{user.firstName}} {{user.lastName}}</p>
   </div>
-    <button class="flex flex-row rounded-xl w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+    <button class="flex flex-row rounded-xl w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
       Delete account
     </button>
   </div>
@@ -30,7 +30,7 @@
         <p class="pl-3 pt-3">{{user.username}}</p>
       </div>
       <div class="pb-5"></div>
-      <button (click)="turnEditMode()" class="flex flex-row rounded-xl 2xl:w-[30%] w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+      <button (click)="turnEditMode()" class="flex flex-row rounded-xl 2xl:w-[30%] w-[70%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
         Edit account
       </button>
     </div>
@@ -68,10 +68,10 @@
       </div>
       <div class="pb-5"></div>
       <div class="flex flex-row gap-8">
-        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
           Save
         </button>
-        <button (click)="exitEditMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
+        <button (click)="exitEditMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover py-3 items-center justify-around gap-8 shadow-2xl">
           Cancel
         </button>
       </div>
