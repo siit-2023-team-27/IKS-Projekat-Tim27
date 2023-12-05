@@ -16,6 +16,7 @@ import { AccommodationCommentFormComponent } from './accommodation-comment-form/
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatInputModule } from '@angular/material/input';
+import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     AccommodationAmenitiesComponent,
     AccommodationCommentsComponent,
     AccommodationCommentFormComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    AccommodationVerificationComponent
   ],
   imports: [
     CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule

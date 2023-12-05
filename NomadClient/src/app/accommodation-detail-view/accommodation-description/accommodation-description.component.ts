@@ -7,8 +7,6 @@ import { Input } from '@angular/core';
 
 })
 export class AccommodationDescriptionComponent {
-  @Input() description:String;
-  constructor(){
-    this.description = "";
-  }
+  @Input() description:String = "";
+
 }

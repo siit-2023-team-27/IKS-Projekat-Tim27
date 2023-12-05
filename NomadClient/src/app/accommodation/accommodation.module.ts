@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccommodationCardComponent } from './accommodation-card/accommodation-card.component';
 import { AccommodationCardsComponent } from './accommodation-cards/accommodation-cards.component';
-
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { AccommodationCardsComponent } from './accommodation-cards/accommodation
     AccommodationCardsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule, RouterModule
   ],
   exports: [
     AccommodationCardComponent,

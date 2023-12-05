@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Review } from 'src/app/model/accommodation.model';
+import { Review } from '../model/accommodationDetails.model';
 @Component({
   selector: 'app-accommodation-comments',
   templateUrl: './accommodation-comments.component.html',
