@@ -16,7 +16,9 @@ import { AccommodationCommentFormComponent } from './accommodation-comment-form/
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatInputModule } from '@angular/material/input';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
+import { RouterModule } from '@angular/router';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -27,10 +29,11 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     AccommodationAmenitiesComponent,
     AccommodationCommentsComponent,
     AccommodationCommentFormComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    AccommodationVerificationComponent
   ],
   imports: [
-    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, FontAwesomeModule
+    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule
   ],
   exports: [
     AccommodationDetailsComponent

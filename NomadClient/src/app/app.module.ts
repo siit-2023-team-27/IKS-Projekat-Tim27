@@ -17,10 +17,12 @@ import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/h
 import {JwtInterceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
 import {AuthModule} from "./infrastructure/auth/auth.module";
 import {AuthService} from "./infrastructure/auth/auth.service";
+import { AccommodationVerificationComponent } from './accommodation-details/accommodation-verification/accommodation-verification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AccommodationVerificationComponent,
     
     
       ],

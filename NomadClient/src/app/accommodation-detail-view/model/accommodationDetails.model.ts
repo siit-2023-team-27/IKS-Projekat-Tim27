@@ -9,13 +9,17 @@ export interface Review{
 	text: string;
 	rating : number;
 }
-export interface Accommodation {
-	_id: number;
+export interface AccommodationDetails {
+	status:string;
+	minGuests: number;
+	maxGuests: number;
+	address: string,
+	id: number;
 	name: string;
 	description: string;
 	rating: number;
-	price: number;
+	// price: number;
 	images: string[],
 	amenities: Amenity[],
-	reviews?: Review[]
+	comments?: Review[]
 }
