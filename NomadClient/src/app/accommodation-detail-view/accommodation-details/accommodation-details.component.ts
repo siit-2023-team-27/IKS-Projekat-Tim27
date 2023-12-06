@@ -44,7 +44,6 @@ export class AccommodationDetailsComponent implements OnInit{
         error: (_) => {console.log("Greska!")}
       })
    });
-    
-
-
+  
+  }
 }
