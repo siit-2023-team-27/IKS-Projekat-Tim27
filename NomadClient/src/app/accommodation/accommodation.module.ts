@@ -5,6 +5,7 @@ import { AccommodationCardsComponent } from './accommodation-cards/accommodation
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
   declarations: [
     AccommodationCardComponent,

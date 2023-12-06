@@ -20,6 +20,7 @@ import { AccommodationVerificationComponent } from './accommodation-verification
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 
+
 @NgModule({
   declarations: [
     AccommodationImagesComponent,
