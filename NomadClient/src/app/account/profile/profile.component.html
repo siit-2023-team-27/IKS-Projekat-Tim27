@@ -1,11 +1,12 @@
 
 <div class="flex xl:flex-row flex-col  flex-wrap justify-between  pb-12 2xl:ml-80 2xl:mr-80 xl:ml-32 xl:mr-32 sm:ml-8 sm:mr-8 mr-4 items-center">
+  <app-modal-deactivate-account (updatedResponse)="getDeleteConformation($event)" *ngIf="isModalVisible"></app-modal-deactivate-account>
   <div class="flex flex-col items-center gap-12 2xl:mt-32 mt-12">
   <div class="flex flex-row bg-gray-100 rounded-3xl py-16 px-10 items-center justify-around gap-8 shadow-2xl">
-    <p class="bg-nomad-dark py-5 px-8 text-5xl text-white decoration-solid rounded-full">{{user.firstName.charAt(0)}}</p>
+    <p class="bg-nomad-dark p-12 text-5xl text-white decoration-solid rounded-full">{{user.firstName.at(0)}}</p>
     <p class="text-xl decoration-solid">{{user.firstName}} {{user.lastName}}</p>
   </div>
-    <button class="text-center rounded-xl text-2xl p-2 pl-6 pr-6 text-nomad-dark decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover shadow-2xl">
+    <button (click)="showDialog()" class="text-center rounded-xl text-2xl p-2 pl-6 pr-6 text-nomad-dark decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover shadow-2xl">
       Delete account
     </button>
   </div>

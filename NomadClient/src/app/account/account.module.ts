@@ -6,6 +6,7 @@ import {RouterLink} from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ProfileComponent} from "./profile/profile.component";
 import {MaterialModule} from "../infrastructure/material/material.module";
+import {LayoutModule} from "../layout/layout.module";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {MaterialModule} from "../infrastructure/material/material.module";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    LayoutModule
   ],
   exports: [
     LoginComponent,

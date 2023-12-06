@@ -10,6 +10,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {MaterialModule} from "../infrastructure/material/material.module";
+import { ModalDeactivateAccountComponent } from './modal-deactivate-account/modal-deactivate-account.component';
 
 
 
@@ -17,7 +18,8 @@ import {MaterialModule} from "../infrastructure/material/material.module";
 @NgModule({
   declarations: [
     NavigationComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ModalDeactivateAccountComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import {MaterialModule} from "../infrastructure/material/material.module";
   exports: [
     NavigationComponent,
     SearchBarComponent,
+    ModalDeactivateAccountComponent,
   ]
 })
 export class LayoutModule { }
