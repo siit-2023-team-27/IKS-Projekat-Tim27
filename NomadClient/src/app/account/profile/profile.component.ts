@@ -1,7 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {User} from "../model/user.model";
-import {AccommodationService} from "../../accommodation/accommodation.service";
-import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {AccountService} from "../account.service";
 
 @Component({

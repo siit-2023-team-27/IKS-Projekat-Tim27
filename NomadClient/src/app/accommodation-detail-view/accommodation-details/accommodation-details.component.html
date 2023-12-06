@@ -1,13 +1,14 @@
 
 <div class = "content ml-36 mr-36">
 
-    <h1 class="font-roboto decoration-1 underline-offset-8 text-3xl underline pt-6 pb-6 pl-4">{{accommodation.name}}</h1>
+    <h1 class="font-roboto font-bold text-3xl underline pb-4 pl-4 pt-2">{{accommodation.name}}, {{accommodation.address}}</h1>
+
     <app-accommodation-images [images] = accommodation.images></app-accommodation-images>
 
 
     <div class ="grid grid-cols-1 gap-6 md:grid-cols-2 p-4">
-        <app-accommodation-description [description] = "accommodation.description"></app-accommodation-description>
-        <app-accommodation-reservation [price] = "accommodation.price"></app-accommodation-reservation>
+        <app-accommodation-description [accommodation] = "accommodation"></app-accommodation-description>
+        <app-accommodation-reservation ></app-accommodation-reservation>
 
     </div>
     <app-accommodation-amenities [amenities] = "accommodation.amenities"></app-accommodation-amenities>
@@ -18,8 +19,9 @@
         </google-map>
     </div>
     <div class = "grid lg:grid-cols-2 grid-cols-1">
+        
+    <app-accommodation-comments [reviews] = "accommodation.comments"></app-accommodation-comments>    
 
-    <app-accommodation-comments [reviews] = "accommodation.reviews"></app-accommodation-comments>
     <app-accommodation-comment-form></app-accommodation-comment-form>
 
     </div>
