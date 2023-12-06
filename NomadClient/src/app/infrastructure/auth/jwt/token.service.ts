@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Login} from "../model/login.model";
 import {LoginResponse} from "../model/login.response.model";
+import {AuthResponse} from "../model/auth.response.module";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,13 @@ export class TokenStorage {
     localStorage.removeItem('id');
     localStorage.setItem('role', token.role);
     localStorage.setItem('id', String(token.id));
+  }
+  saveAccessToken2(token: AuthResponse): void {
+    const helper = new JwtHelperService();
+    localStorage.setItem('id', helper.decodeToken(token.accessToken).id);
+    localStorage.setItem('role', helper.decodeToken(token.accessToken).role[0]);
+    // alert(this.getRole())
+    // alert(this.getId())
   }
 
   getRole() {

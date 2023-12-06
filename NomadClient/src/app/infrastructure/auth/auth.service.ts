@@ -30,6 +30,16 @@ export class AuthService{
         })
       );
   }
+  login2(login: Login): Observable<AuthResponse> {
+    return this.http
+      .post<AuthResponse>(environment.authHost + 'login', login)
+      .pipe(
+        tap((authenticationResponse) => {
+          this.tokenStorage.saveAccessToken2(authenticationResponse);
+          this.setUser();
+        })
+      );
+  }
 
   logout():void{
     this.tokenStorage.clear();

@@ -13,8 +13,8 @@ export class AccountService{
   constructor(private httpClient: HttpClient, private tokenStorage: TokenStorage) {}
 
   getLoggedUser(): Observable<User> {
-    return this.httpClient.get<User>(environment.apiHost + "users/1");
-    //return this.httpClient.get<User>(environment.apiHost + "users/" + this.tokenStorage.getId());
+    //return this.httpClient.get<User>(environment.apiHost + "users/1");
+    return this.httpClient.get<User>(environment.apiHost + "users/" + this.tokenStorage.getId());
   }
 
   deleteAccount(id: number): Observable<void> {
