@@ -1,12 +1,12 @@
 
 <div class = "content ml-36 mr-36">
 
-    <h1 class="font-roboto font-bold text-3xl underline pb-4 pl-4">{{accommodation.name}}</h1>
+    <h1 class="font-roboto font-bold text-3xl underline pb-4 pl-4 pt-2">{{accommodation.name}}, {{accommodation.address}}</h1>
     <app-accommodation-images [images] = accommodation.images></app-accommodation-images>
     
    
     <div class ="grid grid-cols-1 gap-6 md:grid-cols-2 p-4">
-        <app-accommodation-description [description] = "accommodation.description"></app-accommodation-description>
+        <app-accommodation-description [accommodation] = "accommodation"></app-accommodation-description>
         <app-accommodation-reservation ></app-accommodation-reservation>
         
     </div>

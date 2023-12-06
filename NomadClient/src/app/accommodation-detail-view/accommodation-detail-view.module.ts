@@ -17,7 +17,8 @@ import { AccommodationDetailsComponent } from './accommodation-details/accommoda
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatInputModule } from '@angular/material/input';
 import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
-
+import { RouterModule } from '@angular/router';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AccommodationVerificationComponent } from './accommodation-verification
     AccommodationVerificationComponent
   ],
   imports: [
-    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule
+    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule
   ],
   exports: [
     AccommodationDetailsComponent

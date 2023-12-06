@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
+import { Accommodation } from 'src/app/accommodation/model/accommodation.model';
+import { AccommodationDetails } from '../model/accommodationDetails.model';
 @Component({
   selector: 'app-accommodation-description',
   templateUrl: './accommodation-description.component.html',
@@ -7,6 +9,6 @@ import { Input } from '@angular/core';
 
 })
 export class AccommodationDescriptionComponent {
-  @Input() description:String = "";
+  @Input() accommodation:AccommodationDetails = {} as AccommodationDetails;
 
 }
