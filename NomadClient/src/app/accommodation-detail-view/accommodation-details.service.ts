@@ -17,6 +17,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   getRequests():Observable<AccommodationVerificationRequest[]> {
     return this._http.get<AccommodationVerificationRequest[]>(`${this.actionUrl}`);
   }
+  getUnverifiedRequests():Observable<AccommodationVerificationRequest[]> {
+    return this._http.get<AccommodationVerificationRequest[]>(`${this.actionUrl}/unverified`);
+  }
   accept(id:number):Observable<AccommodationVerificationRequest>{
     return this._http.put<AccommodationVerificationRequest>(`${this.actionUrl}/verify/${+id}`, {})
   }

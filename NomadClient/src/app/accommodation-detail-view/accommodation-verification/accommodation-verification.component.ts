@@ -16,7 +16,7 @@ export class AccommodationVerificationComponent implements OnInit{
     this.loadRequests()
   }
   loadRequests():void{
-    this.service.getRequests().subscribe({
+    this.service.getUnverifiedRequests().subscribe({
       next: (data: AccommodationVerificationRequest[]) => {
         this.requests = data;
      },
@@ -26,7 +26,7 @@ export class AccommodationVerificationComponent implements OnInit{
   accept(id:number):void{
     this.service.accept(id).subscribe({
       next: (data: AccommodationVerificationRequest) => {
-        // this.requests = data;
+        this.loadRequests();
      },
       error: (_) => {console.log("Greska!")}
     })
