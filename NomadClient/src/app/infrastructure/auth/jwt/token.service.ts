@@ -9,15 +9,9 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 })
 export class TokenStorage {
   constructor() {}
-
-  saveAccessToken(token: LoginResponse): void {
-    localStorage.removeItem('role');
-    localStorage.removeItem('id');
-    localStorage.setItem('role', token.role);
-    localStorage.setItem('id', String(token.id));
-  }
-  saveAccessToken2(token: AuthResponse): void {
+  saveAccessToken(token: AuthResponse): void {
     const helper = new JwtHelperService();
+    localStorage.setItem('token', token.accessToken);
     localStorage.setItem('id', helper.decodeToken(token.accessToken).id);
     localStorage.setItem('role', helper.decodeToken(token.accessToken).role[0]);
     // alert(this.getRole())
