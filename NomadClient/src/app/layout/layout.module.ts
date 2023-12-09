@@ -3,35 +3,35 @@ import { CommonModule } from '@angular/common';
 import {NavigationComponent} from "./navigation/navigation.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RouterLink} from "@angular/router";
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {MaterialModule} from "../infrastructure/material/material.module";
 import { ModalDeactivateAccountComponent } from './modal-deactivate-account/modal-deactivate-account.component';
-
-
-
+import { FilterComponent } from './filter/filter.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSliderModule} from '@angular/material/slider';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     NavigationComponent,
     SearchBarComponent,
-    ModalDeactivateAccountComponent
+    ModalDeactivateAccountComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
     RouterLink,
-    MaterialModule
-
+    MaterialModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     NavigationComponent,
     SearchBarComponent,
-    ModalDeactivateAccountComponent,
+    ModalDeactivateAccountComponent
   ]
 })
 export class LayoutModule { }

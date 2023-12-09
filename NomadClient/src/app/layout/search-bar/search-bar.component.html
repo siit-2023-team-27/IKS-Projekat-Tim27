@@ -1,4 +1,4 @@
-
+<div class="flex flex-row gap-12">
 <div class="flex flex-col my-md:flex-row bg-white m-auto rounded-3xl p-7 items-center justify-around gap-8 shadow-2xl">
 
   <mat-form-field subscriptSizing="dynamic">
@@ -38,4 +38,8 @@
     <fa-icon [icon]="faSearch" class="pr-3"></fa-icon>
     Search</button>
 
+</div>
+<button (click)="openDialog()" class="flex flex-row bg-nomad-filter m-auto rounded-xl p-5 hover:bg-nomad-filter-hover items-center justify-around ">
+  <fa-icon [icon]="faFilter" class="pr-3"></fa-icon>Filter
+</button>
 </div>
