@@ -9,6 +9,7 @@ import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/a
 import {AuthGuard} from "./infrastructure/auth/auth.guard";
 import {ProfileComponent} from "./account/profile/profile.component";
 import { AccommodationVerificationComponent } from './accommodation-detail-view/accommodation-verification/accommodation-verification.component';
+import {CreateAccommodationComponent} from "./accommodation/create-accommodation/create-accommodation.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'accommodation-details/:id', component: AccommodationDetailsComponent},
   {path: 'accommodation-verification', component: AccommodationVerificationComponent},
+  {path: 'accommodation-create', component: CreateAccommodationComponent}
 ]
  // , canActivate: [AuthGuard]
 @NgModule({

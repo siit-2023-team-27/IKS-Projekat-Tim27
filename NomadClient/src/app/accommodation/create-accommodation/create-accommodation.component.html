@@ -1,0 +1,39 @@
+<div class="pl-32 pr-32 pt-24">
+
+  <label for="name" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Name</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-16">
+    <input type="text" name="name" id="name" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation name">
+  </div>
+
+  <label for="description" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Description</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-16">
+    <textarea name="description" id="description" rows="4" cols="50"
+              class="block shadow-2xl shadow-gray-300 w-full rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation description"></textarea>
+  </div>
+
+  <div class="flex gap-24">
+    <div class="flex flex-col">
+      <label for="minGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Min Guest</label>
+      <div class="relative mt-2 rounded-md shadow-sm mb-16">
+        <input type="number" min="1" name="minGuest" id="minGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label for="maxGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Max Guest</label>
+      <div class="relative mt-2 rounded-md shadow-sm mb-16">
+        <input type="number" min="1" name="maxGuest" id="maxGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+      </div>
+    </div>
+  </div>
+
+  <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4">Amenities</p>
+  <div class="flex flex-wrap gap-12 h-fit p-10 border-2 border-gray-300 rounded-2xl shadow-2xl mt-2 mb-16">
+    <div *ngFor="let amenity of amenities" class="flex items-center gap-4">
+        <input type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150">
+        <label class="text-gray-900 font-sans tracking-widest">{{amenity.name}}</label>
+    </div>
+  </div>
+
+  <button class="bg-gray-300 text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 mb-24">Save</button>
+
+</div>
