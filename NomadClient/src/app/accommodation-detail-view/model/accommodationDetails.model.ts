@@ -1,8 +1,5 @@
-export interface Amenity{
-	_id: number;
-	name: string;
-	icon: string;
-}
+import {Amenity} from "../../amenity/amenity.model";
+
 export interface Review{
 	_id: number;
 	name: string;

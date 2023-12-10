@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Amenity} from "../../accommodation-detail-view/model/accommodationDetails.model";
+import {AmenityService} from "../../amenity/amenity.service";
+import {Amenity} from "../../amenity/amenity.model";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -8,7 +9,12 @@ import {Amenity} from "../../accommodation-detail-view/model/accommodationDetail
 })
 export class CreateAccommodationComponent {
   amenities: Amenity[] = []
-  constructor(){
+  constructor(private amenityService: AmenityService){}
 
+  ngOnInit(): void {
+    this.amenityService.getAll().subscribe({
+      next: (data: Amenity[]) => {this.amenities = data; },
+      error: () => { console.log("Error while reading amenities! ") }
+    })
   }
 }

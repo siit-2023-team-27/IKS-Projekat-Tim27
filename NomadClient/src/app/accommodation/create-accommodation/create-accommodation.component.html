@@ -26,11 +26,18 @@
     </div>
   </div>
 
-  <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4">Amenities</p>
+  <label for="location" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Location</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-8">
+    <input name="location" id="location"
+              class="block shadow-2xl shadow-gray-300 w-full rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation location"/>
+  </div>
+  <app-map></app-map>
+
+  <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4 mt-16">Amenities</p>
   <div class="flex flex-wrap gap-12 h-fit p-10 border-2 border-gray-300 rounded-2xl shadow-2xl mt-2 mb-16">
     <div *ngFor="let amenity of amenities" class="flex items-center gap-4">
-        <input type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150">
-        <label class="text-gray-900 font-sans tracking-widest">{{amenity.name}}</label>
+        <input type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150 cursor-pointer">
+        <label class="text-gray-900 text-sm font-sans tracking-widest">{{amenity.name}}</label>
     </div>
   </div>
 

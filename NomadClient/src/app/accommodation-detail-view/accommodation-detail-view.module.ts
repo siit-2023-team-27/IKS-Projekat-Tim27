@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
+import {AmenityModule} from "../amenity/amenity.module";
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import {MatChipsModule} from '@angular/material/chips';
     AccommodationVerificationComponent
   ],
   imports: [
-    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule
+    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule,
+    MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule,
+    GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule, AmenityModule
   ],
   exports: [
     AccommodationDetailsComponent

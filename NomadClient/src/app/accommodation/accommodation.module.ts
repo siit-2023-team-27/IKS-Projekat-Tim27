@@ -4,6 +4,7 @@ import { AccommodationCardComponent } from './accommodation-card/accommodation-c
 import { AccommodationCardsComponent } from './accommodation-cards/accommodation-cards.component';
 import { RouterModule } from '@angular/router';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -14,7 +15,7 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     CreateAccommodationComponent
   ],
   imports: [
-    CommonModule, RouterModule
+    CommonModule, RouterModule, SharedModule
   ],
   exports: [
     AccommodationCardComponent,
