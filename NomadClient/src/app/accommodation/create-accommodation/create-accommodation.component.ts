@@ -9,6 +9,9 @@ import {Amenity} from "../../amenity/amenity.model";
 })
 export class CreateAccommodationComponent {
   amenities: Amenity[] = []
+  inputLocation: string = "";
+  selectedImages: string[] = [];
+
   constructor(private amenityService: AmenityService){}
 
   ngOnInit(): void {
@@ -16,5 +19,23 @@ export class CreateAccommodationComponent {
       next: (data: Amenity[]) => {this.amenities = data; },
       error: () => { console.log("Error while reading amenities! ") }
     })
+  }
+
+  onFileSelected(event: any) {
+    const file:File = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        // @ts-ignore
+        this.selectedImages.push(e.target.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  getSelectedLocation(selectedLocation: string): void{
+    this.inputLocation = selectedLocation;
   }
 }

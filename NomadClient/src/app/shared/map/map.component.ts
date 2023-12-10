@@ -1,5 +1,6 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
 import * as L from 'leaflet';
+import {MapService} from "./map.service";
 
 @Component({
   selector: 'app-map',
@@ -8,18 +9,36 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit{
   private map:any;
+  private marker: L.Marker = new L.Marker([1, 1]);
 
-  constructor() {}
+  @Output() currentLocation = new EventEmitter<string> ();
+
+  constructor(private mapService: MapService) {}
 
   registerOnClick(): void {
     this.map.on('click', (e: any) => {
+      this.map.removeLayer(this.marker);
       const coord = e.latlng;
       const lat = coord.lat;
       const lng = coord.lng;
-      console.log(
-          'You clicked the map at latitude: ' + lat + ' and longitude: ' + lng
-      );
-      new L.Marker([lat, lng]).addTo(this.map);
+      this.marker = new L.Marker([lat, lng]).addTo(this.map);
+      this.mapService.reverseSearch(lat, lng).subscribe((res) => {
+        this.marker.bindPopup(res.display_name).openPopup();
+        this.currentLocation.emit(res.display_name);
+      });
+    });
+  }
+
+  search(): void {
+    this.mapService.search('Strazilovska 19, Novi Sad').subscribe({
+      next: (result) => {
+        console.log(result);
+        L.marker([result[0].lat, result[0].lon])
+            .addTo(this.map)
+            .bindPopup('Pozdrav iz Strazilovske 19.')
+            .openPopup();
+      },
+      error: () => {},
     });
   }
 
