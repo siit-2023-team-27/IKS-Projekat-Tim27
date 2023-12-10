@@ -39,7 +39,8 @@ import {AmenityModule} from "../amenity/amenity.module";
     GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule, AmenityModule
   ],
   exports: [
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    AccommodationImagesComponent
   ]
 })
 export class AccommodationDetailViewModule { }
