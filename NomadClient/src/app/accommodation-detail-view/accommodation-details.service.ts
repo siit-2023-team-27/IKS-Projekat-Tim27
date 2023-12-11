@@ -20,6 +20,10 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   getUnverifiedRequests():Observable<AccommodationVerificationRequest[]> {
     return this._http.get<AccommodationVerificationRequest[]>(`${this.actionUrl}/unverified`);
   }
+  getTakenDates(id:number|undefined):Observable<string[]>{
+    if(id == undefined){return new Observable<string[]>;}
+    return this._http.get<string[]>(`${this.actionUrl}/taken-dates/${+id}`, {})
+  }
   accept(id:number):Observable<AccommodationVerificationRequest>{
     return this._http.put<AccommodationVerificationRequest>(`${this.actionUrl}/verify/${+id}`, {})
   }

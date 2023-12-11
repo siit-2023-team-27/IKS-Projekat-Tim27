@@ -12,3 +12,6 @@ mat-label{
 mat-form-field {
   --mdc-filled-text-field-focus-active-indicator-color: #421510;
 }
+.special-date {
+  background-color: red!important;
+}
