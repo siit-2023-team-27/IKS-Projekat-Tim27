@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {AmenityService} from "../../amenity/amenity.service";
 import {Amenity} from "../../amenity/amenity.model";
 
@@ -9,7 +9,6 @@ import {Amenity} from "../../amenity/amenity.model";
 })
 export class CreateAccommodationComponent {
   amenities: Amenity[] = []
-  inputLocation: string = "";
   selectedImages: string[] = [];
 
   constructor(private amenityService: AmenityService){}
@@ -33,9 +32,5 @@ export class CreateAccommodationComponent {
 
       reader.readAsDataURL(file);
     }
-  }
-
-  getSelectedLocation(selectedLocation: string): void{
-    this.inputLocation = selectedLocation;
   }
 }

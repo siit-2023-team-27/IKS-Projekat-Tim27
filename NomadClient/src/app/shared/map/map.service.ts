@@ -9,7 +9,7 @@ export class MapService {
 
   constructor(private httpClient: HttpClient) { }
 
-  search(street: string): Observable<any> {
+    search(street: string): Observable<any> {
     return this.httpClient.get('https://nominatim.openstreetmap.org/search?format=json&q=' + street);
   }
 
