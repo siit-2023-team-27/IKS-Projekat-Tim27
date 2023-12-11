@@ -1,6 +1,6 @@
 <div class = "rounded-3xl bg-nomad-gray grid shadow-2xl lg:grid-cols-2 grid-cols-1 gap-1">
     <div class=" p-8">
-        <h2><span class = "font-bold">$ 100</span> Night</h2>
+        <h2><span class = "font-bold">$ {{price}}</span></h2>
         <mat-form-field subscriptSizing="dynamic">
             <mat-label>
               When</mat-label>
@@ -10,7 +10,8 @@
             </mat-date-range-input>
             <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
             <mat-date-range-picker #picker></mat-date-range-picker>
-            <mat-calendar [dateClass]="dateClass()"></mat-calendar>
+            <mat-calendar [dateClass]="dateClass()" [selected] = "this.dateRange" (selectedChange)="this.onChange($event)"></mat-calendar>
+            <button mat-mini-fab class="nomad-brown" (click) = "this.reset()">        <i class="fa fa-recycle text-3xl text-white"></i></button>
 
         </mat-form-field>
     </div>
@@ -24,7 +25,7 @@
         </mat-select>
         </mat-form-field>
         <br>
-        <button mat-button class="nomad-button">Reserve</button>
+        <button mat-button class="nomad-button" (click) = "this.reserve()">Reserve</button>
     </div>
 
 </div>

@@ -8,7 +8,9 @@
 mat-label{
   color: #421510;
 }
-
+.nomad-brown{
+  background-color:#551B14;
+}
 mat-form-field {
   --mdc-filled-text-field-focus-active-indicator-color: #421510;
 }

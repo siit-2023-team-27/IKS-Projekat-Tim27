@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -37,6 +39,9 @@ import {MatChipsModule} from '@angular/material/chips';
   ],
   exports: [
     AccommodationDetailsComponent
+  ],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ]
 })
 export class AccommodationDetailViewModule { }
