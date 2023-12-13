@@ -19,6 +19,11 @@ import { MatInputModule } from '@angular/material/input';
 import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ReservationVerificationComponent } from './reservation-verification/reservation-verification.component';
+import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+
 
 
 @NgModule({
@@ -30,13 +35,19 @@ import {MatChipsModule} from '@angular/material/chips';
     AccommodationCommentsComponent,
     AccommodationCommentFormComponent,
     AccommodationDetailsComponent,
-    AccommodationVerificationComponent
+    AccommodationVerificationComponent,
+    ReservationVerificationComponent,
+    GuestReservationsComponent
   ],
   imports: [
-    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule
+    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule, GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule,
+    FormsModule
   ],
   exports: [
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent, AccommodationVerificationComponent, ReservationVerificationComponent
+  ],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ]
 })
 export class AccommodationDetailViewModule { }
