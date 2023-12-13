@@ -34,4 +34,19 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   reserve(reservation:Reservation){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
+  getReservationsForUser(id:number){
+    return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-host/${+id}`)
+  }
+  getReservationsForGuest(id:number){
+    return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/${+id}`)
+  }
+  confirmReservation(id:number){
+    return this._http.put(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
+  }
+  rejectReservation(id:number){
+    return this._http.put<Reservation>(`http://localhost:8080/api/reservations/reject/${+id}`, {})
+  }
+  deleteReservation(id: number){
+    return this._http.delete<Reservation>(`http://localhost:8080/api/reservations/${+id}`, {})
+  }
 }

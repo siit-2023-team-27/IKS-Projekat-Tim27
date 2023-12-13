@@ -37,6 +37,10 @@
       <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
       <p class="text-white cursor-pointer ">Listing</p>
     </div>
+    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/guest-reservations']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
+      <p class="text-white cursor-pointer ">Reservations</p>
+    </div>
     <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
       <p class="text-white cursor-pointer ">Accommodations</p>

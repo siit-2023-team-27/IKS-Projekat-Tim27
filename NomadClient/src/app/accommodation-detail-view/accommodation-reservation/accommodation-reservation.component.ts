@@ -3,6 +3,13 @@ import { Input } from '@angular/core';
 import { DateRange, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { AccommodationDetailsService } from '../accommodation-details.service';
 import { Reservation } from '../model/reservation.model';
+import { AccommodationDetails } from '../model/accommodationDetails.model';
+import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import { MatCalendar } from '@angular/material/datepicker';
+import { ViewChild } from '@angular/core';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { ChangeDetectorRef } from '@angular/core';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 @Component({
   selector: 'app-accommodation-reservation',
   templateUrl: './accommodation-reservation.component.html',
@@ -10,11 +17,15 @@ import { Reservation } from '../model/reservation.model';
 })
 export class AccommodationReservationComponent implements OnInit{
   @Input() id?: number;
+  @Input() accommodation!: AccommodationDetails;
   datesToHighlight : string[];
   dates : Date[];
   dateRange:DateRange<Date>|null;
   price: number = 0;
-  constructor(private service: AccommodationDetailsService){
+  guests: number = 0;
+  @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
+
+  constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef){
     this.id = 1;
     this.datesToHighlight = []
     this.dates = []
@@ -24,9 +35,9 @@ export class AccommodationReservationComponent implements OnInit{
     this.loadDates()
     
   }
-  dateClass() {
+  dateClass(dates: string[]) {
     return (date: Date): MatCalendarCellCssClasses => {
-      const highlightDate = this.datesToHighlight
+      const highlightDate = dates
         .map(strDate => new Date(strDate))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
       
@@ -39,17 +50,20 @@ export class AccommodationReservationComponent implements OnInit{
   }
   reserve():void{
     this.service.reserve({
-      "user" : 5,
+      "user" : +this.tokenStorage.getId()!,
     "accommodation" : this.id!,
     "startDate" : this.dateRange!.start!,
     "finishDate" : this.dateRange!.end!,
-    "numGuests" : 5,
+    "numGuests" : this.guests,
     "status" : "PENDING"
     }).subscribe({
       next: (data:Reservation) => {console.log(data)},
       error: (a) => {console.log(a)}
     })
     this.loadDates();
+    this.calendar.dateClass = this.dateClass(this.datesToHighlight);
+    this.cdr.detectChanges();
+    
   }
   loadDates():void{
     this.service.getTakenDates(this.id).subscribe({
@@ -59,11 +73,6 @@ export class AccommodationReservationComponent implements OnInit{
       error: (_) => {console.log("Greska!")}
     })
   }
-  myFilter = (d: Date | null): boolean => {
-    const date = (d || new Date()).toDateString();
-    // Prevent Saturday and Sunday from being selected.
-    return (this.datesToHighlight.indexOf(date) > -1);
-  };
   onChange(ev: any) {
     let v = new Date(ev);
     if(this.dateRange == null){
@@ -96,6 +105,10 @@ export class AccommodationReservationComponent implements OnInit{
     if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
       return true;
     }
+    
+  }
+  if(end < new Date() || start < new Date()){
+    return true;
   }
   return false;
  }

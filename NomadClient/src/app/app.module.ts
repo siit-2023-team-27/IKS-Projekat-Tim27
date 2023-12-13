@@ -16,15 +16,11 @@ import {AccommodationModule} from "./accommodation/accommodation.module";
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthModule} from "./infrastructure/auth/auth.module";
 import {AuthService} from "./infrastructure/auth/auth.service";
-import { AccommodationVerificationComponent } from './accommodation-details/accommodation-verification/accommodation-verification.component';
 import {Interceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccommodationVerificationComponent,
-
-
+    AppComponent
       ],
   imports: [
     AccommodationDetailViewModule,
