@@ -5,7 +5,7 @@ export interface SearchFilterForm {
   peopleNum:number;
 // }
 // export interface FilterForm{
-  amenities: Array<number>;
+  amenities: number[];
   minPrice:number;
   maxPrice:number;
   accommodationType:string;

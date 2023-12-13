@@ -11,6 +11,7 @@ import {AuthResponse} from "../infrastructure/auth/model/auth.response.module";
 import {SearchFilterForm} from "./model/searchFilterForm.model";
 import {AccommodationSearch} from "./model/accommodation-search.model";
 import {Accommodation} from "../accommodation/model/accommodation.model";
+import {Amenity} from "./model/amenity.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,16 @@ export class SearchFilterService{
   constructor(private http: HttpClient,
               private router: Router){}
 
+  getAllAmenities(): Observable<Amenity[]>{
+    return this.http.get<Amenity[]>(environment.apiHost + "amenities");
+  }
+
   search(searchForm: SearchFilterForm): Observable<AccommodationSearch[]> {
     return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/search-filter?city="
       +searchForm.city+"&from="+searchForm.startDate+"&to="+searchForm.finishDate+"&peopleNum="+searchForm.peopleNum);
   }
   searchFilter(searchForm: SearchFilterForm): Observable<AccommodationSearch[]> {
-    alert("filtering.."+ searchForm.accommodationType)
+
     let parameters: string = "";
     if(searchForm.minPrice != -1){
       parameters += "&minimumPrice=" +searchForm.minPrice;
@@ -47,7 +52,11 @@ export class SearchFilterService{
     if(searchForm.accommodationType != ""){
       parameters += "&type=" + searchForm.accommodationType;
     }
-
+    for (let amenity of searchForm.amenities) {
+      //alert(parameters)
+      parameters +="&amenity="+amenity;
+    }
+    //alert("filtering.."+ parameters)
     return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/search-filter?city="
       +searchForm.city+"&from="+searchForm.startDate+"&to="+searchForm.finishDate+"&peopleNum="+searchForm.peopleNum+parameters);
   }
