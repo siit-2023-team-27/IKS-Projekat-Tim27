@@ -8,7 +8,13 @@
     <input type="text"
            placeholder="Pick destination"
            aria-label="Where"
-           matInput>
+           matInput
+           list="locations"
+           [(ngModel)]="inputLocation"
+           (change)="onLocationInputChanged($event)">
+    <datalist #locationsDatalist id="locations">
+      <option *ngFor="let suggestion of suggestedLocations" [value]="suggestion">{{ suggestion }}</option>
+    </datalist>
 
   </mat-form-field>
 
@@ -27,10 +33,11 @@
     <mat-label>
       <fa-icon [icon]="faPeopleGroup" class="pr-2"></fa-icon>
       Who</mat-label>
-    <input type="text"
+    <input type="number"
            placeholder="Who"
            aria-label="Who"
-           matInput>
+           matInput
+           min="2">
 
   </mat-form-field>
 

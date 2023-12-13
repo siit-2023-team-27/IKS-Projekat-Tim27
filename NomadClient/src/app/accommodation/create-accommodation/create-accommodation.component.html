@@ -1,13 +1,13 @@
-<div class="pl-32 pr-32 pt-24">
+<div class="pl-32 pr-32 pt-24 pb-24">
 
   <label for="name" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Name</label>
   <div class="relative mt-2 rounded-md shadow-sm mb-16">
-    <input type="text" name="name" id="name" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation name">
+    <input [(ngModel)]="name" type="text" name="name" id="name" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation name">
   </div>
 
   <label for="description" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Description</label>
   <div class="relative mt-2 rounded-md shadow-sm mb-16">
-    <textarea name="description" id="description" rows="4" cols="50"
+    <textarea [(ngModel)]="description" name="description" id="description" rows="4" cols="50"
               class="block shadow-2xl shadow-gray-300 w-full rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation description"></textarea>
   </div>
 
@@ -15,23 +15,23 @@
     <div class="flex flex-col">
       <label for="minGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Min Guest</label>
       <div class="relative mt-2 rounded-md shadow-sm mb-16">
-        <input type="number" min="1" name="minGuest" id="minGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+        <input [(ngModel)]="minGuest" type="number" min="1" name="minGuest" id="minGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
       </div>
     </div>
     <div class="flex flex-col">
       <label for="maxGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Max Guest</label>
       <div class="relative mt-2 rounded-md shadow-sm mb-16">
-        <input type="number" min="1" name="maxGuest" id="maxGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+        <input [(ngModel)]="maxGuest" type="number" min="1" name="maxGuest" id="maxGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
       </div>
     </div>
   </div>
 
-  <app-map></app-map>
+  <app-map (currentLocation)="getCurrentLocation($event)"></app-map>
 
   <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4 mt-16 underline">Amenities</p>
   <div class="flex flex-wrap gap-12 h-fit p-10 border-2 border-gray-300 rounded-2xl shadow-2xl mt-2 mb-16">
     <div *ngFor="let amenity of amenities" class="flex items-center gap-4">
-        <input type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150 cursor-pointer">
+        <input id="amenity+" type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150 cursor-pointer">
         <label class="text-gray-900 text-sm font-sans tracking-widest">{{amenity.name}}</label>
     </div>
   </div>
@@ -44,7 +44,16 @@
       Add image</p>
   </div>
 
-  <app-accommodation-images [images] = selectedImages></app-accommodation-images>
-  <button class="bg-gray-300 text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 ease-in-out duration-150 mb-24 mt-16">Save</button>
+  <app-accommodation-images [images] = selectedImages [prefixNeeded]="false"></app-accommodation-images>
+  <div class="flex flex-row justify-between items-center">
+    <button (click)="saveAcoommodation()" class="bg-gray-300 h-fit text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 ease-in-out duration-150 mt-16">Save</button>
+
+    <div *ngIf="isConformationVisible"
+      class="flex flex-row items-center gap-8 p-8 border-2 border-gray-500 rounded-2xl mt-12">
+      <p class="text-gray-600 font-mono">Are you sure? Check data...</p>
+      <button (click)="confirm()" class="bg-gray-100 border-2 border-nomad-dark text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Confirm</button>
+      <button (click)="cancel()" class="bg-nomad-dark text-white text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Cancel</button>
+    </div>
+  </div>
 
 </div>

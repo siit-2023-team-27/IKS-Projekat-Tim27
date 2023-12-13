@@ -1,4 +1,4 @@
-
+<ng-container *ngIf="accommodation">
 <div class = "content ml-36 mr-36">
 
     <h1 class="font-roboto font-bold text-3xl underline pb-4 pl-4 pt-2">{{accommodation.name}}, {{accommodation.address}}</h1>
@@ -14,17 +14,16 @@
     <app-accommodation-amenities [amenities] = "accommodation.amenities"></app-accommodation-amenities>
     <div class = "p-5">
         <h2 class="font-roboto decoration-1 underline-offset-8 text-3xl underline pb-4 pl-4 rating-title">Location</h2>
+        <app-map [searchBox]="false" [defaultLocation]="accommodation.address"></app-map>
 
-        <google-map height="500px" width="100%">
-        </google-map>
     </div>
     <div class = "grid lg:grid-cols-2 grid-cols-1">
-        
-    <app-accommodation-comments [reviews] = "accommodation.comments"></app-accommodation-comments>    
+
+    <app-accommodation-comments [reviews] = "accommodation.comments"></app-accommodation-comments>
 
     <app-accommodation-comment-form></app-accommodation-comment-form>
 
     </div>
 
 </div>
-
+</ng-container>

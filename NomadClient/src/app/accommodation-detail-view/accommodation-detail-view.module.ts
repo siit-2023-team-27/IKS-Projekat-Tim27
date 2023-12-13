@@ -14,12 +14,12 @@ import { AccommodationCommentsComponent } from './accommodation-comments/accommo
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { AccommodationCommentFormComponent } from './accommodation-comment-form/accommodation-comment-form.component';
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { MatInputModule } from '@angular/material/input';
 import { AccommodationVerificationComponent } from './accommodation-verification/accommodation-verification.component';
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 import {AmenityModule} from "../amenity/amenity.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -33,11 +33,11 @@ import {AmenityModule} from "../amenity/amenity.module";
     AccommodationDetailsComponent,
     AccommodationVerificationComponent
   ],
-  imports: [
-    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule,
-    MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule,
-    GoogleMapsModule, MatInputModule, RouterModule, MatChipsModule, AmenityModule
-  ],
+    imports: [
+        CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule,
+        MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule,
+        MatInputModule, RouterModule, MatChipsModule, AmenityModule, SharedModule
+    ],
   exports: [
     AccommodationDetailsComponent,
     AccommodationImagesComponent

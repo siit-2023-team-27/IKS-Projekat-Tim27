@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AbstractService } from './abstract.service';
+import { AbstractRestService } from './abstract.service';
 
 describe('AbstractService', () => {
-  let service: AbstractService;
+  let service: AbstractRestService<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AbstractService);
+    service = TestBed.inject(AbstractRestService);
   });
 
   it('should be created', () => {

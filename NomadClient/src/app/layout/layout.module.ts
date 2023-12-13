@@ -11,6 +11,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {MaterialModule} from "../infrastructure/material/material.module";
 import { ModalDeactivateAccountComponent } from './modal-deactivate-account/modal-deactivate-account.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -21,13 +22,15 @@ import { ModalDeactivateAccountComponent } from './modal-deactivate-account/moda
     SearchBarComponent,
     ModalDeactivateAccountComponent
   ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    RouterLink,
-    MaterialModule
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        RouterLink,
+        MaterialModule,
+        ReactiveFormsModule,
+        FormsModule
 
-  ],
+    ],
   exports: [
     NavigationComponent,
     SearchBarComponent,

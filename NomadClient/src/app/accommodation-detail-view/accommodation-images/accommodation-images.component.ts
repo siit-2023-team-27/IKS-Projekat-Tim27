@@ -8,6 +8,9 @@ import { Input } from '@angular/core';
 })
 export class AccommodationImagesComponent {
   @Input() images: String[];
+
+  @Input() prefixNeeded: boolean = true;
+
   constructor(){
     this.images = [];
   }

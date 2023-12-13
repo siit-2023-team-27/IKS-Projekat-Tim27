@@ -15,7 +15,6 @@ export interface AccommodationDetails {
 	name: string;
 	description: string;
 	rating: number;
-	// price: number;
 	images: string[],
 	amenities: Amenity[],
 	comments?: Review[]
