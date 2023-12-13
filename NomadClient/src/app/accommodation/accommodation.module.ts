@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AccommodationCardComponent } from './accommodation-card/accommodation-card.component';
 import { AccommodationCardsComponent } from './accommodation-cards/accommodation-cards.component';
 import { RouterModule } from '@angular/router';
+import {LayoutModule} from "../layout/layout.module";
 
 
 
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
     AccommodationCardsComponent
   ],
   imports: [
-    CommonModule, RouterModule
+    CommonModule, RouterModule, LayoutModule
   ],
   exports: [
     AccommodationCardComponent,
