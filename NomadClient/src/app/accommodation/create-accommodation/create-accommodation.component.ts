@@ -20,6 +20,7 @@ export class CreateAccommodationComponent {
   minGuest: number = 1;
   maxGuest: number = 1;
   location: string = "";
+  checkedAmenities:Amenity[] = [];
 
   isConformationVisible: boolean = false;
 
@@ -58,6 +59,8 @@ export class CreateAccommodationComponent {
 
     if(!this.validateFields()) {return;}
 
+    this.getCheckedAmenities();
+
     this.isConformationVisible = true;
   }
 
@@ -78,6 +81,22 @@ export class CreateAccommodationComponent {
     return true;
   }
 
+  isChecked(amenity: Amenity, checkedBoxes: HTMLInputElement[]): boolean {
+    for (const box of checkedBoxes) {
+      if (box.id == amenity.id.toString()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getCheckedAmenities(): void {
+    const checkBoxes = Array.from(document.getElementsByName("checkbox")) as HTMLInputElement[];
+    const checkedBoxes = checkBoxes.filter(checkBox => checkBox.checked);
+    this.checkedAmenities = this.amenities.filter(a => this.isChecked(a, checkedBoxes) );
+    console.log(this.checkedAmenities);
+  }
+
   confirm(): void {
 
     let newAccommodation: Accommodation = {
@@ -87,7 +106,7 @@ export class CreateAccommodationComponent {
       address: this.location,
       minGuests: this.minGuest,
       maxGuests: this.maxGuest,
-      amenities: [],
+      amenities: this.checkedAmenities,
       images: this.images,
       comments: [],
       status: "REJECTED",

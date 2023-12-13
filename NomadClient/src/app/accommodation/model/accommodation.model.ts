@@ -8,7 +8,7 @@ export interface Accommodation {
   address: string,
   minGuests: number,
   maxGuests: number,
-  amenities: string[],
+  amenities: Amenity[],
   images: string[],
   comments: string[],
   status: string,

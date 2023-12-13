@@ -1,5 +1,5 @@
 export interface Amenity{
-    _id: number;
+    id: number;
     name: string;
     icon: string;
 }
