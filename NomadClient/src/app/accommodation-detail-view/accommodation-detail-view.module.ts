@@ -20,6 +20,11 @@ import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 import {AmenityModule} from "../amenity/amenity.module";
 import {SharedModule} from "../shared/shared.module";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ReservationVerificationComponent } from './reservation-verification/reservation-verification.component';
+import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+
 
 
 @NgModule({
@@ -31,16 +36,21 @@ import {SharedModule} from "../shared/shared.module";
     AccommodationCommentsComponent,
     AccommodationCommentFormComponent,
     AccommodationDetailsComponent,
-    AccommodationVerificationComponent
+    AccommodationVerificationComponent,
+    ReservationVerificationComponent,
+    GuestReservationsComponent
   ],
-    imports: [
-        CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule,
-        MatNativeDateModule, MatSelectModule, MatButtonModule, FlexLayoutModule,
-        MatInputModule, RouterModule, MatChipsModule, AmenityModule, SharedModule
-    ],
+  imports: [
+    CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule,
+    MatButtonModule, FlexLayoutModule, MatInputModule, RouterModule, MatChipsModule, FormsModule, AmenityModule,
+    SharedModule
+  ],
   exports: [
-    AccommodationDetailsComponent,
-    AccommodationImagesComponent
+    AccommodationDetailsComponent, AccommodationImagesComponent, AccommodationVerificationComponent, ReservationVerificationComponent
+  ],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ]
 })
+
 export class AccommodationDetailViewModule { }
