@@ -24,21 +24,24 @@ export class SearchBarComponent {
   protected readonly faPeopleGroup = faPeopleGroup;
   protected readonly faSearch = faSearch;
   protected readonly faFilter = faFilter;
-  constructor(public dialog: MatDialog, private searchFilterService: SearchFilterService) {}
+
+  constructor(public dialog: MatDialog, private searchFilterService: SearchFilterService, private mapService: MapService) {
+  }
   ngOnInit() {
     this.searchFilterService.searchFilterForm$.subscribe(data => {
       this.searchFilterForm = data;
     });
   }
+
   searchFilterForm: SearchFilterForm = {
     city: '',
     startDate: '',
     finishDate: '',
-    peopleNum:-1,
+    peopleNum: -1,
     amenities: [],
-    minPrice:-1,
-    maxPrice:-1,
-    accommodationType:""
+    minPrice: -1,
+    maxPrice: -1,
+    accommodationType: ""
   };
   searchForm = new FormGroup({
     city: new FormControl(),
@@ -46,20 +49,30 @@ export class SearchBarComponent {
     finishDate: new FormControl(),
     peopleNum: new FormControl()
   });
+
   search(): void {
     this.searchFilterForm.city = this.searchForm.value.city;
-    this.searchFilterForm.startDate = this.searchForm.value.startDate.toLocaleString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit',});
-    this.searchFilterForm.finishDate = this.searchForm.value.finishDate.toLocaleString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit',});
+    this.searchFilterForm.startDate = this.searchForm.value.startDate.toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    this.searchFilterForm.finishDate = this.searchForm.value.finishDate.toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
     this.searchFilterForm.peopleNum = this.searchForm.value.peopleNum;
     this.searchFilterService.searchFilterForm$.next(this.searchFilterForm);
     this.searchFilterService.search(this.searchFilterForm).subscribe({
-      next: (data: AccommodationSearch[]) => { this.searchFilterService.accommodations$.next(data); },
+      next: (data: AccommodationSearch[]) => {
+        this.searchFilterService.accommodations$.next(data);
+      },
     });
   }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FilterComponent, {
 
-    });
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FilterComponent, {});
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
 
@@ -70,10 +83,9 @@ export class SearchBarComponent {
   inputLocation: string = "";
   suggestedLocations: string[] = [];
 
-  @ViewChild('locationsDatalist', { static: true }) locationsDatalist!: ElementRef;
+  @ViewChild('locationsDatalist', {static: true}) locationsDatalist!: ElementRef;
 
-  constructor(private mapService: MapService) {
-  }
+
 
   onLocationInputChanged(event: any) {
     console.log("tu samm");
@@ -94,8 +106,9 @@ export class SearchBarComponent {
           datalistElement.appendChild(optionElement);
         });
       },
-      error: () => {},
-    }
+      error: () => {
+      },
+    });
+  }
 }
-
 
