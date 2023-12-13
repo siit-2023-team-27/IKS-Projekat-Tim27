@@ -18,4 +18,5 @@ describe('AccommodationReservationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
