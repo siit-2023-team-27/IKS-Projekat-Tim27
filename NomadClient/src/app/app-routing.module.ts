@@ -9,6 +9,8 @@ import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/a
 import {AuthGuard} from "./infrastructure/auth/auth.guard";
 import {ProfileComponent} from "./account/profile/profile.component";
 import { AccommodationVerificationComponent } from './accommodation-detail-view/accommodation-verification/accommodation-verification.component';
+import {CreateAccommodationComponent} from "./accommodation/create-accommodation/create-accommodation.component";
+
 import { ReservationVerificationComponent } from './accommodation-detail-view/reservation-verification/reservation-verification.component';
 import { GuestReservationsComponent } from './accommodation-detail-view/guest-reservations/guest-reservations.component';
 const routes: Routes = [
@@ -18,6 +20,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'accommodation-details/:id', component: AccommodationDetailsComponent},
   {path: 'accommodation-verification', component: AccommodationVerificationComponent},
+  {path: 'accommodation-create', component: CreateAccommodationComponent},
   {path: 'reservation-verification', component: ReservationVerificationComponent},
   {path: 'guest-reservation', component: GuestReservationsComponent},
 ]

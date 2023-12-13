@@ -18,4 +18,8 @@ export abstract class AbstractRestService<T> {
   delete(id:number):Observable<T> {
     return this._http.delete<T>(`${this.actionUrl}/${id}`);
   }
-} 
+
+  post(data: T): Observable<T> {
+    return this._http.post<T>(this.actionUrl, data);
+  }
+}

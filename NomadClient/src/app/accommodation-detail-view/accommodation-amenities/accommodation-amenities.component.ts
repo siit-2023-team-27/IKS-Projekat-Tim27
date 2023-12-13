@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Amenity } from 'src/app/accommodation-detail-view/model/accommodationDetails.model';
+import {Amenity} from "../../amenity/amenity.model";
+
 @Component({
   selector: 'app-accommodation-amenities',
   templateUrl: './accommodation-amenities.component.html',
