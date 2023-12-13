@@ -1,11 +1,17 @@
-<div class="h-[200px]]">
-  <img src="images/{{accommodation.images[0]}}" alt="Accommodation image"
-       class="rounded-2xl">
-</div>
+<div [routerLink]="['/accommodation-details']">
+  <div class="h-3/4">
+    <img *ngIf="!isSearchMode" src="images/{{accommodation.images[0]}}" alt="Accommodation image" class="w-full h-full object-center rounded-2xl">
+    <img *ngIf="isSearchMode" src="images/{{accommodationSearch.images[0]}}" alt="Accommodation image" class="w-full h-full object-center rounded-2xl">
 
-<div class="flex flex-col h-[150px] p-3">
-  <p class="text-md text-gray-600 font-bold">{{accommodation.name}}, {{accommodation.address}}</p>
-  <p class="pl-3 text-sm">Excellent</p>
-  <p class="text-md text-gray-600 font-bold">$100 Night</p>
+  </div>
+
+  <div class="flex flex-col h-1/4 p-3">
+    <p *ngIf="!isSearchMode" class="text-md text-gray-600 font-bold">{{accommodation.name}}, {{accommodation.address}}</p>
+    <p *ngIf="isSearchMode" class="text-md text-gray-600 font-bold">{{accommodationSearch.name}}, {{accommodationSearch.address}}</p>
+    <p class="pl-3 text-sm">Excellent</p>
+    <p *ngIf="!isSearchMode" class="text-md text-gray-600">$100 Night</p>
+    <p *ngIf="isSearchMode" class="text-md text-gray-600">Price per night: {{accommodationSearch.pricePerNight}}</p>
+    <p *ngIf="isSearchMode" class="text-md text-gray-600">Total price: {{accommodationSearch.totalPrice}}</p>
+  </div>
 </div>
 
