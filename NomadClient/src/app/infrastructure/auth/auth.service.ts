@@ -20,22 +20,12 @@ export class AuthService{
               private tokenStorage: TokenStorage,
               private router: Router){}
 
-  login(login: Login): Observable<LoginResponse> {
-    return this.http
-      .post<LoginResponse>(environment.apiHost + 'users/login', login)
-      .pipe(
-        tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse);
-          this.setUser();
-        })
-      );
-  }
-  login2(login: Login): Observable<AuthResponse> {
+  login(login: Login): Observable<AuthResponse> {
     return this.http
       .post<AuthResponse>(environment.authHost + 'login', login)
       .pipe(
         tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken2(authenticationResponse);
+          this.tokenStorage.saveAccessToken(authenticationResponse);
           this.setUser();
         })
       );

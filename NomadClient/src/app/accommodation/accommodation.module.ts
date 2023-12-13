@@ -4,20 +4,26 @@ import { AccommodationCardComponent } from './accommodation-card/accommodation-c
 import { AccommodationCardsComponent } from './accommodation-cards/accommodation-cards.component';
 import { RouterModule } from '@angular/router';
 import {LayoutModule} from "../layout/layout.module";
+import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import {SharedModule} from "../shared/shared.module";
+import {FormsModule} from "@angular/forms";
+import {AccommodationDetailViewModule} from "../accommodation-detail-view/accommodation-detail-view.module";
 
 
 
 @NgModule({
   declarations: [
     AccommodationCardComponent,
-    AccommodationCardsComponent
+    AccommodationCardsComponent,
+    CreateAccommodationComponent
   ],
   imports: [
-    CommonModule, RouterModule, LayoutModule
+    CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule,LayoutModule
   ],
   exports: [
     AccommodationCardComponent,
-    AccommodationCardsComponent
+    AccommodationCardsComponent,
+    CreateAccommodationComponent,
   ]
 })
 export class AccommodationModule { }

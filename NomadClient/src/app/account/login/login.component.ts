@@ -27,7 +27,7 @@ export class LoginComponent {
       password: this.loginForm.value.password || "",
     };
 
-      this.authService.login2(login).subscribe({
+      this.authService.login(login).subscribe({
         next: () => {
           this.router.navigate(['/home']);
         },

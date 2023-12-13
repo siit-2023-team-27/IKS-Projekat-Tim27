@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+
 import {faLocationArrow, faPeopleGroup, faSearch, faFilter} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
 import {FilterComponent} from "../filter/filter.component";
@@ -11,6 +11,8 @@ import {AuthService} from "../../infrastructure/auth/auth.service";
 import {SearchFilterService} from "../search-filter.service";
 import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {AccommodationSearch} from "../model/accommodation-search.model";
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {MapService} from "../../shared/map/map.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -60,8 +62,40 @@ export class SearchBarComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+
     });
   }
+
+
+  inputLocation: string = "";
+  suggestedLocations: string[] = [];
+
+  @ViewChild('locationsDatalist', { static: true }) locationsDatalist!: ElementRef;
+
+  constructor(private mapService: MapService) {
+  }
+
+  onLocationInputChanged(event: any) {
+    console.log("tu samm");
+    this.mapService.search(this.inputLocation).subscribe({
+      next: (results) => {
+        results.forEach((result: { display_name: string; }) => {
+          this.suggestedLocations.push(result.display_name);
+        })
+
+        const datalistElement = this.locationsDatalist.nativeElement;
+        while (datalistElement.firstChild) {
+          datalistElement.removeChild(datalistElement.firstChild);
+        }
+
+        this.suggestedLocations.forEach((suggestion: string) => {
+          const optionElement = document.createElement('option');
+          optionElement.value = suggestion;
+          datalistElement.appendChild(optionElement);
+        });
+      },
+      error: () => {},
+    }
 }
 
 
