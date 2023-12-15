@@ -10,6 +10,7 @@ export interface AccommodationSearch {
   comments: string[],
   status: string,
   totalPrice: number,
-  pricePerNight: number
+  pricePerNight: number,
+  averageRating:number
 
 }

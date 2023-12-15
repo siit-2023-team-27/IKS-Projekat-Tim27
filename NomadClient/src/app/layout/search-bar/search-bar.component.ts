@@ -13,6 +13,9 @@ import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {AccommodationSearch} from "../model/accommodation-search.model";
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {MapService} from "../../shared/map/map.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
+import {SnackBarService} from "../../shared/snack-bar.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -25,7 +28,14 @@ export class SearchBarComponent {
   protected readonly faSearch = faSearch;
   protected readonly faFilter = faFilter;
 
-  constructor(public dialog: MatDialog, private searchFilterService: SearchFilterService, private mapService: MapService) {
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 2000,
+    });
+    this.snackService.errorMessage$.next("Some search fields are empty")
+  }
+
+  constructor(private snackService: SnackBarService, private _snackBar: MatSnackBar,public dialog: MatDialog, private searchFilterService: SearchFilterService, private mapService: MapService) {
   }
   ngOnInit() {
     this.searchFilterService.searchFilterForm$.subscribe(data => {
@@ -50,8 +60,21 @@ export class SearchBarComponent {
     peopleNum: new FormControl()
   });
 
+  isValidForSearch():boolean{
+    if(this.searchForm.value.city == '' || this.searchForm.value.startDate == null || this.searchForm.value.finishDate==null || this.searchForm.value.peopleNum==null){
+      return false;
+    }
+    return true;
+  }
+
   search(): void {
+    if(!this.isValidForSearch()){
+      this.openSnackBar()
+      return
+    }
+
     this.searchFilterForm.city = this.searchForm.value.city;
+
     this.searchFilterForm.startDate = this.searchForm.value.startDate.toLocaleString('en-US', {
       year: 'numeric',
       month: '2-digit',
@@ -63,12 +86,15 @@ export class SearchBarComponent {
       day: '2-digit',
     });
     this.searchFilterForm.peopleNum = this.searchForm.value.peopleNum;
+
     this.searchFilterService.searchFilterForm$.next(this.searchFilterForm);
     this.searchFilterService.search(this.searchFilterForm).subscribe({
       next: (data: AccommodationSearch[]) => {
         this.searchFilterService.accommodations$.next(data);
       },
     });
+
+
   }
 
   openDialog(): void {
