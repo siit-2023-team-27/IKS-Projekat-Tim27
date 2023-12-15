@@ -10,6 +10,7 @@ import {AccommodationSearch} from "../../layout/model/accommodation-search.model
   styleUrls: ['./accommodation-cards.component.css']
 })
 export class AccommodationCardsComponent implements OnInit{
+  peopleNum: number = -1;
   accommodations: Accommodation[] = [];
   accommodationsSearch: AccommodationSearch[] = [];
   constructor(private service: AccommodationService, private searchService: SearchFilterService ) {
@@ -24,6 +25,10 @@ export class AccommodationCardsComponent implements OnInit{
     this.searchService.accommodations$.subscribe(data => {
       this.accommodations = [];
       this.accommodationsSearch = data;
+    });
+    this.searchService.accommodationsFilter$.subscribe(data => {
+      this.accommodations = data;
+      this.accommodationsSearch = [];
     });
   }
 }
