@@ -61,7 +61,7 @@ export class SearchFilterService{
     return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/search-filter?city="
       +searchForm.city+"&from="+searchForm.startDate+"&to="+searchForm.finishDate+"&peopleNum="+searchForm.peopleNum+parameters);
   }
-  filter(searchForm: SearchFilterForm): Observable<AccommodationSearch[]> {
+  filter(searchForm: SearchFilterForm): Observable<Accommodation[]> {
 
     let parameters: string = "";
     if(searchForm.minPrice != -1){
@@ -76,7 +76,7 @@ export class SearchFilterService{
     for (let amenity of searchForm.amenities) {
       parameters +="&amenity="+amenity;
     }
-    return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/filter?"+searchForm.peopleNum+parameters);
+    return this.http.get<Accommodation[]>(environment.apiHost + "accommodations/filter?"+searchForm.peopleNum+parameters);
   }
 
 
