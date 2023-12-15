@@ -41,36 +41,34 @@
       <div class="flex flex-row gap-2">
         <mat-form-field class="example-full-width">
           <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="user.firstName">
+          <input matInput [(ngModel)]="user.firstName" pattern="\b[A-Za-z]{3,20}\b">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Surname</mat-label>
-          <input matInput [(ngModel)]="user.lastName">
+          <input matInput [(ngModel)]="user.lastName" pattern="\b[A-Za-z]{3,20}\b">
         </mat-form-field>
       </div>
       <div class="flex flex-row ">
         <mat-form-field class="example-full-width">
           <mat-label>Adress</mat-label>
-          <input matInput [(ngModel)]="user.address">
+          <input matInput [(ngModel)]="user.address" pattern="\b[A-Za-z0-9]{3,20}\b">
         </mat-form-field>
       </div>
       <div class="flex flex-row">
         <mat-form-field class="example-full-width">
           <mat-label>Phone number</mat-label>
-          <input matInput [(ngModel)]="user.phoneNumber">
+          <input matInput [(ngModel)]="user.phoneNumber" pattern= "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
         </mat-form-field>
       </div>
 
       <div class="flex flex-row">
         <mat-form-field class="example-full-width">
           <mat-label>Username</mat-label>
-          <input matInput [(ngModel)]="user.username">
+          <input matInput [(ngModel)]="user.username" pattern="\b[A-Za-z0-9]{3,20}\b">
         </mat-form-field>
       </div>
-      <div class="flex flex-row">
-        <mat-form-field class="example-full-width">
-          
-        </mat-form-field>
+      <div class="flex flex-row" *ngFor="let error of errors">
+        {{error}}
       </div>
 
       <div class="flex flex-row gap-8">
