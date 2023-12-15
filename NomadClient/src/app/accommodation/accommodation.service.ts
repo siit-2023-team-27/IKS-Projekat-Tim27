@@ -1,15 +1,21 @@
 import {HttpClient} from "@angular/common/http";
-import { Accommodation } from "./model/accommodation.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
 import { AbstractRestService } from "../abstract.service";
+import {AccommodationDetails} from "../accommodation-detail-view/model/accommodationDetails.model";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class AccommodationService extends AbstractRestService<Accommodation>{
+export class AccommodationService extends AbstractRestService<AccommodationDetails>{
   constructor(private httpClient: HttpClient) {
     super(httpClient, environment.apiHost + "accommodations");
+  }
+
+  getAccommodationsForHost(hostId:number): Observable<AccommodationDetails[]> {
+    console.log(`${this.actionUrl}/${+hostId}`);
+    return this.httpClient.get<AccommodationDetails[]>(`${this.actionUrl}/host/${+hostId}`)
   }
 }

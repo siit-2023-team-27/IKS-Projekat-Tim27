@@ -3,7 +3,9 @@ import {AmenityService} from "../../amenity/amenity.service";
 import {Amenity} from "../../amenity/amenity.model";
 import {Accommodation} from "../model/accommodation.model";
 import {AccommodationService} from "../accommodation.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
+import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -11,6 +13,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./create-accommodation.component.css']
 })
 export class CreateAccommodationComponent {
+
+  accommodation:AccommodationDetails | undefined;
+
   amenities: Amenity[] = []
   selectedImages: string[] = [];
 
@@ -24,15 +29,63 @@ export class CreateAccommodationComponent {
 
   isConformationVisible: boolean = false;
 
+  edit: boolean = false;
+
+  id?:number;
+
   constructor(private amenityService: AmenityService,
               private accommodationService: AccommodationService,
-              private router: Router){}
+              private router: Router,
+              private route: ActivatedRoute,
+              private tokenStorage: TokenStorage){}
 
   ngOnInit(): void {
     this.amenityService.getAll().subscribe({
       next: (data: Amenity[]) => {this.amenities = data; },
       error: () => { console.log("Error while reading amenities! ") }
     })
+
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      if(this.id) {
+        this.edit = true;
+        this.accommodationService.get(this.id).subscribe({
+          next: (data: AccommodationDetails) => {
+            this.accommodation = data;
+            this.initializeFields();
+          },
+          error: (_) => {}
+        })
+      }
+
+    });
+  }
+
+  initializeFields(): void {
+    if(this.accommodation) {
+      this.name = this.accommodation.name;
+      this.description = this.accommodation.description;
+      this.location = this.accommodation.address;
+
+      this.minGuest = this.accommodation.minGuests;
+      this.maxGuest = this.accommodation.maxGuests;
+      this.selectedImages = this.accommodation.images;
+      this.selectedImages = this.selectedImages.map(i => i = "images/"+i);
+      this.checkedAmenities = this.accommodation.amenities;
+      const checkBoxes = Array.from(document.getElementsByName("checkbox")) as HTMLInputElement[];
+      checkBoxes.map(box => {
+        if (this.contains(parseInt(box.id), this.checkedAmenities)){
+          box.checked = true
+        }
+      })
+    }
+  }
+
+  contains(id:number, amenities: Amenity[]): boolean {
+    for(const amenity of amenities){
+      if(id == amenity.id) { return  true; }
+    }
+    return false;
   }
 
   getCurrentLocation(currentLocation: string) {
@@ -99,8 +152,9 @@ export class CreateAccommodationComponent {
 
   confirm(): void {
 
-    let newAccommodation: Accommodation = {
+    let newAccommodation: AccommodationDetails = {
       id:0,
+      hostId: +this.tokenStorage.getId()!,
       name: this.name,
       description: this.description,
       address: this.location,
@@ -110,6 +164,7 @@ export class CreateAccommodationComponent {
       images: this.images,
       comments: [],
       status: "REJECTED",
+      rating: 0
     }
 
     this.accommodationService.post(newAccommodation).subscribe({

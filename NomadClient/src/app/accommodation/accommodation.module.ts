@@ -8,6 +8,8 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
 import {SharedModule} from "../shared/shared.module";
 import {FormsModule} from "@angular/forms";
 import {AccommodationDetailViewModule} from "../accommodation-detail-view/accommodation-detail-view.module";
+import { AccommodationCardsHostComponent } from './accommodation-cards-host/accommodation-cards-host.component';
+import { AccommodationCardHostComponent } from './accommodation-card-host/accommodation-card-host.component';
 
 
 
@@ -15,7 +17,9 @@ import {AccommodationDetailViewModule} from "../accommodation-detail-view/accomm
   declarations: [
     AccommodationCardComponent,
     AccommodationCardsComponent,
-    CreateAccommodationComponent
+    CreateAccommodationComponent,
+    AccommodationCardsHostComponent,
+    AccommodationCardHostComponent
   ],
   imports: [
     CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule,LayoutModule
@@ -24,6 +28,8 @@ import {AccommodationDetailViewModule} from "../accommodation-detail-view/accomm
     AccommodationCardComponent,
     AccommodationCardsComponent,
     CreateAccommodationComponent,
+    AccommodationCardsHostComponent,
+    AccommodationCardHostComponent
   ]
 })
 export class AccommodationModule { }

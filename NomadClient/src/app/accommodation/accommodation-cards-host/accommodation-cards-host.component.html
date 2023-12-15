@@ -1,0 +1,10 @@
+<p class="text-center text-2xl font-bold text-gray-700 tracking-wider underline">Your Listing</p>
+<div class="flex flex-col w-[80%] m-auto mt-12 pb-12 gap-8 items-center md:items-end">
+      <button class="text-nomad-dark font-bold text-md underline p-3 px-16 bg-neutral-300 rounded-2xl w-fit md:float-right hover:scale-110 ease-in-out duration-150"
+              [routerLink]="['/accommodation-create']">
+          <i class="fa-solid fa-plus pr-2 text-2xl"></i>
+          Add Accommodation</button>
+    <div *ngFor="let accommodation of accommodations">
+        <app-accommodation-card-host [accommodation] = "accommodation"></app-accommodation-card-host>
+    </div>
+</div>
