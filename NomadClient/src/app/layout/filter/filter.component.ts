@@ -61,6 +61,14 @@ export class FilterComponent {
   getAmenityControls(): FormControl[] {
     return this.amenitiesArray.controls.map(control => control as FormControl);
   }
+
+  isSearchEmpty(){
+    if(this.searchFilterForm.peopleNum==-1){
+      return true;
+    }
+    return false;
+  }
+
   filter(): void {
     this.searchFilterForm.minPrice = this.filterForm.value.minPrice||0;
     this.searchFilterForm.maxPrice = this.filterForm.value.maxPrice||1000;
@@ -68,15 +76,20 @@ export class FilterComponent {
     let iterator:number = 0;
     for (let amenity of this.filterForm.value.amenities||[]) {
       if(amenity) {
-        //alert(amenity+"-"+this.amenities[iterator].id)
         this.searchFilterForm.amenities.push(this.amenities[iterator].id);
       }
       iterator++;
     }
+    if(this.isSearchEmpty()){
+      this.searchFilterService.filter(this.searchFilterForm).subscribe({
+        next: (data: Accommodation[]) => { this.searchFilterService.accommodationsFilter$.next(data); },
+      });
+    }else{
+      this.searchFilterService.searchFilter(this.searchFilterForm).subscribe({
+        next: (data: AccommodationSearch[]) => { this.searchFilterService.accommodations$.next(data); },
+      });
+    }
 
-    this.searchFilterService.searchFilter(this.searchFilterForm).subscribe({
-      next: (data: AccommodationSearch[]) => { this.searchFilterService.accommodations$.next(data); },
-    });
     this.searchFilterForm.amenities = []
   }
 
@@ -88,8 +101,9 @@ export class FilterComponent {
     return `${value}`;
   }
   onCancel(): void {
-    this.dialogRef.close();
-  }
+     this.dialogRef.close();
+   }
+
   onFilter(): void {
     this.filter();
     this.dialogRef.close({

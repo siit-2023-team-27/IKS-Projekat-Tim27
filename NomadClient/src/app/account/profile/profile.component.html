@@ -41,35 +41,41 @@
       <div class="flex flex-row gap-2">
         <mat-form-field class="example-full-width">
           <mat-label>Name</mat-label>
-          <input matInput value="{{user.firstName}}">
+          <input matInput [(ngModel)]="user.firstName">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Surname</mat-label>
-          <input matInput value="{{user.lastName}}">
+          <input matInput [(ngModel)]="user.lastName">
         </mat-form-field>
       </div>
       <div class="flex flex-row ">
         <mat-form-field class="example-full-width">
           <mat-label>Adress</mat-label>
-          <input matInput value="{{user.address}}">
+          <input matInput [(ngModel)]="user.address">
         </mat-form-field>
       </div>
       <div class="flex flex-row">
         <mat-form-field class="example-full-width">
           <mat-label>Phone number</mat-label>
-          <input matInput value="{{user.phoneNumber}}">
+          <input matInput [(ngModel)]="user.phoneNumber">
         </mat-form-field>
       </div>
 
       <div class="flex flex-row">
         <mat-form-field class="example-full-width">
           <mat-label>Username</mat-label>
-          <input matInput value="{{user.username}}">
+          <input matInput [(ngModel)]="user.username">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row">
+        <mat-form-field class="example-full-width">
+          
         </mat-form-field>
       </div>
 
       <div class="flex flex-row gap-8">
-        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl">
+        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl" 
+        (click)="editUser()">
           Save
         </button>
         <button (click)="exitEditMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl">

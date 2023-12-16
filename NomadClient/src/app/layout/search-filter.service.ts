@@ -10,8 +10,8 @@ import {environment} from "../../env/env";
 import {AuthResponse} from "../infrastructure/auth/model/auth.response.module";
 import {SearchFilterForm} from "./model/searchFilterForm.model";
 import {AccommodationSearch} from "./model/accommodation-search.model";
-import {Accommodation} from "../accommodation/model/accommodation.model";
 import {Amenity} from "./model/amenity.model";
+import {AccommodationDetails} from "../accommodation-detail-view/model/accommodationDetails.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ import {Amenity} from "./model/amenity.model";
 export class SearchFilterService{
 
   accommodations$ = new BehaviorSubject<AccommodationSearch[]>([]);
+  accommodationsFilter$ = new BehaviorSubject<AccommodationDetails[]>([]);
   searchFilterForm$ = new BehaviorSubject<SearchFilterForm>({
     city: '',
     startDate: '',
@@ -59,6 +60,23 @@ export class SearchFilterService{
     //alert("filtering.."+ parameters)
     return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/search-filter?city="
       +searchForm.city+"&from="+searchForm.startDate+"&to="+searchForm.finishDate+"&peopleNum="+searchForm.peopleNum+parameters);
+  }
+  filter(searchForm: SearchFilterForm): Observable<AccommodationDetails[]> {
+
+    let parameters: string = "";
+    if(searchForm.minPrice != -1){
+      parameters += "&minimumPrice=" +searchForm.minPrice;
+    }
+    if(searchForm.maxPrice != -1){
+      parameters += "&maximumPrice=" +searchForm.maxPrice;
+    }
+    if(searchForm.accommodationType != ""){
+      parameters += "&type=" + searchForm.accommodationType;
+    }
+    for (let amenity of searchForm.amenities) {
+      parameters +="&amenity="+amenity;
+    }
+    return this.http.get<AccommodationDetails[]>(environment.apiHost + "accommodations/filter?"+searchForm.peopleNum+parameters);
   }
 
 
