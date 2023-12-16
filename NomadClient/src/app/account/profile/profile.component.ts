@@ -2,17 +2,21 @@ import {Component, Input} from '@angular/core';
 import {User} from "../model/user.model";
 import {AccountService} from "../account.service";
 import {AuthService} from "../../infrastructure/auth/auth.service";
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import { Login } from 'src/app/infrastructure/auth/model/login.model';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-
+  isResetPasswordMode: boolean = false;
   isModalVisible: boolean = false;
   deleteConformation: boolean = false;
+  oldPassword: String = "";
+  newPassword: String = "";
+  confirmedPassword: String = "";
   errors: String[] = [];
+  passwordErrors: String[] = [];
   validationPatterns = {
     "phoneNumber" : new RegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"),
     "userName" : new RegExp("[A-Za-z0-9]{3,20}"),
@@ -51,7 +55,7 @@ export class ProfileComponent {
       next: () => {
         
       },
-      error: () => { console.log("Error while deleting user with id: ", this.user.id,  "!"); }
+      error: () => { console.log("Error while editing user with id: ", this.user.id,  "!"); }
     });
   }
   validate(): boolean{
@@ -85,5 +89,52 @@ export class ProfileComponent {
       next: (data: User) => { this.user = data; },
       error: () => { console.log("Error while reading logged user!"); }
     })
+  }
+  enterResetPasswordMode() : void {
+    this.isResetPasswordMode = true;
+    this.isEditMode = false;
+  }
+  exitResetPasswordMode(): void{
+    this.isResetPasswordMode = false;
+    this.isEditMode = false;
+  }
+  resetPassword(): void{
+    let validated = true;
+    this.passwordErrors = []
+    var login: Login = {
+      "username" : this.user.username,
+      "password" : this.oldPassword as string
+    }
+    this.authService.reauthenticate(login).subscribe({
+      next : (_) => {
+
+        //all good?
+        if(this.newPassword.length < 8){
+          this.passwordErrors.push("New password must be at least 8 characters")
+          validated = false;
+        }
+        if(this.newPassword != this.confirmedPassword){
+          this.passwordErrors.push("Passwords must match")
+          validated = false
+        }
+        if(!validated){
+          return;
+        }
+        this.user.password = this.newPassword as string;
+        this.service.editUser(this.user).subscribe({
+          next: (_) => {},
+          error: (_) => {console.log("Error changing password")}
+        })
+      },
+      error : (e) => {
+        console.log(e)
+
+        this.passwordErrors.push("Old Password Incorrect")
+        validated = false;
+      }
+      
+  });
+    
+    
   }
 }

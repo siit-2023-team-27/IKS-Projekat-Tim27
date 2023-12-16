@@ -30,6 +30,10 @@ export class AuthService{
         })
       );
   }
+  reauthenticate(login: Login): Observable<Login> {
+    return this.http
+      .post<Login>(environment.authHost + 'reauthenticate', login);
+  }
 
   logout():void{
     this.tokenStorage.clear();
