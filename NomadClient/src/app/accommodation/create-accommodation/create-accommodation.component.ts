@@ -17,7 +17,8 @@ export class CreateAccommodationComponent {
   accommodation:AccommodationDetails | undefined;
 
   amenities: Amenity[] = []
-  selectedImages: string[] = [];
+
+  accommodaitonImages: string[] = [];
 
   images: string[] = [];
   name:string = "";
@@ -69,8 +70,8 @@ export class CreateAccommodationComponent {
 
       this.minGuest = this.accommodation.minGuests;
       this.maxGuest = this.accommodation.maxGuests;
-      this.selectedImages = this.accommodation.images;
-      this.selectedImages = this.selectedImages.map(i => i = "images/"+i);
+      this.accommodaitonImages = this.accommodation.images;
+      this.accommodaitonImages = this.accommodaitonImages.map(i => i = "images/"+i);
       this.checkedAmenities = this.accommodation.amenities;
       const checkBoxes = Array.from(document.getElementsByName("checkbox")) as HTMLInputElement[];
       checkBoxes.map(box => {
@@ -79,6 +80,10 @@ export class CreateAccommodationComponent {
         }
       })
     }
+  }
+
+  getImages(selectedImages: string[]) {
+    this.images = selectedImages;
   }
 
   contains(id:number, amenities: Amenity[]): boolean {
@@ -90,22 +95,6 @@ export class CreateAccommodationComponent {
 
   getCurrentLocation(currentLocation: string) {
     this.location = currentLocation;
-  }
-
-  onFileSelected(event: any) {
-    const file:File = event.target.files[0];
-    this.images.push(file.name);
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        // @ts-ignore
-        this.selectedImages.push(e.target.result as string);
-      };
-
-      reader.readAsDataURL(file);
-    }
   }
 
   saveAcoommodation(): void {
@@ -151,7 +140,18 @@ export class CreateAccommodationComponent {
   }
 
   confirm(): void {
+    if(this.accommodation) {
+      this.updateAccommodation();
+    }else{
+      this.createAccommodation();
+    }
+  }
 
+  cancel(): void {
+    this.isConformationVisible = false;
+  }
+
+  createAccommodation() {
     let newAccommodation: AccommodationDetails = {
       id:0,
       hostId: +this.tokenStorage.getId()!,
@@ -163,7 +163,7 @@ export class CreateAccommodationComponent {
       amenities: this.checkedAmenities,
       images: this.images,
       comments: [],
-      status: "REJECTED",
+      status: "PENDING",
       rating: 0
     }
 
@@ -178,11 +178,31 @@ export class CreateAccommodationComponent {
       },
       error: () => {console.log("Error while posting new accommocation!!");}
     })
-
   }
 
-  cancel(): void {
-    this.isConformationVisible = false;
+  updateAccommodation() {
+    if(this.accommodation) {
+      this.accommodation.name = this.name;
+      this.accommodation.description = this.description;
+      this.accommodation.address = this.location;
+      this.accommodation.minGuests = this.minGuest;
+      this.accommodation.maxGuests = this.maxGuest;
+      this.accommodation.amenities = this.checkedAmenities;
+      this.accommodation.images = this.images;
+
+      this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({
+        next: (accommodation) => {
+          console.log("Success!");
+          console.log("Accommodation is updated: ", accommodation);
+
+          alert("Accommodation is updated. Thank you for submiting.");
+          this.router.navigate(['/home']);
+
+        },
+        error: () => {console.log("Error while posting new accommocation!!");}
+      })
+    }
+
   }
 
 }

@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {AccommodationDetailViewModule} from "../accommodation-detail-view/accommodation-detail-view.module";
 import { AccommodationCardsHostComponent } from './accommodation-cards-host/accommodation-cards-host.component';
 import { AccommodationCardHostComponent } from './accommodation-card-host/accommodation-card-host.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 
 
@@ -19,7 +20,8 @@ import { AccommodationCardHostComponent } from './accommodation-card-host/accomm
     AccommodationCardsComponent,
     CreateAccommodationComponent,
     AccommodationCardsHostComponent,
-    AccommodationCardHostComponent
+    AccommodationCardHostComponent,
+    ImageUploadComponent
   ],
   imports: [
     CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule,LayoutModule

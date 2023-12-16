@@ -43,15 +43,8 @@
     </div>
   </div>
 
-  <input type="file" class="file-input hidden" (change)="onFileSelected($event)"  #fileUpload>
-  <div class="flex flex-row items-center justify-between mb-4">
-    <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4 mt-8 cursor-pointer underline">Images</p>
-    <p (click)="fileUpload.click()" class="text-md font-medium leading-6 text-gray-900 font-sans pl-4 mt-16 cursor-pointer hover:scale-110 ease-in-out duration-150">
-      <i class="fa-regular fa-images text-2xl text-nomad-dark mr-2"></i>
-      Add image</p>
-  </div>
+  <app-image-upload [images]="accommodaitonImages" (selectedImagesOutput)="getImages($event)" ></app-image-upload>
 
-  <app-accommodation-images [images] = selectedImages [prefixNeeded]="false"></app-accommodation-images>
   <div class="flex flex-row justify-between items-center">
     <button (click)="saveAcoommodation()" class="bg-gray-300 h-fit text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 ease-in-out duration-150 mt-16">Save</button>
 
