@@ -12,6 +12,7 @@ import {AccommodationDetails} from "../../accommodation-detail-view/model/accomm
 })
 export class AccommodationCardsComponent implements OnInit{
   accommodations: AccommodationDetails[] = [];
+  peopleNum: number = -1;
   accommodationsSearch: AccommodationSearch[] = [];
   constructor(private service: AccommodationService, private searchService: SearchFilterService ) {
   }
@@ -25,6 +26,10 @@ export class AccommodationCardsComponent implements OnInit{
     this.searchService.accommodations$.subscribe(data => {
       this.accommodations = [];
       this.accommodationsSearch = data;
+    });
+    this.searchService.accommodationsFilter$.subscribe(data => {
+      this.accommodations = data;
+      this.accommodationsSearch = [];
     });
   }
 }
