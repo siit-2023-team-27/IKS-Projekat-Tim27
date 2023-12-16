@@ -2,7 +2,7 @@
 
   <div *ngFor="let image of images" class="rounded-2xl">
     <img
-      class="rounded-3xl object-contain"
+      class="w-full h-full rounded-3xl object-cover"
       [src]="prefixNeeded ? 'images/' + image : image"
       alt=""
     />
