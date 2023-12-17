@@ -10,6 +10,7 @@ import { FilterComponent } from './filter/filter.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatCheckboxModule,
     MatSliderModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule
   ],
   exports: [
     NavigationComponent,

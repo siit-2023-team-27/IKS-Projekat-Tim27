@@ -19,7 +19,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatAutocompleteModule,
     MatButtonModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
   ], exports:[
     MatFormFieldModule,
     MatInputModule,

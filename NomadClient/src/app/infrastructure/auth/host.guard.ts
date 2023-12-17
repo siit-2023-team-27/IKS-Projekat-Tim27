@@ -8,7 +8,7 @@ import {TokenStorage} from "./jwt/token.service";
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class HostGuard implements CanActivate {
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -22,8 +22,8 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
 
     const role: string = this.tokenStorage.getRole()||"";
-    if (role === '') {
-      this.router.navigate(['login']);
+    if (role != 'HOST') {
+      this.router.navigate(['home']);
       return false;
     }
     return true;
