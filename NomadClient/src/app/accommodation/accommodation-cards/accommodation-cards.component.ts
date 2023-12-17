@@ -3,6 +3,7 @@ import { Accommodation } from '../model/accommodation.model';
 import {AccommodationService} from "../accommodation.service";
 import {SearchFilterService} from "../../layout/search-filter.service";
 import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
+import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 
 @Component({
   selector: 'app-accommodation-cards',
@@ -10,8 +11,8 @@ import {AccommodationSearch} from "../../layout/model/accommodation-search.model
   styleUrls: ['./accommodation-cards.component.css']
 })
 export class AccommodationCardsComponent implements OnInit{
+  accommodations: AccommodationDetails[] = [];
   peopleNum: number = -1;
-  accommodations: Accommodation[] = [];
   accommodationsSearch: AccommodationSearch[] = [];
   constructor(private service: AccommodationService, private searchService: SearchFilterService ) {
   }
@@ -19,7 +20,7 @@ export class AccommodationCardsComponent implements OnInit{
   ngOnInit(): void {
 
     this.service.getAll().subscribe({
-      next: (data: Accommodation[]) => { this.accommodations = data; this.accommodationsSearch = [];},
+      next: (data: AccommodationDetails[]) => { this.accommodations = data; this.accommodationsSearch = [];},
       error: () => { console.log("Error while reading accommodations!"); }
     })
     this.searchService.accommodations$.subscribe(data => {

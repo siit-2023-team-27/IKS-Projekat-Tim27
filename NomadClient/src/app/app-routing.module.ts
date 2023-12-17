@@ -16,6 +16,12 @@ import { GuestReservationsComponent } from './accommodation-detail-view/guest-re
 import {GuestGuard} from "./infrastructure/auth/guest.guard";
 import {AdminGuard} from "./infrastructure/auth/admin.guard";
 import {HostGuard} from "./infrastructure/auth/host.guard";
+import {
+  AccommodationCardHostComponent
+} from "./accommodation/accommodation-card-host/accommodation-card-host.component";
+import {
+  AccommodationCardsHostComponent
+} from "./accommodation/accommodation-cards-host/accommodation-cards-host.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
@@ -26,6 +32,8 @@ const routes: Routes = [
   {path: 'accommodation-create', component: CreateAccommodationComponent, canActivate: [HostGuard]},
   {path: 'reservation-verification', component: ReservationVerificationComponent, canActivate: [HostGuard]},
   {path: 'guest-reservation', component: GuestReservationsComponent, canActivate: [GuestGuard]},
+  {path: 'accommodation-create/:id', component: CreateAccommodationComponent},
+  {path: 'host-accommodations', component: AccommodationCardsHostComponent}
 ]
 @NgModule({
   declarations: [],

@@ -20,5 +20,7 @@ export class AccountService{
   deleteAccount(id: number): Observable<void> {
     return this.httpClient.delete<void>(environment.apiHost + "users/"+ id);
   }
-
+  editUser(user: User){
+    return this.httpClient.put<User>(environment.apiHost + "users/" +user.id, user)
+  }
 }

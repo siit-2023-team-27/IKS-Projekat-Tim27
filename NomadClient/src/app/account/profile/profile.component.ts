@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {User} from "../model/user.model";
 import {AccountService} from "../account.service";
 import {AuthService} from "../../infrastructure/auth/auth.service";
-
+import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -37,7 +37,14 @@ export class ProfileComponent {
       })
     }
   }
-
+  editUser(): void {
+    this.service.editUser(this.user).subscribe({
+      next: () => {
+        
+      },
+      error: () => { console.log("Error while deleting user with id: ", this.user.id,  "!"); }
+    });
+  }
   showDialog(): void {
     this.isModalVisible = true;
   }
