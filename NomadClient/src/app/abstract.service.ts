@@ -22,4 +22,8 @@ export abstract class AbstractRestService<T> {
   post(data: T): Observable<T> {
     return this._http.post<T>(this.actionUrl, data);
   }
+
+  put(id:number, data: T): Observable<T> {
+    return this._http.put<T>(`${this.actionUrl}/${id}`, data);
+  }
 }

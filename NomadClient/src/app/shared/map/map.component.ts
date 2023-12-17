@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import * as L from 'leaflet';
 import {MapService} from "./map.service";
 import {Accommodation} from "../../accommodation/model/accommodation.model";
@@ -8,7 +17,7 @@ import {Accommodation} from "../../accommodation/model/accommodation.model";
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit{
+export class MapComponent implements AfterContentInit{
   private map:any;
   private marker: L.Marker = new L.Marker([1, 1]);
   inputLocation: string = "";
@@ -93,6 +102,9 @@ export class MapComponent implements AfterViewInit{
     }
 
     if(this.defaultLocation != "") {
+
+      this.inputLocation = this.defaultLocation;
+
       this.mapService.search(this.defaultLocation).subscribe({
         next: (result) => {
           if(result.length > 0) {
@@ -111,7 +123,7 @@ export class MapComponent implements AfterViewInit{
 
   }
 
-  ngAfterViewInit(): void {
+  ngAfterContentInit(): void {
     let DefaultIcon = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png',
     });
