@@ -14,7 +14,6 @@ export class Interceptor implements HttpInterceptor {
     if (req.headers.get('skip')) return next.handle(req);
 
     if (accessToken) {
-      //alert("Dodaje header")
       const cloned = req.clone({
         headers: req.headers.set('Authorization', accessToken),
       });

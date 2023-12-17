@@ -14,8 +14,6 @@ export class TokenStorage {
     localStorage.setItem('token', token.accessToken);
     localStorage.setItem('id', helper.decodeToken(token.accessToken).id);
     localStorage.setItem('role', helper.decodeToken(token.accessToken).role[0]);
-    // alert(this.getRole())
-    // alert(this.getId())
   }
 
   getRole() {
@@ -28,5 +26,6 @@ export class TokenStorage {
   clear() {
     localStorage.removeItem('role');
     localStorage.removeItem('id');
+    localStorage.removeItem('token');
   }
 }
