@@ -33,14 +33,13 @@ export class AccommodationReservationComponent implements OnInit{
   }
   ngOnInit(): void {
     this.loadDates()
-    
   }
   dateClass(dates: string[]) {
     return (date: Date): MatCalendarCellCssClasses => {
       const highlightDate = dates
         .map(strDate => new Date(strDate))
         .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
-      
+
       return highlightDate ? 'special-date' : '';
     };
   }
@@ -63,7 +62,7 @@ export class AccommodationReservationComponent implements OnInit{
     this.loadDates();
     this.calendar.dateClass = this.dateClass(this.datesToHighlight);
     this.cdr.detectChanges();
-    
+
   }
   loadDates():void{
     this.service.getTakenDates(this.id).subscribe({
@@ -78,7 +77,7 @@ export class AccommodationReservationComponent implements OnInit{
     if(this.dateRange == null){
       this.dateRange =  new DateRange((() => {
         let v = new Date(ev);
-        
+
         return v;
       })(), v);
     }else if(v > this.dateRange!.start!){
@@ -87,11 +86,11 @@ export class AccommodationReservationComponent implements OnInit{
       }
       this.dateRange =  new DateRange(this.dateRange!.start!, (() => {
         let v = new Date(ev);
-        
+
         return v;
       })());
     }
-    
+
   }
  datesOverlap(start: Date, end: Date):boolean{
   this.price = 0
@@ -105,7 +104,7 @@ export class AccommodationReservationComponent implements OnInit{
     if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
       return true;
     }
-    
+
   }
   if(end < new Date() || start < new Date()){
     return true;

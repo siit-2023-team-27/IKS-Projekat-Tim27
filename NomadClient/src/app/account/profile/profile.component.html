@@ -3,7 +3,7 @@
   <app-modal-deactivate-account (updatedResponse)="getDeleteConformation($event)" *ngIf="isModalVisible"></app-modal-deactivate-account>
   <div class="flex flex-col items-center gap-12 2xl:mt-32 mt-12">
   <div class="flex flex-row bg-gray-100 rounded-3xl py-16 px-10 items-center justify-around gap-8 shadow-2xl">
-    <p class="bg-nomad-dark p-12 text-5xl text-white decoration-solid rounded-full">{{user.firstName.at(0)}}</p>
+    <p class="bg-nomad-dark px-12 py-10 text-5xl text-white decoration-solid rounded-full">{{user.firstName.at(0)}}</p>
     <p class="text-xl decoration-solid">{{user.firstName}} {{user.lastName}}</p>
   </div>
     <button (click)="showDialog()" class="text-center rounded-xl text-2xl p-2 pl-6 pr-6 text-nomad-dark decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover shadow-2xl">
@@ -69,12 +69,12 @@
       </div>
       <div class="flex flex-row">
         <mat-form-field class="example-full-width">
-          
+
         </mat-form-field>
       </div>
 
       <div class="flex flex-row gap-8">
-        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl" 
+        <button class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl"
         (click)="editUser()">
           Save
         </button>

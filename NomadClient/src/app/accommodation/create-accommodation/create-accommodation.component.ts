@@ -6,6 +6,9 @@ import {AccommodationService} from "../accommodation.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
+import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
+import {SnackBarService} from "../../shared/snack-bar.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -38,7 +41,8 @@ export class CreateAccommodationComponent {
               private accommodationService: AccommodationService,
               private router: Router,
               private route: ActivatedRoute,
-              private tokenStorage: TokenStorage){}
+              private tokenStorage: TokenStorage,
+              private snackService: SnackBarService, private _snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.amenityService.getAll().subscribe({
@@ -108,16 +112,22 @@ export class CreateAccommodationComponent {
 
   validateFields(): boolean {
     if(this.name == "" || this.description == ""){
-      alert("Make sure you have filled in all the fields!")
+      this.openSnackBar("WARNING: Make sure you have filled in all the fields!");
       return false;
     }
+
+    if (this.minGuest > this.maxGuest) {
+      this.openSnackBar("WARNING: Minimum number of guests must be less than maximum!");
+      return false;
+    }
+
     if(this.location == "") {
-      alert("Please click on the search icon to confirm location!")
+      this.openSnackBar("\"WARNING: Please click on the search icon to confirm location!");
       return false;
     }
 
     if(this.images.length <= 0) {
-      alert("Please select at least one photo!");
+      this.openSnackBar("\"WARNING: Please select at least one photo!");
       return false;
     }
     return true;
@@ -169,14 +179,11 @@ export class CreateAccommodationComponent {
 
     this.accommodationService.post(newAccommodation).subscribe({
       next: (accommodation) => {
-        console.log("Success!");
-        console.log("New accommodation is created: ", accommodation);
-
-        alert("New accommodation is created. Thank you for submiting.");
-        this.router.navigate(['/home']);
+        this.openSnackBar("SUCCESS: Your accommodation has been successfully created.");
+        this.router.navigate(['/host-accommodations']);
 
       },
-      error: () => {console.log("Error while posting new accommocation!!");}
+      error: () => {console.log("Error while posting new accommodation!!");}
     })
   }
 
@@ -192,17 +199,20 @@ export class CreateAccommodationComponent {
 
       this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({
         next: (accommodation) => {
-          console.log("Success!");
-          console.log("Accommodation is updated: ", accommodation);
-
-          alert("Accommodation is updated. Thank you for submiting.");
-          this.router.navigate(['/home']);
+          this.openSnackBar("SUCCESS: Your accommodation has been successfully updated.");
+          this.router.navigate(['/host-accommodations']);
 
         },
-        error: () => {console.log("Error while posting new accommocation!!");}
+        error: () => {console.log("Error while updating new accommodation!!");}
       })
     }
+  }
 
+  openSnackBar(message: string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 5000,
+    });
+    this.snackService.errorMessage$.next(message)
   }
 
 }

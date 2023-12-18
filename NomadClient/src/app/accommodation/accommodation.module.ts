@@ -11,6 +11,10 @@ import {AccommodationDetailViewModule} from "../accommodation-detail-view/accomm
 import { AccommodationCardsHostComponent } from './accommodation-cards-host/accommodation-cards-host.component';
 import { AccommodationCardHostComponent } from './accommodation-card-host/accommodation-card-host.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { AccommodationAvailabilityComponent } from './accommodation-availability/accommodation-availability.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 
@@ -21,10 +25,11 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     CreateAccommodationComponent,
     AccommodationCardsHostComponent,
     AccommodationCardHostComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    AccommodationAvailabilityComponent
   ],
   imports: [
-    CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule,LayoutModule
+    CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule, LayoutModule, MatDatepickerModule, MatButtonModule, MatFormFieldModule
   ],
   exports: [
     AccommodationCardComponent,

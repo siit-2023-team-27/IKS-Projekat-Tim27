@@ -35,7 +35,10 @@
     <app-map (currentLocation)="getCurrentLocation($event)"></app-map>
   </div>
 
-  <p class="text-md font-medium leading-6 text-gray-900 font-sans pl-4 mt-8 underline">Amenities</p>
+  <p class="text-md font-medium leading-6 text-gray-900 font-sans pt-4 pl-4 pb-5 mt-9 underline">Availability</p>
+  <app-accommodation-availability></app-accommodation-availability>
+
+  <p class="text-md font-medium leading-6 text-gray-900 font-sans pt-4 pl-4 mt-8 underline">Amenities</p>
   <div class="flex flex-wrap gap-12 h-fit p-10 border-2 border-gray-300 rounded-2xl shadow-2xl mt-2 mb-8">
     <div *ngFor="let amenity of amenities" class="flex items-center gap-4">
         <input [id]="amenity.id" name="checkbox" type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150 cursor-pointer">
@@ -45,12 +48,12 @@
 
   <app-image-upload [images]="accommodaitonImages" (selectedImagesOutput)="getImages($event)" ></app-image-upload>
 
-  <div class="flex flex-row justify-between items-center">
+  <div class="flex flex-col my-md:flex-row justify-between items-center">
     <button (click)="saveAcoommodation()" class="bg-gray-300 h-fit text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 ease-in-out duration-150 mt-16">Save</button>
 
     <div *ngIf="isConformationVisible"
-      class="flex flex-row items-center gap-8 p-8 border-2 border-gray-500 rounded-2xl mt-12">
-      <p class="text-gray-600 font-mono">Are you sure? Check data...</p>
+      class="flex flex-col md:flex-row items-center gap-8 p-8 border-2 border-gray-500 rounded-2xl mt-12 ml-8">
+      <p class="text-gray-600 font-mono">Are you sure you want to proceed? Please check your data before submitting.</p>
       <button (click)="confirm()" class="bg-gray-100 border-2 border-nomad-dark text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Confirm</button>
       <button (click)="cancel()" class="bg-nomad-dark text-white text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Cancel</button>
     </div>
