@@ -19,5 +19,5 @@ export interface AccommodationDetails {
 	images: string[],
 	amenities: Amenity[],
 	comments?: Review[],
-	priceType: String
+	priceType?: String
 }
