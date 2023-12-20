@@ -27,13 +27,13 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'home', component: AccommodationCardsComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'accommodation-details/:id', component: AccommodationDetailsComponent},
+  {path: 'accommodation-details/:id/:startDate/:endDate/:peopleNum', component: AccommodationDetailsComponent},
   {path: 'accommodation-verification', component: AccommodationVerificationComponent, canActivate: [AdminGuard]},
   {path: 'accommodation-create', component: CreateAccommodationComponent, canActivate: [HostGuard]},
   {path: 'reservation-verification', component: ReservationVerificationComponent, canActivate: [HostGuard]},
   {path: 'guest-reservation', component: GuestReservationsComponent, canActivate: [GuestGuard]},
-  {path: 'accommodation-create/:id', component: CreateAccommodationComponent},
-  {path: 'host-accommodations', component: AccommodationCardsHostComponent}
+  {path: 'accommodation-create/:id', component: CreateAccommodationComponent, canActivate: [HostGuard]},
+  {path: 'host-accommodations', component: AccommodationCardsHostComponent, canActivate: [HostGuard]}
 ]
 @NgModule({
   declarations: [],
