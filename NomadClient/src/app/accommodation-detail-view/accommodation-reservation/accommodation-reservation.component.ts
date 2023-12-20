@@ -10,6 +10,9 @@ import { ViewChild } from '@angular/core';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { ChangeDetectorRef } from '@angular/core';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { SnackBarComponent } from 'src/app/shared/snack-bar/snack-bar.component';
 @Component({
   selector: 'app-accommodation-reservation',
   templateUrl: './accommodation-reservation.component.html',
@@ -25,7 +28,7 @@ export class AccommodationReservationComponent implements OnInit{
   guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
 
-  constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef){
+  constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
     this.id = 1;
     this.datesToHighlight = []
     this.dates = []
@@ -33,7 +36,12 @@ export class AccommodationReservationComponent implements OnInit{
   }
   ngOnInit(): void {
     this.loadDates()
-    
+  }
+  openSnackBar(message: string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 2000,
+    });
+    this.snackService.errorMessage$.next(message)
   }
   dateClass(dates: string[]) {
     return (date: Date): MatCalendarCellCssClasses => {
@@ -47,6 +55,7 @@ export class AccommodationReservationComponent implements OnInit{
   onSelect(){}
   reset():void{
     this.dateRange = null;
+    this.price = 0
   }
   reserve():void{
     this.service.reserve({
@@ -57,8 +66,14 @@ export class AccommodationReservationComponent implements OnInit{
     "numGuests" : this.guests,
     "status" : "PENDING"
     }).subscribe({
-      next: (data:Reservation) => {console.log(data)},
-      error: (a) => {console.log(a)}
+      next: (data:Reservation) => {
+        console.log(data);
+        this.openSnackBar("Reservation made successfully");
+      },
+      error: (a) => {
+        console.log(a);
+        this.openSnackBar("Error making reservation");
+      }
     })
     this.loadDates();
     this.calendar.dateClass = this.dateClass(this.datesToHighlight);
@@ -103,11 +118,15 @@ export class AccommodationReservationComponent implements OnInit{
       error: (_) => {console.log("Greska!")}
     })
     if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
+      this.openSnackBar("Accommodation is reserved for some of those dates!")
       return true;
-    }
-    
+    } 
+  }
+  if(this.accommodation.priceType == "FOR_GUEST"){
+    this.price *= this.guests
   }
   if(end < new Date() || start < new Date()){
+    this.openSnackBar("May not make reservations in the past")
     return true;
   }
   return false;

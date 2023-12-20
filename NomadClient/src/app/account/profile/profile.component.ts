@@ -49,6 +49,7 @@ export class ProfileComponent {
   }
   editUser(): void {
     if(!this.validate()){
+      
       return;
     }
     this.service.editUser(this.user).subscribe({
