@@ -22,7 +22,6 @@ export class ImageUploadComponent implements OnChanges {
     if (changes['images'] && !changes['images'].firstChange) {
       this.selectedImages = this.images;
       this.selectedImages = this.selectedImages.map(i => i.split("/")[1])
-      console.log(this.selectedImages);
       this.selectedImagesOutput.emit(this.selectedImages);
     }
     }

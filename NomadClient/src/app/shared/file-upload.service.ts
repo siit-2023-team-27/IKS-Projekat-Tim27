@@ -16,5 +16,4 @@ export class FileUploadService {
       observe: 'events'
     });
   }
-
 }

@@ -18,5 +18,10 @@ export interface AccommodationDetails {
 	rating: number;
 	images: string[],
 	amenities: Amenity[],
-	comments?: Review[]
+	comments?: Review[],
+  defaultPrice: number,
+  priceType:string,
+  accommodationType: string,
+  conformationType: string,
+  deadlineForCancellation: number
 }
