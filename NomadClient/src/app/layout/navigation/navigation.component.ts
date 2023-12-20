@@ -8,7 +8,7 @@ import {
   faList, faUsers,  faArrowRightFromBracket,
   faLocation, faLocationArrow, faPeopleGroup
 } from "@fortawesome/free-solid-svg-icons";
-import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regular-svg-icons";
+import {faUser, faHeart, faEnvelope, faFileLines, faPaperPlane} from "@fortawesome/free-regular-svg-icons";
 import {User} from "../../infrastructure/auth/model/user.model";
 import {AuthService} from "../../infrastructure/auth/auth.service";
 import {Router} from "@angular/router";
@@ -24,6 +24,7 @@ export class NavigationComponent {
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faHeart = faHeart;
   faEnvelope = faEnvelope;
+  faPaper = faPaperPlane;
   faUser = faUser;
   faFileLines = faFileLines;
   faBolt = faBolt;
