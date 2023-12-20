@@ -205,7 +205,8 @@ export class CreateAccommodationComponent {
   }
 
   createAccommodation() {
-    let newAccommodation: AccommodationDetails = {
+    let   newAccommodation: AccommodationDetails = {
+      status: "PENDING",
       id:0,
       hostId: +this.tokenStorage.getId()!,
       name: this.name,
@@ -216,7 +217,7 @@ export class CreateAccommodationComponent {
       amenities: this.checkedAmenities,
       images: this.images,
       comments: [],
-      status: "PENDING",
+      verified: false,
       rating: 0,
       accommodationType: this.accommodationType,
       defaultPrice: this.defaultPrice,
@@ -224,6 +225,8 @@ export class CreateAccommodationComponent {
       conformationType: this.conformationType,
       deadlineForCancellation: this.deadline
     }
+
+    console.log(newAccommodation);
 
     this.accommodationService.post(newAccommodation).subscribe({
       next: (accommodation) => {
@@ -247,7 +250,7 @@ export class CreateAccommodationComponent {
       this.accommodation.amenities = this.checkedAmenities;
       this.accommodation.images = this.images;
       this.accommodation.accommodationType = this.accommodationType;
-      this.accommodation.status = "PENDING";
+      this.accommodation.verified = false;
       this.accommodation.deadlineForCancellation = this.deadline;
 
       this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({

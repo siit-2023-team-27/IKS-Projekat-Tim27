@@ -14,8 +14,8 @@ export class AccommodationService extends AbstractRestService<AccommodationDetai
     super(httpClient, environment.apiHost + "accommodations");
   }
 
-  getApprovedAccommodations(): Observable<AccommodationDetails[]> {
-    return this.httpClient.get<AccommodationDetails[]>(`${this.actionUrl}/approved`);
+  getVerifiedAccommodations(): Observable<AccommodationDetails[]> {
+    return this.httpClient.get<AccommodationDetails[]>(`${this.actionUrl}/verified`);
   }
 
   getAccommodationsForHost(hostId:number): Observable<AccommodationDetails[]> {

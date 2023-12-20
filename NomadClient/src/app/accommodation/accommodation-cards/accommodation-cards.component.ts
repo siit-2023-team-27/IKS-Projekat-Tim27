@@ -19,7 +19,7 @@ export class AccommodationCardsComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.service.getApprovedAccommodations().subscribe({
+    this.service.getVerifiedAccommodations().subscribe({
       next: (data: AccommodationDetails[]) => { this.accommodations = data; this.accommodationsSearch = [];},
       error: () => { console.log("Error while reading accommodations!"); }
     })

@@ -7,8 +7,7 @@ export interface Review{
 	rating : number;
 }
 export interface AccommodationDetails {
-  hostId: number
-	status:string;
+  hostId: number;
 	minGuests: number;
 	maxGuests: number;
 	address: string,
@@ -16,12 +15,14 @@ export interface AccommodationDetails {
 	name: string;
 	description: string;
 	rating: number;
-	images: string[],
-	amenities: Amenity[],
-	comments?: Review[],
-  defaultPrice: number,
-  priceType:string,
-  accommodationType: string,
-  conformationType: string,
-  deadlineForCancellation: number
+	images: string[];
+	amenities: Amenity[];
+	comments?: Review[];
+  defaultPrice: number;
+  priceType:string;
+  accommodationType: string;
+  conformationType: string;
+  deadlineForCancellation: number;
+  status: string;
+  verified: boolean;
 }
