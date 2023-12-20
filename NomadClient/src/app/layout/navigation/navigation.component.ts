@@ -12,6 +12,7 @@ import {faUser, faHeart, faEnvelope, faFileLines} from "@fortawesome/free-regula
 import {User} from "../../infrastructure/auth/model/user.model";
 import {AuthService} from "../../infrastructure/auth/auth.service";
 import {Router} from "@angular/router";
+import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 
 @Component({
   selector: 'app-navigation',
@@ -19,7 +20,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  constructor(private authService: AuthService, private router:Router) {}
+  constructor(private authService: AuthService, private router:Router, private tokenStorage:TokenStorage) {}
   faPersonWalkingLuggage = faPersonWalkingLuggage;
   faHeart = faHeart;
   faEnvelope = faEnvelope;
@@ -47,6 +48,7 @@ export class NavigationComponent {
       this.navBar=true;
     }
   }
+  user: User ={username: "", id:0, role:""};
   ngOnInit() {
     this.getScreenWidth = window.innerWidth;
     if(this.getScreenWidth<=768){
@@ -58,6 +60,7 @@ export class NavigationComponent {
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
+    this.user.role = this.tokenStorage.getRole()||"";
 }
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -69,10 +72,6 @@ export class NavigationComponent {
       this.navBar = true
     }
   }
-
-  user: User | undefined;
-
-
 
   onLogout(): void {
     this.authService.logout();

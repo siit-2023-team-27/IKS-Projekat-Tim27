@@ -10,6 +10,7 @@ import {AccommodationSearch} from "../model/accommodation-search.model";
 import {SearchFilterService} from "../search-filter.service";
 import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {Amenity} from "../model/amenity.model";
+import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -82,7 +83,7 @@ export class FilterComponent {
     }
     if(this.isSearchEmpty()){
       this.searchFilterService.filter(this.searchFilterForm).subscribe({
-        next: (data: Accommodation[]) => { this.searchFilterService.accommodationsFilter$.next(data); },
+        next: (data: AccommodationDetails[]) => { this.searchFilterService.accommodationsFilter$.next(data); },
       });
     }else{
       this.searchFilterService.searchFilter(this.searchFilterForm).subscribe({

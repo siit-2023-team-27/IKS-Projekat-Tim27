@@ -13,18 +13,28 @@ import {CreateAccommodationComponent} from "./accommodation/create-accommodation
 
 import { ReservationVerificationComponent } from './accommodation-detail-view/reservation-verification/reservation-verification.component';
 import { GuestReservationsComponent } from './accommodation-detail-view/guest-reservations/guest-reservations.component';
+import {GuestGuard} from "./infrastructure/auth/guest.guard";
+import {AdminGuard} from "./infrastructure/auth/admin.guard";
+import {HostGuard} from "./infrastructure/auth/host.guard";
+import {
+  AccommodationCardHostComponent
+} from "./accommodation/accommodation-card-host/accommodation-card-host.component";
+import {
+  AccommodationCardsHostComponent
+} from "./accommodation/accommodation-cards-host/accommodation-cards-host.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'home', component: AccommodationCardsComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'accommodation-details/:id', component: AccommodationDetailsComponent},
-  {path: 'accommodation-verification', component: AccommodationVerificationComponent},
-  {path: 'accommodation-create', component: CreateAccommodationComponent},
-  {path: 'reservation-verification', component: ReservationVerificationComponent},
-  {path: 'guest-reservation', component: GuestReservationsComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'accommodation-details/:id/:startDate/:endDate/:peopleNum', component: AccommodationDetailsComponent},
+  {path: 'accommodation-verification', component: AccommodationVerificationComponent, canActivate: [AdminGuard]},
+  {path: 'accommodation-create', component: CreateAccommodationComponent, canActivate: [HostGuard]},
+  {path: 'reservation-verification', component: ReservationVerificationComponent, canActivate: [HostGuard]},
+  {path: 'guest-reservation', component: GuestReservationsComponent, canActivate: [GuestGuard]},
+  {path: 'accommodation-create/:id', component: CreateAccommodationComponent, canActivate: [HostGuard]},
+  {path: 'host-accommodations', component: AccommodationCardsHostComponent, canActivate: [HostGuard]}
 ]
- // , canActivate: [AuthGuard]
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],

@@ -3,7 +3,9 @@ import {AmenityService} from "../../amenity/amenity.service";
 import {Amenity} from "../../amenity/amenity.model";
 import {Accommodation} from "../model/accommodation.model";
 import {AccommodationService} from "../accommodation.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
+import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -11,8 +13,12 @@ import {Router} from "@angular/router";
   styleUrls: ['./create-accommodation.component.css']
 })
 export class CreateAccommodationComponent {
+
+  accommodation:AccommodationDetails | undefined;
+
   amenities: Amenity[] = []
-  selectedImages: string[] = [];
+
+  accommodaitonImages: string[] = [];
 
   images: string[] = [];
   name:string = "";
@@ -24,35 +30,71 @@ export class CreateAccommodationComponent {
 
   isConformationVisible: boolean = false;
 
+  edit: boolean = false;
+
+  id?:number;
+
   constructor(private amenityService: AmenityService,
               private accommodationService: AccommodationService,
-              private router: Router){}
+              private router: Router,
+              private route: ActivatedRoute,
+              private tokenStorage: TokenStorage){}
 
   ngOnInit(): void {
     this.amenityService.getAll().subscribe({
       next: (data: Amenity[]) => {this.amenities = data; },
       error: () => { console.log("Error while reading amenities! ") }
     })
+
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      if(this.id) {
+        this.edit = true;
+        this.accommodationService.get(this.id).subscribe({
+          next: (data: AccommodationDetails) => {
+            this.accommodation = data;
+            this.initializeFields();
+          },
+          error: (_) => {}
+        })
+      }
+
+    });
+  }
+
+  initializeFields(): void {
+    if(this.accommodation) {
+      this.name = this.accommodation.name;
+      this.description = this.accommodation.description;
+      this.location = this.accommodation.address;
+
+      this.minGuest = this.accommodation.minGuests;
+      this.maxGuest = this.accommodation.maxGuests;
+      this.accommodaitonImages = this.accommodation.images;
+      this.accommodaitonImages = this.accommodaitonImages.map(i => i = "images/"+i);
+      this.checkedAmenities = this.accommodation.amenities;
+      const checkBoxes = Array.from(document.getElementsByName("checkbox")) as HTMLInputElement[];
+      checkBoxes.map(box => {
+        if (this.contains(parseInt(box.id), this.checkedAmenities)){
+          box.checked = true
+        }
+      })
+    }
+  }
+
+  getImages(selectedImages: string[]) {
+    this.images = selectedImages;
+  }
+
+  contains(id:number, amenities: Amenity[]): boolean {
+    for(const amenity of amenities){
+      if(id == amenity.id) { return  true; }
+    }
+    return false;
   }
 
   getCurrentLocation(currentLocation: string) {
     this.location = currentLocation;
-  }
-
-  onFileSelected(event: any) {
-    const file:File = event.target.files[0];
-    this.images.push(file.name);
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        // @ts-ignore
-        this.selectedImages.push(e.target.result as string);
-      };
-
-      reader.readAsDataURL(file);
-    }
   }
 
   saveAcoommodation(): void {
@@ -98,9 +140,21 @@ export class CreateAccommodationComponent {
   }
 
   confirm(): void {
+    if(this.accommodation) {
+      this.updateAccommodation();
+    }else{
+      this.createAccommodation();
+    }
+  }
 
-    let newAccommodation: Accommodation = {
+  cancel(): void {
+    this.isConformationVisible = false;
+  }
+
+  createAccommodation() {
+    let newAccommodation: AccommodationDetails = {
       id:0,
+      hostId: +this.tokenStorage.getId()!,
       name: this.name,
       description: this.description,
       address: this.location,
@@ -109,7 +163,8 @@ export class CreateAccommodationComponent {
       amenities: this.checkedAmenities,
       images: this.images,
       comments: [],
-      status: "REJECTED",
+      status: "PENDING",
+      rating: 0
     }
 
     this.accommodationService.post(newAccommodation).subscribe({
@@ -123,11 +178,31 @@ export class CreateAccommodationComponent {
       },
       error: () => {console.log("Error while posting new accommocation!!");}
     })
-
   }
 
-  cancel(): void {
-    this.isConformationVisible = false;
+  updateAccommodation() {
+    if(this.accommodation) {
+      this.accommodation.name = this.name;
+      this.accommodation.description = this.description;
+      this.accommodation.address = this.location;
+      this.accommodation.minGuests = this.minGuest;
+      this.accommodation.maxGuests = this.maxGuest;
+      this.accommodation.amenities = this.checkedAmenities;
+      this.accommodation.images = this.images;
+
+      this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({
+        next: (accommodation) => {
+          console.log("Success!");
+          console.log("Accommodation is updated: ", accommodation);
+
+          alert("Accommodation is updated. Thank you for submiting.");
+          this.router.navigate(['/home']);
+
+        },
+        error: () => {console.log("Error while posting new accommocation!!");}
+      })
+    }
+
   }
 
 }

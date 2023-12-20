@@ -7,6 +7,7 @@ export interface Review{
 	rating : number;
 }
 export interface AccommodationDetails {
+  hostId: number
 	status:string;
 	minGuests: number;
 	maxGuests: number;
