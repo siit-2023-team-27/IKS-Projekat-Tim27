@@ -218,7 +218,6 @@ export class CreateAccommodationComponent {
       images: this.images,
       comments: [],
       verified: false,
-      rating: 0,
       accommodationType: this.accommodationType,
       defaultPrice: this.defaultPrice,
       priceType: this.priceType,
