@@ -67,6 +67,7 @@ export class AccommodationReservationComponent implements OnInit{
       duration: 2000,
     });
     this.snackService.errorMessage$.next(message)
+  }
   ngOnInit(): void {
     this.loadDates()
     this.guests = this.peopleNum;
