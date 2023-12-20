@@ -5,8 +5,8 @@
             <mat-label>
               When</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate placeholder="Start date">
-              <input matEndDate placeholder="End date">
+              <input matStartDate [(ngModel)]="fromDate" placeholder="Start date" >
+              <input matEndDate [(ngModel)]="toDate" placeholder="End date">
             </mat-date-range-input>
             <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
             <mat-date-range-picker #picker></mat-date-range-picker>
