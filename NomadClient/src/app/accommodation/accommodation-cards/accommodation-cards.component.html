@@ -1,9 +1,9 @@
 <div class="flex flex-row gap-8 flex-wrap justify-around w-[90%] m-auto mt-12 pb-12">
-  <div *ngFor="let accommodation of accommodations" [routerLink]="['/accommodation-details', accommodation.id]">
+  <div *ngFor="let accommodation of accommodations" [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]">
     <app-accommodation-card class="w-[350px] h-[380px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
      [accommodation] = "accommodation" ></app-accommodation-card>
   </div>
-  <div *ngFor="let accommodation of accommodationsSearch" [routerLink]="['/accommodation-details', accommodation.id]">
+  <div *ngFor="let accommodation of accommodationsSearch" [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]">
     <app-accommodation-card class="w-[300px] h-[400px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
        [accommodationSearch] = "accommodation" [isSearchMode] = "true"></app-accommodation-card>
   </div>

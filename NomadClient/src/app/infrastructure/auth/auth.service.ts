@@ -9,6 +9,7 @@ import {Login} from "./model/login.model";
 import {environment} from "../../../env/env";
 import {Injectable} from "@angular/core";
 import {LoginResponse} from "./model/login.response.model";
+import {UserRegistration} from "../../account/model/user-registration.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +30,15 @@ export class AuthService{
           this.setUser();
         })
       );
+  }
+
+  reauthenticate(login: Login): Observable<Login> {
+    return this.http
+      .post<Login>(environment.authHost + 'reauthenticate', login);
+  }
+  register(user: UserRegistration): Observable<UserRegistration> {
+    return this.http
+      .post<UserRegistration>(environment.authHost + 'signup', user);
   }
 
   logout():void{

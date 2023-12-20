@@ -53,6 +53,10 @@
       <fa-icon class="text-2xl cursor-pointer" [icon]="faBolt"></fa-icon>
       <p class="text-white cursor-pointer ">Reported comments</p>
     </div>
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/accommodation-verification']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faPaper"></fa-icon>
+      <p class="text-white cursor-pointer ">Unverified Accommodations</p>
+    </div>
     <div [routerLink]="['/profile']" class="flex flex-col items-center hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer " [icon]="faUser"></fa-icon>
       <p class="text-white cursor-pointer">Profile</p>

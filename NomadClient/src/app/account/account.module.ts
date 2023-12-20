@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ProfileComponent} from "./profile/profile.component";
 import {MaterialModule} from "../infrastructure/material/material.module";
 import {LayoutModule} from "../layout/layout.module";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {LayoutModule} from "../layout/layout.module";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    LayoutModule
+    LayoutModule,
+    MatSelectModule
   ],
   exports: [
     LoginComponent,

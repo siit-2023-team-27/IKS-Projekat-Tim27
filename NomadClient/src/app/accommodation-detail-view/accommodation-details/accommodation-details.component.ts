@@ -17,12 +17,19 @@ export class AccommodationDetailsComponent implements OnInit{
   //@Input() accommodation: AccommodationDetails;
   accommodation: AccommodationDetails | undefined;
   id?:number;
+  startDate:string = "";
+  endDate:string = "";
+  peopleNum:number = 0;
 	constructor(private service: AccommodationDetailsService, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
       this.route.params.subscribe(params => {
           this.id = +params['id']; // (+) converts string 'id' to a number
+
+          this.startDate = params['startDate']
+          this.endDate = params['endDate']
+          this.peopleNum = +params['peopleNum']
           this.service.get(this.id).subscribe({
               next: (data: AccommodationDetails) => {
                   this.accommodation = data;

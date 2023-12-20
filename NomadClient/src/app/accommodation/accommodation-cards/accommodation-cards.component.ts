@@ -4,6 +4,7 @@ import {AccommodationService} from "../accommodation.service";
 import {SearchFilterService} from "../../layout/search-filter.service";
 import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
+import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
 
 @Component({
   selector: 'app-accommodation-cards',
@@ -14,7 +15,18 @@ export class AccommodationCardsComponent implements OnInit{
   accommodations: AccommodationDetails[] = [];
   peopleNum: number = -1;
   accommodationsSearch: AccommodationSearch[] = [];
-  constructor(private service: AccommodationService, private searchService: SearchFilterService ) {
+
+  searchFilterForm: SearchFilterForm = {
+    city: '',
+    startDate: '',
+    finishDate: '',
+    peopleNum:-1,
+    amenities: [],
+    minPrice:-1,
+    maxPrice:-1,
+    accommodationType:''
+  };
+  constructor(private searchFilterService: SearchFilterService,private service: AccommodationService, private searchService: SearchFilterService ) {
   }
 
   ngOnInit(): void {
@@ -30,6 +42,9 @@ export class AccommodationCardsComponent implements OnInit{
     this.searchService.accommodationsFilter$.subscribe(data => {
       this.accommodations = data;
       this.accommodationsSearch = [];
+    });
+    this.searchFilterService.searchFilterForm$.subscribe(data => {
+      this.searchFilterForm = data;
     });
   }
 }
