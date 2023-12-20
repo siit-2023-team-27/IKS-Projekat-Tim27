@@ -31,6 +31,11 @@ export class AuthService{
         })
       );
   }
+
+  reauthenticate(login: Login): Observable<Login> {
+    return this.http
+      .post<Login>(environment.authHost + 'reauthenticate', login);
+  }
   register(user: UserRegistration): Observable<UserRegistration> {
     return this.http
       .post<UserRegistration>(environment.authHost + 'signup', user);
