@@ -164,7 +164,9 @@ export class AccommodationReservationComponent implements OnInit{
     if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
       this.openSnackBar("Accommodation is reserved for some of those dates!")
       return true;
-    } 
+    }
+
+ 
   }
   if(end < new Date() || start < new Date()){
     this.openSnackBar("May not make reservations in the past")

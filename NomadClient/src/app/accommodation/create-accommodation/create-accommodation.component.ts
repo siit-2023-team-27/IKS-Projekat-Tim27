@@ -6,6 +6,11 @@ import {AccommodationService} from "../accommodation.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
+import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
+import {SnackBarService} from "../../shared/snack-bar.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AccommodationDetailsService} from "../../accommodation-detail-view/accommodation-details.service";
+import {DateRange} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -25,8 +30,15 @@ export class CreateAccommodationComponent {
   description: string = ""
   minGuest: number = 1;
   maxGuest: number = 1;
+  deadline:number = 0;
   location: string = "";
+  accommodationType:string = "ROOM";
   checkedAmenities:Amenity[] = [];
+  conformationType:string = "";
+  priceType:string = "";
+  defaultPrice: number = 0;
+  currentIntervalPrices:any[] = []
+  currentUnavailableIntervals: any[] = [];
 
   isConformationVisible: boolean = false;
 
@@ -36,9 +48,11 @@ export class CreateAccommodationComponent {
 
   constructor(private amenityService: AmenityService,
               private accommodationService: AccommodationService,
+              private accommodationDetailsService: AccommodationDetailsService,
               private router: Router,
               private route: ActivatedRoute,
-              private tokenStorage: TokenStorage){}
+              private tokenStorage: TokenStorage,
+              private snackService: SnackBarService, private _snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.amenityService.getAll().subscribe({
@@ -79,6 +93,8 @@ export class CreateAccommodationComponent {
           box.checked = true
         }
       })
+      const accommodationTypeRadio = document.getElementById(this.accommodation.accommodationType.toLowerCase()) as HTMLInputElement;
+      accommodationTypeRadio.checked= true;
     }
   }
 
@@ -97,6 +113,30 @@ export class CreateAccommodationComponent {
     this.location = currentLocation;
   }
 
+  getCurrentDefaultPrice (currentPrice: number) {
+    this.defaultPrice = currentPrice;
+  }
+
+  getCurrentPriceType(currentPriceType: string) {
+    this.priceType = currentPriceType;
+  }
+
+  getCurrentConformationType(currentConformationType: string) {
+    this.conformationType = currentConformationType;
+  }
+
+  getCurrentIntervalPrices(currentIntervalPRices: any) {
+    this.currentIntervalPrices.push(currentIntervalPRices);
+  }
+
+  getCurrentUnavailableIntervals(unavailableInterval: DateRange<any>) {
+    const interval = {
+      "startDate": unavailableInterval.start,
+      "finishDate": unavailableInterval.end
+    }
+    this.currentUnavailableIntervals.push(interval);
+  }
+
   saveAcoommodation(): void {
 
     if(!this.validateFields()) {return;}
@@ -108,16 +148,22 @@ export class CreateAccommodationComponent {
 
   validateFields(): boolean {
     if(this.name == "" || this.description == ""){
-      alert("Make sure you have filled in all the fields!")
+      this.openSnackBar("WARNING: Make sure you have filled in all the fields!");
       return false;
     }
+
+    if (this.minGuest > this.maxGuest) {
+      this.openSnackBar("WARNING: Minimum number of guests must be less than maximum!");
+      return false;
+    }
+
     if(this.location == "") {
-      alert("Please click on the search icon to confirm location!")
+      this.openSnackBar("\"WARNING: Please click on the search icon to confirm location!");
       return false;
     }
 
     if(this.images.length <= 0) {
-      alert("Please select at least one photo!");
+      this.openSnackBar("\"WARNING: Please select at least one photo!");
       return false;
     }
     return true;
@@ -130,6 +176,13 @@ export class CreateAccommodationComponent {
       }
     }
     return false;
+  }
+
+  onAccommodationTypeChange(event: any): void {
+    const selected = event.target.value;
+    if(selected == "room") {this.accommodationType = "ROOM"}
+    if(selected == "studio") {this.accommodationType = "STUDIO"}
+    if(selected == "house") {this.accommodationType = "HOUSE"}
   }
 
   getCheckedAmenities(): void {
@@ -152,7 +205,8 @@ export class CreateAccommodationComponent {
   }
 
   createAccommodation() {
-    let newAccommodation: AccommodationDetails = {
+    let   newAccommodation: AccommodationDetails = {
+      status: "PENDING",
       id:0,
       hostId: +this.tokenStorage.getId()!,
       name: this.name,
@@ -163,21 +217,27 @@ export class CreateAccommodationComponent {
       amenities: this.checkedAmenities,
       images: this.images,
       comments: [],
-      status: "PENDING",
-      rating: 0
+      verified: false,
+      rating: 0,
+      accommodationType: this.accommodationType,
+      defaultPrice: this.defaultPrice,
+      priceType: this.priceType,
+      conformationType: this.conformationType,
+      deadlineForCancellation: this.deadline
     }
+
+    console.log(newAccommodation);
 
     this.accommodationService.post(newAccommodation).subscribe({
       next: (accommodation) => {
-        console.log("Success!");
-        console.log("New accommodation is created: ", accommodation);
-
-        alert("New accommodation is created. Thank you for submiting.");
-        this.router.navigate(['/home']);
-
+        console.log(accommodation.id);
+        this.setIntervalPrices(accommodation.id);
+        this.setUnavailableIntervals(accommodation.id);
+        this.openSnackBar("SUCCESS: Your accommodation has been successfully created.");
+        this.router.navigate(['/host-accommodations']);
       },
-      error: () => {console.log("Error while posting new accommocation!!");}
-    })
+      error: () => {console.log("Error while posting new accommodation!!");}
+    });
   }
 
   updateAccommodation() {
@@ -189,20 +249,46 @@ export class CreateAccommodationComponent {
       this.accommodation.maxGuests = this.maxGuest;
       this.accommodation.amenities = this.checkedAmenities;
       this.accommodation.images = this.images;
+      this.accommodation.accommodationType = this.accommodationType;
+      this.accommodation.verified = false;
+      this.accommodation.deadlineForCancellation = this.deadline;
 
       this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({
         next: (accommodation) => {
-          console.log("Success!");
-          console.log("Accommodation is updated: ", accommodation);
-
-          alert("Accommodation is updated. Thank you for submiting.");
-          this.router.navigate(['/home']);
-
+          this.openSnackBar("SUCCESS: Your accommodation has been successfully updated.");
+          this.router.navigate(['/host-accommodations']);
         },
-        error: () => {console.log("Error while posting new accommocation!!");}
+        error: () => {console.log("Error while updating new accommodation!!");}
+      })
+
+      this.setIntervalPrices(this.accommodation.id);
+      this.setUnavailableIntervals(this.accommodation.id);
+    }
+  }
+
+  setIntervalPrices (id: number) {
+    for (const intervalPrice of this.currentIntervalPrices) {
+      this.accommodationDetailsService.setPriceInterval(id, intervalPrice).subscribe({
+        next: (succes:string) => { console.log(succes); },
+        error: () => { console.log("GRESKA"); }
       })
     }
+  }
 
+  setUnavailableIntervals(id: number) {
+    for(const dateRange of this.currentUnavailableIntervals) {
+      this.accommodationDetailsService.setUnavailableForInterval(id, dateRange).subscribe({
+        next: (succes:string) => { console.log(succes); },
+        error: () => { console.log("GRESKA"); }
+      });
+    }
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 5000,
+    });
+    this.snackService.errorMessage$.next(message)
   }
 
 }

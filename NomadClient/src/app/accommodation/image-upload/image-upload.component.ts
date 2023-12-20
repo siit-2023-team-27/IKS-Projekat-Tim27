@@ -1,4 +1,6 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {FileUploadService} from "../../shared/file-upload.service";
+
 
 @Component({
   selector: 'app-image-upload',
@@ -13,14 +15,13 @@ export class ImageUploadComponent implements OnChanges {
 
   @Output() selectedImagesOutput = new EventEmitter<string[]>();
 
-  constructor() {
+  constructor(private fileUploadService: FileUploadService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['images'] && !changes['images'].firstChange) {
       this.selectedImages = this.images;
       this.selectedImages = this.selectedImages.map(i => i.split("/")[1])
-      console.log(this.selectedImages);
       this.selectedImagesOutput.emit(this.selectedImages);
     }
     }
@@ -31,6 +32,13 @@ export class ImageUploadComponent implements OnChanges {
     this.selectedImages.push(fileName);
     this.selectedImagesOutput.emit(this.selectedImages);
 
+    //upload to server
+    const formData: FormData = new FormData();
+    formData.append('images', file, file.name);
+    this.fileUploadService.upload(formData).subscribe(
+      event => {console.log("Image uploaded"); }
+    )
+
     if (file) {
       const reader = new FileReader();
 
@@ -39,7 +47,6 @@ export class ImageUploadComponent implements OnChanges {
         const base64String = e.target.result as string;
         // @ts-ignore
         this.images.push(e.target.result as string);
-        console.log(this.images);
         this.imageMapping[base64String] = fileName;
       };
 

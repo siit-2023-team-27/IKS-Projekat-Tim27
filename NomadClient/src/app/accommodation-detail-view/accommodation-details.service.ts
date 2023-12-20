@@ -31,6 +31,13 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   getPrice(id:number, date:String){
     return this._http.get<number>(`${this.actionUrl}/price/${+id}/${date}`);
   }
+
+  setPriceInterval(accommodationId:number, body:any){
+    return this._http.post<string>(`${this.actionUrl}/price/${+accommodationId}`, body);
+  }
+  setUnavailableForInterval(accommodationId:number, body:any){
+    return this._http.post<string>(`${this.actionUrl}/unavailable/${+accommodationId}`, body);
+  }
   reserve(reservation:Reservation){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
