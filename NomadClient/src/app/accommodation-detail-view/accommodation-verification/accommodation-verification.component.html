@@ -1,7 +1,7 @@
 <div>
     <div *ngFor="let request of requests" class = "pl-48 pr-48 pt-12">
         <mat-card fxLayout="row wrap"  fxLayoutGap="16px" class = "p-2">
-            <div fxFlex = "20%" ><img class = "rounded-3xl p-4" src="accommodation.images[0]" alt="Lamp">
+            <div fxFlex = "20%" ><img class = "rounded-3xl p-4"  [src]="'images/' + request.images[0]" alt="Lamp">
             </div>
             <div fxFlex = "47%" class = "p-12"  [routerLink]="['/accommodation-details', request.id]">
                 {{request.name}}, {{request.address}}
@@ -15,5 +15,5 @@
             </div>
         </mat-card>
     </div>
-    
+
 </div>
