@@ -70,7 +70,9 @@ export class AccommodationReservationComponent implements OnInit{
   }
   ngOnInit(): void {
     this.loadDates()
-    this.guests = this.peopleNum;
+    if(this.peopleNum!= -1){
+      this.guests = this.peopleNum;
+    }
     if(this.startDate != ""){
       this.fromDate = this.parseDate(this.startDate);
       this.toDate = this.parseDate(this.endDate);
@@ -166,7 +168,7 @@ export class AccommodationReservationComponent implements OnInit{
       return true;
     }
 
- 
+
   }
   if(end < new Date() || start < new Date()){
     this.openSnackBar("May not make reservations in the past")

@@ -43,18 +43,19 @@ export class ProfileComponent {
           console.log("User with id ", this.user.id, " is successfully deleted!");
           this.logout();
         },
-        error: () => { console.log("Error while deleting user with id: ", this.user.id,  "!"); }
+        error: () => {
+          console.log("Error while deleting user with id: ", this.user.id,  "!"); }
       })
     }
   }
   editUser(): void {
     if(!this.validate()){
-      
+
       return;
     }
     this.service.editUser(this.user).subscribe({
       next: () => {
-        
+
       },
       error: () => { console.log("Error while editing user with id: ", this.user.id,  "!"); }
     });
@@ -133,9 +134,9 @@ export class ProfileComponent {
         this.passwordErrors.push("Old Password Incorrect")
         validated = false;
       }
-      
+
   });
-    
-    
+
+
   }
 }
