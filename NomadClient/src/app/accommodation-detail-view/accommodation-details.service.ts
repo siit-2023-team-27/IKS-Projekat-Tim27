@@ -38,6 +38,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   setUnavailableForInterval(accommodationId:number, body:any){
     return this._http.post<string>(`${this.actionUrl}/unavailable/${+accommodationId}`, body);
   }
+  setAvailableForInterval(accommodationId:number, body:any){
+    return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
+  }
   reserve(reservation:Reservation){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }

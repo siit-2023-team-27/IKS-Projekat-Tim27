@@ -20,7 +20,7 @@ export interface AccommodationDetails {
   defaultPrice: number;
   priceType:string;
   accommodationType: string;
-  conformationType: string;
+  confirmationType: string;
   deadlineForCancellation: number;
   status: string;
   verified: boolean;

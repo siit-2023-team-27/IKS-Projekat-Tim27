@@ -15,6 +15,7 @@ import { AccommodationAvailabilityComponent } from './accommodation-availability
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
@@ -26,7 +27,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     AccommodationCardsHostComponent,
     AccommodationCardHostComponent,
     ImageUploadComponent,
-    AccommodationAvailabilityComponent
+    AccommodationAvailabilityComponent,
+    FavoritesComponent
   ],
   imports: [
     CommonModule, RouterModule, SharedModule, FormsModule, AccommodationDetailViewModule, LayoutModule, MatDatepickerModule, MatButtonModule, MatFormFieldModule
