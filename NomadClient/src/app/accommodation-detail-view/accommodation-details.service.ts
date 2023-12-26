@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import { AccommodationDetails } from "./model/accommodationDetails.model";
+import { AccommodationDetails, Review } from "./model/accommodationDetails.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
 import { AbstractRestService } from "../abstract.service";
@@ -55,5 +55,11 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   }
   deleteReservation(id: number){
     return this._http.delete<Reservation>(`http://localhost:8080/api/reservations/${+id}`, {})
+  }
+  addComment(comment: Review){
+    return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)
+  }
+  getComments(accommodationId: number){
+    return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
   }
 }
