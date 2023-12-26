@@ -8,7 +8,7 @@
   <p *ngIf="!isSearchMode" class="text-md text-gray-600 font-bold">{{accommodation.name}}, {{accommodation.address}}</p>
   <p *ngIf="isSearchMode" class="text-md text-gray-600 font-bold">{{accommodationSearch.name}}, {{accommodationSearch.address}}</p>
   <p class="pl-3 text-sm">Excellent</p>
-  <p *ngIf="!isSearchMode" class="text-md text-gray-600">$100 Night</p>
+  <p *ngIf="!isSearchMode" class="text-md text-gray-600">$ {{accommodation.defaultPrice}} Night</p>
   <p *ngIf="isSearchMode" class="text-md text-gray-600">Price per night: {{accommodationSearch.pricePerNight}}</p>
   <p *ngIf="isSearchMode" class="text-md text-gray-600">Total price: {{accommodationSearch.totalPrice}}</p>
 </div>

@@ -45,10 +45,13 @@ export class MapComponent implements AfterContentInit{
         const coord = e.latlng;
         const lat = coord.lat;
         const lng = coord.lng;
+        console.log(lat);
+        console.log(lng);
         this.marker = new L.Marker([lat, lng]).addTo(this.map);
         this.mapService.reverseSearch(lat, lng).subscribe((res) => {
           this.marker.bindPopup(res.display_name).openPopup();
           this.inputLocation = res.display_name;
+          console.log("tuss")
         });
       });
 

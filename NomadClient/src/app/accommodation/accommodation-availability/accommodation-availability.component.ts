@@ -34,6 +34,7 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
   @Output() conformationType = new EventEmitter<string> ();
   @Output() pricesForIntervals = new EventEmitter<any>();
   @Output() unavailableIntervalsEmmiter = new EventEmitter<DateRange<Date>>();
+  @Output() availableIntervalsEmmiter = new EventEmitter<DateRange<Date>>();
 
   @Input() accommodation: AccommodationDetails | undefined;
 
@@ -41,10 +42,7 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
 
   constructor(private accommodationDetailsService: AccommodationDetailsService,
               private snackService: SnackBarService, private _snackBar: MatSnackBar,
-              private cdr: ChangeDetectorRef) {
-    this.priceType.emit("FOR_GUEST");
-    this.conformationType.emit("MANUAL");
-  }
+              private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
         if(this.accommodation) {
@@ -61,18 +59,26 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
     if(this.accommodation) {
       this.defaultPrice = this.accommodation.defaultPrice;
       this.defaultPriceEmitter.emit(this.defaultPrice);
+      const priceTypeRadio = document.getElementById(this.accommodation.priceType) as HTMLInputElement;
+      priceTypeRadio.checked= true;
+      if(this.accommodation.confirmationType == 'AUTOMATIC'){
+        const conformationTypeBox = document.getElementById("conformationType") as HTMLInputElement;
+        conformationTypeBox.checked = true;
+      }
+
     }
   }
 
 
   onPriceTypeChange(event:any):void {
     const selected = event.target.value;
-    if(selected == "perPerson"){
-      this.priceType.emit("FOR_GUEST");
-    }
-    if (selected == "perNight") {
-      this.priceType.emit("FOR_ACCOMMODATION");
-    }
+    this,this.priceType.emit(selected);
+    // if(selected == "FOR_GUEST"){
+    //   this.priceType.emit("FOR_GUEST");
+    // }
+    // if (selected == "FOR_ACCOMMODATION") {
+    //   this.priceType.emit("FOR_ACCOMMODATION");
+    // }
   }
 
   onConformationTypeChange(event: any):void {
@@ -118,6 +124,23 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  setAvailable() {
+    if(this.dateRange == null) {
+      this.openSnackBar("WARNING! Select date range first!");
+      return;
+    }
+    this.availableIntervalsEmmiter.emit(this.dateRange);
+    this.openSnackBar("SUCCESS: Accommodation availability will be updated!");
+    this.datesToHighlight = [];
+    // @ts-ignore
+    this.datesToHighlight.push(this.dateRange.start.toDateString());
+    // @ts-ignore
+    this.datesToHighlight.push(this.dateRange.end.toDateString());
+    this.calendar.dateClass = this.dateClass(this.datesToHighlight);
+    this.cdr.detectChanges();
+  }
+
+
   setPriceForDate(date:Date): void {
     if(this.accommodation) {
       this.accommodationDetailsService.getPrice(this.accommodation.id, date.toDateString()).subscribe({
@@ -150,7 +173,6 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
 
   onChange(ev: any) {
     let v = new Date(ev);
-    console.log("datum", this.dateRange);
     if(this.dateRange == null){
       this.dateRange =  new DateRange((() => {
         let v = new Date(ev);
@@ -159,7 +181,6 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
       })(), v);
     }else if(v > this.dateRange!.start!){
       if (this.datesOverlap(this.dateRange.start!, v)){
-        console.log("tu sam usao");
         this.dateRange = null;
       }
       this.dateRange =  new DateRange(this.dateRange!.start!, (() => {
@@ -172,11 +193,6 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
   }
 
   datesOverlap(start: Date, end: Date):boolean{
-    for(var date = new Date(start); date < end; date.setDate(date.getDate() + 1)){
-      if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
-        return true;
-      }
-    }
     if(end < new Date() || start < new Date()){
       return true;
     }
