@@ -1,19 +1,31 @@
 <div>
-    <div *ngFor="let reservation of reservations" class = "pl-48 pr-48 pt-12">
-        <mat-card fxLayout="row wrap"  fxLayoutGap="16px" class = "p-2">
-            <div fxFlex = "20%" ><img class = "rounded-3xl p-4" src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg" alt="Lamp">
-            </div>
-            <div fxFlex = "47%" class = "p-12"  [routerLink]="['/accommodation-details', reservation.accommodation]">
-                {{reservation.accommodationDetails!.name}}, {{reservation.accommodationDetails!.address}}
-            </div>
-            <div fxFlex = "30%" class = "align-bottom align-text-bottom pb-4" style = "display: flex; align-items: flex-end;">
-                <div class = "align-bottom" style = "display: flex; align-items: flex-end;">
-                    <button mat-button class="nomad-button mr-4" (click)="accept(reservation.id!)">Accept</button>
-                    <button mat-button class="nomad-button" (click)="deny(reservation.id!)">Decline</button>
+  <div *ngFor="let request of reservations" class = "pl-48 pr-48 pt-12">
+    <mat-card fxLayout="row wrap"  fxLayoutGap="16px" class = "p-2">
+      <div *ngIf=" request.accommodationDetails != null" fxFlex = "20%" ><img class = "rounded-3xl p-4" src="images/{{request.accommodationDetails.images[0]}}" alt="Lamp">
+      </div>
+      <div class="flex-col">
+        <h2>Reservation details </h2>
+        <div fxFlex = "47%" class = "p-4"  [routerLink]="['/accommodation-details', request.accommodation]">
+          {{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}
+        </div>
+      </div>
+      <div class="flex-col">
+        <h2>Accommodation </h2>
+        <div fxFlex = "47%" class = "p-4"  [routerLink]="['/accommodation-details', request.accommodation]">
+          {{request.accommodationDetails!.name}}, {{request.accommodationDetails!.address}}
+        </div>
+      </div>
 
-                </div>
-            </div>
-        </mat-card>
-    </div>
-    
+      <div fxFlex = "30%" class = "align-bottom align-text-bottom pb-4" style = "display: flex; align-items: flex-end;">
+        <div class = "align-bottom" style = "display: flex; align-items: flex-end;">
+          <div class = "ml-4 pr-8 pl-8 bg-nomad-light text-white rounded-2xl">{{request.status}}</div>
+          <div class="flex flex-row ml-24">
+          <button mat-button class="nomad-button mr-4" *ngIf=" request.status == 'PENDING'" (click)="accept(request.id!)">ACCEPT</button>
+          <button mat-button class="nomad-button mr-4" *ngIf="request.status == 'PENDING'" (click)="deny(request.id!)">REJECT</button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
 </div>

@@ -12,7 +12,7 @@ import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 })
 export class ReservationVerificationComponent {
   @Input() reservations: Reservation[]
-  
+
   constructor(private service: AccommodationDetailsService, private tokenStorage: TokenStorage){
     this.reservations = []
     this.loadReservations()
@@ -27,8 +27,8 @@ export class ReservationVerificationComponent {
     })
   }
   loadAccommodations() : void {
-    for (var res of this.reservations){
-      this.service.get(res.accommodation).subscribe({
+    for (let res of this.reservations){
+      this.service.getAccommodation(res.accommodation).subscribe({
         next: (data: AccommodationDetails) => {
           res.accommodationDetails = data;
        },
@@ -37,9 +37,13 @@ export class ReservationVerificationComponent {
     }
   }
   accept(id: number) : void{
-    this.service.confirmReservation(id).subscribe();
+    this.service.confirmReservation(id).subscribe({
+      next: (_) => {this.loadReservations()}
+    });
   }
   deny(id: number) : void{
-    this.service.rejectReservation(id).subscribe();
+    this.service.rejectReservation(id).subscribe({
+      next: (_) => {this.loadReservations()}
+    });
   }
 }
