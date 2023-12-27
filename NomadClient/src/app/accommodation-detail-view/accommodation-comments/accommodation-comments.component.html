@@ -4,16 +4,29 @@
 
                 <div fxLayout="row wrap"  fxLayoutGap="16px" class = "pt-5">
                     <div fxFlex="4%">
-                        <div ><i class="fa fa-circle-user pb-5 text-3xl "></i>
+                        <div><i class="fa fa-circle-user pb-5 text-3xl "></i>
                         </div>
                     </div>
                     <div fxFlex="60%">
-                        <div class="star-rating">
+                        <!-- <div class="star-rating">
                             <i class="fa fa-star text-3xl text-nomad-dark" *ngFor="let star of numSequence(review.rating)"></i>
                             <i class="fa fa-star-half text-3xl text-nomad-dark" *ngIf="review.rating % 1 !== 0"></i>
+                        </div> -->
+                        <div>
+                            <span  *ngIf = "review.rating>=1"><i  class="material-icons text-5xl text-nomad-dark star">star</i></span>
+                            <span  *ngIf = "review.rating>=2"><i  class="material-icons text-5xl text-nomad-dark  star">star</i></span>
+                            <span  *ngIf = "review.rating>=3"><i  class="material-icons text-5xl text-nomad-dark  star">star</i></span>
+                            <span  *ngIf = "review.rating>=4"><i  class="material-icons text-5xl text-nomad-dark  star">star</i></span>
+                            <span  *ngIf = "review.rating>=5"><i  class="material-icons text-5xl text-nomad-dark  star">star</i></span>
+    
+                            <!-- <i (click)="setRating(1)" *NgIf = "rating>=1" class="fa fa-star-o text-5xl text-nomad-dark p-5"></i> -->
+                            <span  *ngIf = "review.rating<2"><i  class="material-icons text-5xl text-nomad-dark  star">star_outline</i></span>
+                            <span  *ngIf = "review.rating<3"><i  class="material-icons text-5xl text-nomad-dark star">star_outline</i></span>
+                            <span  *ngIf = "review.rating<4"><i  class="material-icons text-5xl text-nomad-dark  star">star_outline</i></span>
+                            <span *ngIf = "review.rating<5"><i  class="material-icons text-5xl text-nomad-dark  star">star_outline</i></span>
                         </div>
                         <div class=" text-2xl ">
-                            {{review.name}}
+                            {{review.userName}}
                         </div>
 
 

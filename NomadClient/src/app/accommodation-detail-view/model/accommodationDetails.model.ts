@@ -1,10 +1,12 @@
 import {Amenity} from "../../amenity/amenity.model";
 
 export interface Review{
-	_id: number;
-	name: string;
+	id: number;
+	userName: string;
 	text: string;
 	rating : number;
+	accommodationId: number;
+	userId: number;
 }
 export interface AccommodationDetails {
   hostId: number;
@@ -16,7 +18,7 @@ export interface AccommodationDetails {
 	description: string;
 	images: string[];
 	amenities: Amenity[];
-	comments?: Review[];
+	ratings?: Review[];
   defaultPrice: number;
   priceType:string;
   accommodationType: string;
