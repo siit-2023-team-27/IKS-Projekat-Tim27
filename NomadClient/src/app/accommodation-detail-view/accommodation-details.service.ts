@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import { AccommodationDetails } from "./model/accommodationDetails.model";
+import { AccommodationDetails, Review } from "./model/accommodationDetails.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
 import { AbstractRestService } from "../abstract.service";
@@ -38,6 +38,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   setUnavailableForInterval(accommodationId:number, body:any){
     return this._http.post<string>(`${this.actionUrl}/unavailable/${+accommodationId}`, body);
   }
+  setAvailableForInterval(accommodationId:number, body:any){
+    return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
+  }
   reserve(reservation:Reservation){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
@@ -61,5 +64,11 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   }
   cancelReservation(id: number){
     return this._http.put<string>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
+  }
+  addComment(comment: Review){
+    return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)
+  }
+  getComments(accommodationId: number){
+    return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
+import { AccommodationDetails, Review } from '../model/accommodationDetails.model';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { AccommodationDetailsService } from '../accommodation-details.service';
@@ -16,6 +16,7 @@ export class AccommodationDetailsComponent implements OnInit{
 
   //@Input() accommodation: AccommodationDetails;
   accommodation: AccommodationDetails | undefined;
+  reviews?: Review[];
   id?:number;
   startDate:string = "";
   endDate:string = "";
@@ -33,11 +34,19 @@ export class AccommodationDetailsComponent implements OnInit{
           this.service.get(this.id).subscribe({
               next: (data: AccommodationDetails) => {
                   this.accommodation = data;
+                  this.getComments()
               },
               error: (_) => {console.log("Greska!")}
           })
       });
+      
   }
-
+  getComments(): void {
+    this.service.getComments(this.accommodation!.id!).subscribe({
+      next: (data:Review[]) => {
+        this.reviews = data;
+      }
+    })
+  }
   protected readonly encodeURIComponent = encodeURIComponent;
 }

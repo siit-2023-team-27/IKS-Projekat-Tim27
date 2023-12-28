@@ -56,6 +56,7 @@
                                     (priceType)="getCurrentPriceType($event)"
                                     (pricesForIntervals)="getCurrentIntervalPrices($event)"
                                     (unavailableIntervalsEmmiter)="getCurrentUnavailableIntervals($event)"
+                                    (availableIntervalsEmmiter)="getCurrentAvailableIntervals($event)"
                                     [accommodation]="accommodation">
 
     </app-accommodation-availability>
@@ -67,7 +68,9 @@
     <app-accommodation-availability (defaultPriceEmitter)="getCurrentDefaultPrice($event)"
                                     (conformationType)="getCurrentConformationType($event)"
                                     (priceType)="getCurrentPriceType($event)"
-                                    (pricesForIntervals)="getCurrentIntervalPrices($event)">
+                                    (pricesForIntervals)="getCurrentIntervalPrices($event)"
+                                    (unavailableIntervalsEmmiter)="getCurrentUnavailableIntervals($event)"
+                                    (availableIntervalsEmmiter)="getCurrentAvailableIntervals($event)">
 
     </app-accommodation-availability>
   </div>

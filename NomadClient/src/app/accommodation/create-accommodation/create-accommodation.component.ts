@@ -34,11 +34,12 @@ export class CreateAccommodationComponent {
   location: string = "";
   accommodationType:string = "ROOM";
   checkedAmenities:Amenity[] = [];
-  conformationType:string = "";
-  priceType:string = "";
+  conformationType:string = "MANUAL";
+  priceType:string = "FOR_GUEST";
   defaultPrice: number = 0;
   currentIntervalPrices:any[] = []
   currentUnavailableIntervals: any[] = [];
+  currentAvailableIntervals: any[] = [];
 
   isConformationVisible: boolean = false;
 
@@ -84,6 +85,7 @@ export class CreateAccommodationComponent {
 
       this.minGuest = this.accommodation.minGuests;
       this.maxGuest = this.accommodation.maxGuests;
+      this.deadline = this.accommodation.deadlineForCancellation;
       this.accommodaitonImages = this.accommodation.images;
       this.accommodaitonImages = this.accommodaitonImages.map(i => i = "images/"+i);
       this.checkedAmenities = this.accommodation.amenities;
@@ -123,6 +125,7 @@ export class CreateAccommodationComponent {
 
   getCurrentConformationType(currentConformationType: string) {
     this.conformationType = currentConformationType;
+    console.log("uhvatio sam ", currentConformationType);
   }
 
   getCurrentIntervalPrices(currentIntervalPRices: any) {
@@ -135,6 +138,14 @@ export class CreateAccommodationComponent {
       "finishDate": unavailableInterval.end
     }
     this.currentUnavailableIntervals.push(interval);
+  }
+
+  getCurrentAvailableIntervals(availableInterval: DateRange<any>) {
+    const interval = {
+      "startDate": availableInterval.start,
+      "finishDate": availableInterval.end
+    }
+    this.currentAvailableIntervals.push(interval);
   }
 
   saveAcoommodation(): void {
@@ -216,12 +227,12 @@ export class CreateAccommodationComponent {
       maxGuests: this.maxGuest,
       amenities: this.checkedAmenities,
       images: this.images,
-      comments: [],
+      ratings: [],
       verified: false,
       accommodationType: this.accommodationType,
       defaultPrice: this.defaultPrice,
       priceType: this.priceType,
-      conformationType: this.conformationType,
+      confirmationType: this.conformationType,
       deadlineForCancellation: this.deadline
     }
 
@@ -232,6 +243,7 @@ export class CreateAccommodationComponent {
         console.log(accommodation.id);
         this.setIntervalPrices(accommodation.id);
         this.setUnavailableIntervals(accommodation.id);
+        this.setAvailableIntervals(accommodation.id);
         this.openSnackBar("SUCCESS: Your accommodation has been successfully created.");
         this.router.navigate(['/host-accommodations']);
       },
@@ -249,8 +261,10 @@ export class CreateAccommodationComponent {
       this.accommodation.amenities = this.checkedAmenities;
       this.accommodation.images = this.images;
       this.accommodation.accommodationType = this.accommodationType;
+      this.accommodation.confirmationType = this.conformationType;
       this.accommodation.verified = false;
       this.accommodation.deadlineForCancellation = this.deadline;
+      this.accommodation.status = "PENDING";
 
       this.accommodationService.put(this.accommodation.id, this.accommodation).subscribe({
         next: (accommodation) => {
@@ -262,6 +276,7 @@ export class CreateAccommodationComponent {
 
       this.setIntervalPrices(this.accommodation.id);
       this.setUnavailableIntervals(this.accommodation.id);
+      this.setAvailableIntervals(this.accommodation.id);
     }
   }
 
@@ -277,6 +292,15 @@ export class CreateAccommodationComponent {
   setUnavailableIntervals(id: number) {
     for(const dateRange of this.currentUnavailableIntervals) {
       this.accommodationDetailsService.setUnavailableForInterval(id, dateRange).subscribe({
+        next: (succes:string) => { console.log(succes); },
+        error: () => { console.log("GRESKA"); }
+      });
+    }
+  }
+
+  setAvailableIntervals(id: number) {
+    for(const dateRange of this.currentAvailableIntervals) {
+      this.accommodationDetailsService.setAvailableForInterval(id, dateRange).subscribe({
         next: (succes:string) => { console.log(succes); },
         error: () => { console.log("GRESKA"); }
       });

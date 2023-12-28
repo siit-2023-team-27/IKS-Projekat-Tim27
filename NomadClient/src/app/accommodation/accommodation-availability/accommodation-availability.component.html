@@ -31,13 +31,13 @@
 
     <div class="flex gap-40">
       <div>
-        <input id="perPerson" name="priceType" type="radio" value="perPerson" class="" (change)="onPriceTypeChange($event)">
-        <label for="perPerson" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per person</label>
+        <input id="FOR_GUEST" name="FOR_GUEST" type="radio" value="FOR_GUEST" class="" (change)="onPriceTypeChange($event)">
+        <label for="FOR_GUEST" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per person</label>
       </div>
 
       <div>
-        <input id="perNight" name="priceType" type="radio" value="perNight" class="" (change)="onPriceTypeChange($event)">
-        <label for="perNight" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per night</label>
+        <input id="FOR_ACCOMMODATION" name="FOR_ACCOMMODATION" type="radio" value="FOR_ACCOMMODATION" class="" (change)="onPriceTypeChange($event)">
+        <label for="FOR_ACCOMMODATION" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per night</label>
       </div>
 
     </div>
@@ -52,7 +52,7 @@
     </button>
 
     <div>
-      <button class="px-16 py-3 rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300 mr-8">Set Available</button>
+      <button (click)="setAvailable()" class="px-16 py-3 rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300 mr-8">Set Available</button>
       <button (click)="setUnavailable()" class="px-16 py-3 rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300">Set Unavailable </button>
     </div>
   </div>

@@ -24,6 +24,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ReservationVerificationComponent } from './reservation-verification/reservation-verification.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -43,7 +44,7 @@ import { GuestReservationsComponent } from './guest-reservations/guest-reservati
   imports: [
     CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule,
     MatButtonModule, FlexLayoutModule, MatInputModule, RouterModule, MatChipsModule, FormsModule, AmenityModule,
-    SharedModule
+    SharedModule, FontAwesomeModule
   ],
   exports: [
     AccommodationDetailsComponent, AccommodationImagesComponent, AccommodationVerificationComponent, ReservationVerificationComponent
