@@ -8,4 +8,5 @@ export interface User {
   phoneNumber:string
   userType:string
   suspended:boolean
+  roles: string[]
 }
