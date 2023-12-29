@@ -9,4 +9,5 @@ export interface User {
   userType:string
   suspended:boolean
   verified?:boolean
+  cancellationNumber?:number
 }
