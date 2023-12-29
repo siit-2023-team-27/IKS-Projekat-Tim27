@@ -11,13 +11,15 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSliderModule} from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatNativeDateModule} from "@angular/material/core";
+import { SearchBarReservationsComponent } from './search-bar-reservations/search-bar-reservations.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
     SearchBarComponent,
     ModalDeactivateAccountComponent,
-    FilterComponent
+    FilterComponent,
+    SearchBarReservationsComponent
   ],
   imports: [
     CommonModule,

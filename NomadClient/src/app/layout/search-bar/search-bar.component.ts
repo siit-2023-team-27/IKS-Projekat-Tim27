@@ -96,7 +96,6 @@ export class SearchBarComponent {
 
 
   }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(FilterComponent, {});
     dialogRef.afterClosed().subscribe(result => {
@@ -110,9 +109,6 @@ export class SearchBarComponent {
   suggestedLocations: string[] = [];
 
   @ViewChild('locationsDatalist', {static: true}) locationsDatalist!: ElementRef;
-
-
-
   onLocationInputChanged(event: any) {
     console.log("tu samm");
     this.mapService.search(this.inputLocation).subscribe({
