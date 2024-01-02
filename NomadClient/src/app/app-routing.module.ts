@@ -23,6 +23,7 @@ import {
   AccommodationCardsHostComponent
 } from "./accommodation/accommodation-cards-host/accommodation-cards-host.component";
 import {FavoritesComponent} from "./accommodation/favorites/favorites.component";
+import { AdminAccountsViewComponent } from './account/admin-accounts-view/admin-accounts-view.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'accommodation-details/:id/:startDate/:endDate/:peopleNum', component: AccommodationDetailsComponent},
   {path: 'accommodation-verification', component: AccommodationVerificationComponent, canActivate: [AdminGuard]},
+  {path: 'admin-accounts-view', component: AdminAccountsViewComponent, canActivate: [AdminGuard]},
   {path: 'accommodation-create', component: CreateAccommodationComponent, canActivate: [HostGuard]},
   {path: 'reservation-verification', component: ReservationVerificationComponent, canActivate: [HostGuard]},
   {path: 'guest-reservation', component: GuestReservationsComponent, canActivate: [GuestGuard]},

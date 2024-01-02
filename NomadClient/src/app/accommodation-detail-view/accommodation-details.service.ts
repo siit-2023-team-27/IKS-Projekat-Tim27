@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import { AccommodationDetails } from "./model/accommodationDetails.model";
+import { AccommodationDetails, Review } from "./model/accommodationDetails.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
 import { AbstractRestService } from "../abstract.service";
@@ -47,16 +47,28 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   getReservationsForUser(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-host/${+id}`)
   }
+  getAccommodation(id:number){
+    return this._http.get<AccommodationDetails>(`http://localhost:8080/api/accommodations/${+id}`)
+  }
   getReservationsForGuest(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/${+id}`)
   }
   confirmReservation(id:number){
-    return this._http.put(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
+    return this._http.put<Reservation>(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
   }
   rejectReservation(id:number){
     return this._http.put<Reservation>(`http://localhost:8080/api/reservations/reject/${+id}`, {})
   }
   deleteReservation(id: number){
     return this._http.delete<Reservation>(`http://localhost:8080/api/reservations/${+id}`, {})
+  }
+  cancelReservation(id: number){
+    return this._http.put<string>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
+  }
+  addComment(comment: Review){
+    return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)
+  }
+  getComments(accommodationId: number){
+    return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
   }
 }

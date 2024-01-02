@@ -227,7 +227,7 @@ export class CreateAccommodationComponent {
       maxGuests: this.maxGuest,
       amenities: this.checkedAmenities,
       images: this.images,
-      comments: [],
+      ratings: [],
       verified: false,
       accommodationType: this.accommodationType,
       defaultPrice: this.defaultPrice,
