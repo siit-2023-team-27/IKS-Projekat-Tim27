@@ -63,7 +63,7 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
     return this._http.delete<Reservation>(`http://localhost:8080/api/reservations/${+id}`, {})
   }
   cancelReservation(id: number){
-    return this._http.put<string>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
+    return this._http.put<Reservation>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
   }
   addComment(comment: Review){
     return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)

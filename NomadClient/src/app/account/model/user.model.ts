@@ -10,4 +10,5 @@ export interface User {
   suspended:boolean
   roles: string[]
   verified?:boolean
+  cancellationNumber?:number
 }
