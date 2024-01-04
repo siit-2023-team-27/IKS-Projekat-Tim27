@@ -11,12 +11,14 @@
         <p class="font-mono font-bold">{{request.accommodationDetails!.name}}, {{request.accommodationDetails!.address}}</p>
         <p class="font-mono text-gray-600">{{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}</p>
         <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{request.status}}</p>
+
         <button *ngIf=" request.status == 'PENDING'" (click)="accept(request.id!)"
-                class="absolute bottom-3  p-3 px-24 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+                class="absolute bottom-3  p-3 lg:px-18 md:px-12 px-4 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
           Accept</button>
         <button *ngIf=" request.status == 'PENDING'" (click)="deny(request.id!)"
-                class="absolute bottom-3 right-5 p-3 px-24 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+                class="absolute bottom-3 right-9 p-3 lg:px-18 md:px-12 px-4 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
           Reject</button>
+
       </div>
       <p class="text-right text-gray-600 w-1/6 pt-5 pr-5 hidden md:block">User canceled: {{request.userDetails!.cancellationNumber}}</p>
       <p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{request.status}}</p>

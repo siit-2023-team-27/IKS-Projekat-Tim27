@@ -55,6 +55,7 @@ export class SearchBarReservationsComponent {
   radioChange(data: MatRadioChange) {
     console.log(data.value);
     if(data.value == "all"){
+      this.searchFilterForm.status = "";
       if(this.isValidForSearch()){
         this.search();
       }else{
