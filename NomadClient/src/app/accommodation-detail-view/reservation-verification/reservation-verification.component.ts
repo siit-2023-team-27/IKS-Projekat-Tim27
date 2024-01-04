@@ -5,6 +5,7 @@ import { AccommodationDetailsService } from '../accommodation-details.service';
 import { AccommodationDetails } from '../model/accommodationDetails.model';
 import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 import {SearchFilterService} from "../../layout/search-filter.service";
+import {User} from "../../account/model/user.model";
 
 @Component({
   selector: 'app-reservation-verification',
@@ -21,19 +22,19 @@ export class ReservationVerificationComponent {
   ngOnInit(){
     this.searchFilterService.reservations$.subscribe(data => {
       this.reservations = data;
-      this.loadAccommodations()
+      this.loadAccommodationsAndUsers()
     });
   }
   loadReservations() : void {
     this.service.getReservationsForUser(+this.tokenStorage.getId()!).subscribe({
       next: (data: Reservation[]) => {
         this.reservations = data
-        this.loadAccommodations()
+        this.loadAccommodationsAndUsers()
      },
       error: (_) => {console.log("Greska!")}
     })
   }
-  loadAccommodations() : void {
+  loadAccommodationsAndUsers() : void {
     for (let res of this.reservations){
       this.service.getAccommodation(res.accommodation).subscribe({
         next: (data: AccommodationDetails) => {
@@ -41,8 +42,15 @@ export class ReservationVerificationComponent {
        },
         error: (_) => {console.log("Greska!")}
       })
+      this.service.getUser(res.user).subscribe({
+        next: (data: User) => {
+          res.userDetails = data;
+        },
+        error: (_) => {console.log("Greska!")}
+      })
     }
   }
+
   accept(id: number) : void{
     this.service.confirmReservation(id).subscribe({
       next: (_) => {this.loadReservations()}

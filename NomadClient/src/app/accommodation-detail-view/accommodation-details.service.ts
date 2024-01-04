@@ -6,6 +6,7 @@ import { AbstractRestService } from "../abstract.service";
 import { AccommodationVerificationRequest } from "./model/accommodationVerificationRequest.model";
 import { Observable } from "rxjs";
 import { Reservation } from "./model/reservation.model";
+import {User} from "../account/model/user.model";
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   }
   getAccommodation(id:number){
     return this._http.get<AccommodationDetails>(`http://localhost:8080/api/accommodations/${+id}`)
+  }
+  getUser(id:number){
+    return this._http.get<User>(`http://localhost:8080/api/users/${+id}`)
   }
   getReservationsForGuest(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/${+id}`)
