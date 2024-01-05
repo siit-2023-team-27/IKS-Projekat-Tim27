@@ -1,4 +1,5 @@
 import { AccommodationDetails } from "./accommodationDetails.model";
+import {User} from "../../account/model/user.model";
 
 export interface Reservation{
     "id"? : number,
@@ -8,5 +9,6 @@ export interface Reservation{
     "finishDate" : Date,
     "numGuests" : number,
     "status" : String,
-    "accommodationDetails"? : AccommodationDetails
+    "accommodationDetails"? : AccommodationDetails,
+    "userDetails"? : User
 }
