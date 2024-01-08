@@ -8,6 +8,7 @@ import {User} from "../../infrastructure/auth/model/user.model";
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {SearchFilterService} from "../../layout/search-filter.service";
 @Component({
   selector: 'app-guest-reservations',
   templateUrl: './guest-reservations.component.html',
@@ -18,7 +19,14 @@ export class GuestReservationsComponent {
   isLoaded: boolean = false;
   numQueries: number = 0;
 
-  constructor(private snackService: SnackBarService, private _snackBar: MatSnackBar,private service: AccommodationDetailsService, private tokenStorage: TokenStorage){
+  ngOnInit(){
+    this.searchFilterService.reservations$.subscribe(data => {
+      this.reservations = data;
+      this.loadAccommodations()
+    });
+  }
+
+  constructor(private searchFilterService:SearchFilterService ,private snackService: SnackBarService, private _snackBar: MatSnackBar,private service: AccommodationDetailsService, private tokenStorage: TokenStorage){
     this.reservations = []
     this.loadReservations()
   }
