@@ -5,6 +5,7 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { AccommodationDetailsService } from '../accommodation-details.service';
 import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import {CommentService} from "../comment.service";
 @Component({
   selector: 'app-accommodation-comment-form',
   templateUrl: './accommodation-comment-form.component.html',
@@ -15,32 +16,57 @@ export class AccommodationCommentFormComponent {
   title: String = "";
   rating: number = 5;
   @Input() accommodationId: number = 0;
+  @Input() hostId?: number;
   @Output() newCommentEvent = new EventEmitter<string>();
+  @Input() ratingType: string = "accommodation";
 
-  getFloatLabelValue(): FloatLabelType  { 
+  getFloatLabelValue(): FloatLabelType  {
     return 'auto';
   }
-  constructor(private service: AccommodationDetailsService, private tokenStorage: TokenStorage) {
+  constructor(private service: CommentService, private tokenStorage: TokenStorage) {
 
   }
   setRating(n : number){
     this.rating = n
   }
-  post() : void {
-    console.log("AAA")
+
+  post() {
+    if(this.ratingType == "accommodation") {this.postAccommodationRating(); }
+    else {this.postHostRating(); }
+  }
+
+  postAccommodationRating() : void {
     var comment = {
       "text" : this.title + " " + this.text,
       "rating" : this.rating,
       "userName" : "Aa",
       "id" : 0,
       "userId" : +this.tokenStorage!.getId()!,
-      "accommodationId" : +this.accommodationId!
+      "ratedId" : +this.accommodationId!
     }
-    this.service.addComment(comment).subscribe({
+    this.service.addAccommodationComment(comment).subscribe({
       next: () => {
         this.newCommentEvent.emit("")
       },
       error: (_) => {console.log("Greska!")}
   })
+  }
+
+  postHostRating(): void {
+    var comment = {
+      "text" : this.title + " " + this.text,
+      "rating" : this.rating,
+      "userName" : "Aa",
+      "id" : 0,
+      "userId" : +this.tokenStorage!.getId()!,
+      "ratedId" : +this.hostId!
+    }
+    console.log("host id: ", this.hostId);
+    this.service.addHostComment(comment).subscribe({
+      next: () => {
+        this.newCommentEvent.emit("")
+      },
+      error: (_) => {console.log("Greska!")}
+    })
   }
 }

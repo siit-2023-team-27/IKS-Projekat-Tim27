@@ -5,7 +5,7 @@ export interface Review{
 	userName: string;
 	text: string;
 	rating : number;
-	accommodationId: number;
+	ratedId: number;
 	userId: number;
 }
 export interface AccommodationDetails {

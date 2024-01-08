@@ -24,21 +24,27 @@
   <div *ngFor="let request of reservations" class="w-full flex flex-col items-center">
     <div class="flex flex-col shadow-md md:flex-row h-[500px] w-[400px] md:h-[250px] md:w-full rounded-2xl">
       <div class="md:w-2/6 h-1/2 md:h-full overflow-hidden">
-        <img src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"
+        <img [src]="'images/' + request.accommodationDetails?.images?.[0]"
              class="object-cover md:w-full md:h-full md:pr-12 rounded-2xl hover:scale-125 transition-all duration-500">
       </div>
 
       <div class="relative h-full p-8 md:w-3/6 md:h-[250px] h-1/2 pt-3">
-        <p class="font-mono font-bold">{{request.accommodationDetails!.name}}, {{request.accommodationDetails!.address}}</p>
+        <p class="font-mono font-bold">{{request.accommodationDetails?.name}}, {{request.accommodationDetails?.address}}</p>
         <p class="font-mono text-gray-600">{{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}</p>
         <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{request.status}}</p>
         <button *ngIf=" request.status == 'PENDING'" (click)="delete(request.id!)"
                 class="absolute bottom-3  p-3 px-24 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
           <i class = "fa fa-trash nomadButton"></i></button>
 
-        <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request.id!)"
-                class="absolute bottom-3  p-3 px-24 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
-          Cancel</button>
+        <div class="absolute bottom-3">
+          <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request.id!)"
+                  class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+            Cancel</button>
+
+          <button [routerLink]="['/reservation', request.id]"
+                  class="ml-4 p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+            See details</button>
+        </div>
       </div>
 
       <p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{request.status}}</p>
