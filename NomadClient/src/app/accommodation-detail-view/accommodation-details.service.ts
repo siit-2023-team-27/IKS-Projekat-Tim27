@@ -42,7 +42,15 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   setAvailableForInterval(accommodationId:number, body:any){
     return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
   }
-  reserve(reservation:Reservation){
+
+  reserve(reservation: {
+    numGuests: number;
+    accommodation: number;
+    finishDate: Date;
+    user: number;
+    startDate: Date;
+    status: string
+  }){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
   getReservationsForUser(id:number){
@@ -57,6 +65,10 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   getReservationsForGuest(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/${+id}`)
   }
+
+  getReservation(id: number) {
+    return this._http.get<Reservation>(`http://localhost:8080/api/reservations/${+id}`)
+  }
   confirmReservation(id:number){
     return this._http.put<Reservation>(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
   }
@@ -69,10 +81,5 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   cancelReservation(id: number){
     return this._http.put<Reservation>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
   }
-  addComment(comment: Review){
-    return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)
-  }
-  getComments(accommodationId: number){
-    return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
-  }
+
 }

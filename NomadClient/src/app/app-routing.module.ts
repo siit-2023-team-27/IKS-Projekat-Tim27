@@ -22,20 +22,25 @@ import {
 import {
   AccommodationCardsHostComponent
 } from "./accommodation/accommodation-cards-host/accommodation-cards-host.component";
+import {FavoritesComponent} from "./accommodation/favorites/favorites.component";
 import { AdminAccountsViewComponent } from './account/admin-accounts-view/admin-accounts-view.component';
+import {ReservationComponent} from "./accommodation-detail-view/reservation/reservation.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'home', component: AccommodationCardsComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'accommodation-details/:id/:startDate/:endDate/:peopleNum', component: AccommodationDetailsComponent},
+  {path: 'accommodation-details/:id', component: AccommodationDetailsComponent},
   {path: 'accommodation-verification', component: AccommodationVerificationComponent, canActivate: [AdminGuard]},
   {path: 'admin-accounts-view', component: AdminAccountsViewComponent, canActivate: [AdminGuard]},
   {path: 'accommodation-create', component: CreateAccommodationComponent, canActivate: [HostGuard]},
   {path: 'reservation-verification', component: ReservationVerificationComponent, canActivate: [HostGuard]},
   {path: 'guest-reservation', component: GuestReservationsComponent, canActivate: [GuestGuard]},
   {path: 'accommodation-create/:id', component: CreateAccommodationComponent, canActivate: [HostGuard]},
-  {path: 'host-accommodations', component: AccommodationCardsHostComponent, canActivate: [HostGuard]}
+  {path: 'host-accommodations', component: AccommodationCardsHostComponent, canActivate: [HostGuard]},
+  {path: 'favourites', component: FavoritesComponent, canActivate: [GuestGuard]},
+  {path: 'reservation/:id', component: ReservationComponent}
 ]
 @NgModule({
   declarations: [],

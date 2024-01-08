@@ -17,49 +17,49 @@
 
 <nav *ngIf="navBar && user && user.role !==''" class="w-full bg-nomad-nav-bar md:h-20 h-80 md:block">
   <div class="flex md:flex-row h-full justify-between 2xl:ml-96 2xl:mr-96 md:ml-24 md:mr-24 sm:ml-16 sm:mr-16 items-center flex-col gap-8 top-[9%] ">
-    <div *ngIf="user && (user.role === 'HOST' || user.role === 'GUEST' )" [routerLink]="['/login']" class="flex flex-col items-center hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'HOST' || user.role === 'GUEST' )" [routerLink]="['/login']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
       <fa-icon  class="text-2xl cursor-pointer" [icon]="faEnvelope"></fa-icon>
-      <p class="text-white cursor-pointer">Notifications</p>
+      <p class="text-white">Notifications</p>
     </div>
-    <div *ngIf="user && (user.role === 'HOST' )" [routerLink]="['/reservation-verification']" class="flex flex-col items-center hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'HOST' )" [routerLink]="['/reservation-verification']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
       <fa-icon  class="text-2xl cursor-pointer " [icon]="faFileLines"></fa-icon>
-      <p class="text-white cursor-pointer ">Requests</p>
+      <p class="text-white ">Requests</p>
     </div>
-    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/login']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/favourites']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faHeart"></fa-icon>
-      <p class="text-white cursor-pointer ">Favourites</p>
+      <p class="text-white">Favourites</p>
     </div>
-    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/login']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/login']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faBolt"></fa-icon>
-      <p class="text-white cursor-pointer ">Report</p>
+      <p class="text-white ">Report</p>
     </div>
-    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/host-accommodations']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/host-accommodations']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
-      <p class="text-white cursor-pointer ">Listing</p>
+      <p class="text-white ">Listing</p>
     </div>
-    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/guest-reservation']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/guest-reservation']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
-      <p class="text-white cursor-pointer ">Reservations</p>
+      <p class="text-white ">Reservations</p>
     </div>
-    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
-      <p class="text-white cursor-pointer ">Accommodations</p>
+      <p class="text-white ">Accommodations</p>
     </div>
-    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/admin-accounts-view']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/admin-accounts-view']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faUsers"></fa-icon>
-      <p class="text-white cursor-pointer ">All users</p>
+      <p class="text-white ">All users</p>
     </div>
-    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faBolt"></fa-icon>
-      <p class="text-white cursor-pointer ">Reported comments</p>
+      <p class="text-white ">Reported comments</p>
     </div>
-    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/accommodation-verification']" class="flex flex-col items-center  hover:bg-nomad-light rounded-lg w-40">
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/accommodation-verification']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer" [icon]="faPaper"></fa-icon>
-      <p class="text-white cursor-pointer ">Unverified Accommodations</p>
+      <p class="text-white ">Unverified Accommodations</p>
     </div>
-    <div [routerLink]="['/profile']" class="flex flex-col items-center hover:bg-nomad-light rounded-lg w-40">
+    <div [routerLink]="['/profile']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
       <fa-icon class="text-2xl cursor-pointer " [icon]="faUser"></fa-icon>
-      <p class="text-white cursor-pointer">Profile</p>
+      <p class="text-white">Profile</p>
     </div>
   </div>
 </nav>
