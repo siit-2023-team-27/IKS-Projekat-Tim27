@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavigationComponent } from './navigation.component';
+import {NavigationComponent} from './navigation.component';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -18,5 +18,5 @@ describe('NavigationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
 });

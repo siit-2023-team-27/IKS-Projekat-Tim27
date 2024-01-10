@@ -2,7 +2,8 @@ import {Component, Input} from '@angular/core';
 import {User} from "../model/user.model";
 import {AccountService} from "../account.service";
 import {AuthService} from "../../infrastructure/auth/auth.service";
-import { Login } from 'src/app/infrastructure/auth/model/login.model';
+import {Login} from 'src/app/infrastructure/auth/model/login.model';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

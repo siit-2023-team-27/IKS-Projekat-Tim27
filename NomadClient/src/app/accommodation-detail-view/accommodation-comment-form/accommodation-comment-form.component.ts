@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { FloatLabelType } from '@angular/material/form-field';
-import { Input } from '@angular/core';
-import { Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FloatLabelType} from '@angular/material/form-field';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
 import {CommentService} from "../comment.service";
 import {NotificationService} from "../../notifications/notification.service";
 import {MyNotification} from "../../notifications/notification.model";
 import {AccommodationDetails} from "../model/accommodationDetails.model";
+
 @Component({
   selector: 'app-accommodation-comment-form',
   templateUrl: './accommodation-comment-form.component.html',

@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {SearchFilterService} from "../search-filter.service";
 import {MapService} from "../../shared/map/map.service";
-import {SearchFilterForm} from "../model/searchFilterForm.model";
 import {FormControl, FormGroup} from "@angular/forms";
-import {AccommodationSearch} from "../model/accommodation-search.model";
-import {faLocationArrow, faPeopleGroup, faSearch, faFilter} from "@fortawesome/free-solid-svg-icons";
+import {faFilter, faLocationArrow, faPeopleGroup, faSearch} from "@fortawesome/free-solid-svg-icons";
 import {SearchFIlterFormReservations} from "../model/searchFIlterFormReservations";
 import {Reservation} from "../../accommodation-detail-view/model/reservation.model";
-import { MatRadioChange } from '@angular/material/radio';
+import {MatRadioChange} from '@angular/material/radio';
+
 @Component({
   selector: 'app-search-bar-reservations',
   templateUrl: './search-bar-reservations.component.html',

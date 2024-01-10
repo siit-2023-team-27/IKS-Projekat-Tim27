@@ -1,8 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Accommodation} from "../../accommodation/model/accommodation.model";
-import {BehaviorSubject} from "rxjs";
-import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
-import {SearchFilterService} from "../../layout/search-filter.service";
 import {SnackBarService} from "../snack-bar.service";
 
 @Component({

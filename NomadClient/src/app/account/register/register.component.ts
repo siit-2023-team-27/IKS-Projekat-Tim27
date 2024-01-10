@@ -1,15 +1,12 @@
-import {Component, Input} from '@angular/core';
-
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Login} from "../../infrastructure/auth/model/login.model";
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRegistration} from "../model/user-registration.model";
 import {AuthService} from "../../infrastructure/auth/auth.service";
 import {Router} from "@angular/router";
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

@@ -1,32 +1,33 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./account/login/login.component";
-import {NavigationComponent} from "./layout/navigation/navigation.component";
 import {RegisterComponent} from "./account/register/register.component";
-import { AccommodationDetailsComponent } from './accommodation-detail-view/accommodation-details/accommodation-details.component';
+import {
+  AccommodationDetailsComponent
+} from './accommodation-detail-view/accommodation-details/accommodation-details.component';
 import {AccommodationCardsComponent} from "./accommodation/accommodation-cards/accommodation-cards.component";
 import {AuthGuard} from "./infrastructure/auth/auth.guard";
 import {ProfileComponent} from "./account/profile/profile.component";
-import { AccommodationVerificationComponent } from './accommodation-detail-view/accommodation-verification/accommodation-verification.component';
+import {
+  AccommodationVerificationComponent
+} from './accommodation-detail-view/accommodation-verification/accommodation-verification.component';
 import {CreateAccommodationComponent} from "./accommodation/create-accommodation/create-accommodation.component";
 
-import { ReservationVerificationComponent } from './accommodation-detail-view/reservation-verification/reservation-verification.component';
-import { GuestReservationsComponent } from './accommodation-detail-view/guest-reservations/guest-reservations.component';
+import {
+  ReservationVerificationComponent
+} from './accommodation-detail-view/reservation-verification/reservation-verification.component';
+import {GuestReservationsComponent} from './accommodation-detail-view/guest-reservations/guest-reservations.component';
 import {GuestGuard} from "./infrastructure/auth/guest.guard";
 import {AdminGuard} from "./infrastructure/auth/admin.guard";
 import {HostGuard} from "./infrastructure/auth/host.guard";
 import {
-  AccommodationCardHostComponent
-} from "./accommodation/accommodation-card-host/accommodation-card-host.component";
-import {
   AccommodationCardsHostComponent
 } from "./accommodation/accommodation-cards-host/accommodation-cards-host.component";
 import {FavoritesComponent} from "./accommodation/favorites/favorites.component";
-import { AdminAccountsViewComponent } from './account/admin-accounts-view/admin-accounts-view.component';
+import {AdminAccountsViewComponent} from './account/admin-accounts-view/admin-accounts-view.component';
 import {ReservationComponent} from "./accommodation-detail-view/reservation/reservation.component";
-import {NotificationsModule} from "./notifications/notifications.module";
 import {NotificationsComponent} from "./notifications/notifications/notifications.component";
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},

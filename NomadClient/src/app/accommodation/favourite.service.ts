@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../env/env";
 import {AbstractRestService} from "../abstract.service";
-import {AccommodationDetails} from "../accommodation-detail-view/model/accommodationDetails.model";
 import {Observable} from "rxjs";
 import {FavouriteAccommodation} from "./model/favouriteAccommodation.model";
 

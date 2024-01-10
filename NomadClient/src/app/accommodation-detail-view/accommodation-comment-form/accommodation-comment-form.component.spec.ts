@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AccommodationCommentFormComponent } from './accommodation-comment-form.component';
+import {AccommodationCommentFormComponent} from './accommodation-comment-form.component';
 
 describe('AccommodationCommentFormComponent', () => {
   let component: AccommodationCommentFormComponent;

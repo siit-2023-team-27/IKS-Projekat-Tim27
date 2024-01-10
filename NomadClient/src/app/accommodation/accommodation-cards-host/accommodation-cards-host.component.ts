@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import {Accommodation} from "../model/accommodation.model";
+import {Component} from '@angular/core';
 import {AccommodationService} from "../accommodation.service";
-import {SearchFilterService} from "../../layout/search-filter.service";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 

@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NotificationService} from "../notification.service";
 import {User} from "../../account/model/user.model";
 import {AccountService} from "../../account/account.service";
 import {MyNotification} from "../notification.model";
-import {formatDate} from "@angular/common";
 import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 
 @Component({

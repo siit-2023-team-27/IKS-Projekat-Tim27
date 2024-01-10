@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { DateRange, MatCalendarCellCssClasses } from '@angular/material/datepicker';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { Reservation } from '../model/reservation.model';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
-import { MatCalendar } from '@angular/material/datepicker';
-import { ViewChild } from '@angular/core';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import { ChangeDetectorRef } from '@angular/core';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarService } from 'src/app/shared/snack-bar.service';
-import { SnackBarComponent } from 'src/app/shared/snack-bar/snack-bar.component';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {DateRange, MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {Reservation} from '../model/reservation.model';
+import {AccommodationDetails} from '../model/accommodationDetails.model';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackBarService} from 'src/app/shared/snack-bar.service';
+import {SnackBarComponent} from 'src/app/shared/snack-bar/snack-bar.component';
 import {NotificationService} from "../../notifications/notification.service";
 import {MyNotification} from "../../notifications/notification.model";
+
 @Component({
   selector: 'app-accommodation-reservation',
   templateUrl: './accommodation-reservation.component.html',

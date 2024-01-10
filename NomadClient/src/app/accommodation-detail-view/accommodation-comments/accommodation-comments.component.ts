@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { Review } from '../model/accommodationDetails.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Review} from '../model/accommodationDetails.model';
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { OnInit } from '@angular/core';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+
 @Component({
   selector: 'app-accommodation-comments',
   templateUrl: './accommodation-comments.component.html',
@@ -14,12 +13,12 @@ export class AccommodationCommentsComponent implements OnInit {
   @Input() accommodationId?:number;
   faCircleUser=faCircleUser;
   constructor(private service: AccommodationDetailsService){
-    
+
   }
   numSequence(n: number): Array<number> {
     return Array(Math.floor(n));
   }
   ngOnInit():void{
-    
+
   }
 }

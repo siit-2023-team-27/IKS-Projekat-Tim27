@@ -1,14 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {
-  faPersonWalkingLuggage,
+  faArrowRightFromBracket,
   faBars,
-  faMagnifyingGlass,
-  faSearch,
   faBolt,
-  faList, faUsers,  faArrowRightFromBracket,
-  faLocation, faLocationArrow, faPeopleGroup
+  faList,
+  faLocation,
+  faLocationArrow,
+  faMagnifyingGlass,
+  faPeopleGroup,
+  faPersonWalkingLuggage,
+  faSearch,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
-import {faUser, faHeart, faEnvelope, faFileLines, faPaperPlane} from "@fortawesome/free-regular-svg-icons";
+import {faEnvelope, faFileLines, faHeart, faPaperPlane, faUser} from "@fortawesome/free-regular-svg-icons";
 import {User} from "../../infrastructure/auth/model/user.model";
 import {AuthService} from "../../infrastructure/auth/auth.service";
 import {Router} from "@angular/router";

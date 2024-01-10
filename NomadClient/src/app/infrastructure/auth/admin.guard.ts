@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {CanActivate, Router, UrlTree} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {Observable} from "rxjs";
-import {User} from "./model/user.model";
 import {TokenStorage} from "./jwt/token.service";
 
 @Injectable({

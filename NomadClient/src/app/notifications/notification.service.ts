@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserReport} from "../accommodation-detail-view/model/userReport.model";
 import {MyNotification} from "./notification.model";
 
 @Injectable({

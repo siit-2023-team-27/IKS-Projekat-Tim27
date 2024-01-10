@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminAccountsViewComponent } from './admin-accounts-view.component';
+import {AdminAccountsViewComponent} from './admin-accounts-view.component';
 
 describe('AdminAccountsViewComponent', () => {
   let component: AdminAccountsViewComponent;

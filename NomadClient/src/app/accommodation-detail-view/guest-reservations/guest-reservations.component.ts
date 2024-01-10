@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { Reservation } from '../model/reservation.model';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
-import {User} from "../../infrastructure/auth/model/user.model";
+import {Component, Input} from '@angular/core';
+import {Reservation} from '../model/reservation.model';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {AccommodationDetails} from '../model/accommodationDetails.model';
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SearchFilterService} from "../../layout/search-filter.service";
 import {MyNotification} from "../../notifications/notification.model";
 import {NotificationService} from "../../notifications/notification.service";
-import {ReservationComponent} from "../reservation/reservation.component";
+
 @Component({
   selector: 'app-guest-reservations',
   templateUrl: './guest-reservations.component.html',

@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { Reservation } from '../model/reservation.model';
-import { Accommodation } from 'src/app/accommodation/model/accommodation.model';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import {Component, Input} from '@angular/core';
+import {Reservation} from '../model/reservation.model';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {AccommodationDetails} from '../model/accommodationDetails.model';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
 import {SearchFilterService} from "../../layout/search-filter.service";
 import {User} from "../../account/model/user.model";
 import {NotificationService} from "../../notifications/notification.service";

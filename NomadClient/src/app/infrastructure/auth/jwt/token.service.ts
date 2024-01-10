@@ -1,6 +1,4 @@
 import {Injectable} from "@angular/core";
-import {Login} from "../model/login.model";
-import {LoginResponse} from "../model/login.response.model";
 import {AuthResponse} from "../model/auth.response.module";
 import {JwtHelperService} from "@auth0/angular-jwt";
 

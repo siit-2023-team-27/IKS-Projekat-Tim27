@@ -1,9 +1,7 @@
-import {ChangeDetectorRef, Component, Input} from '@angular/core';
-import { Accommodation } from '../model/accommodation.model';
+import {Component, Input} from '@angular/core';
 import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {FavouriteService} from "../favourite.service";
-import {AccountService} from "../../account/account.service";
 import {User} from "../../account/model/user.model";
 import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
 
@@ -42,7 +40,6 @@ export class AccommodationCardComponent {
         }
       })
     }
-
 
   }
 

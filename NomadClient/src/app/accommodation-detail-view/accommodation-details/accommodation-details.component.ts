@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { AccommodationDetails, Review } from '../model/accommodationDetails.model';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faWifi } from '@fortawesome/free-solid-svg-icons';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AccommodationDetails, Review} from '../model/accommodationDetails.model';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {ActivatedRoute} from '@angular/router';
 import {CommentService} from "../comment.service";
+
 @Component({
   selector: 'app-accommodation-details',
   templateUrl: './accommodation-details.component.html',
