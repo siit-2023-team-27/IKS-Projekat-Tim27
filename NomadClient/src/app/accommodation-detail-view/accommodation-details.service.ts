@@ -6,6 +6,7 @@ import { AbstractRestService } from "../abstract.service";
 import { AccommodationVerificationRequest } from "./model/accommodationVerificationRequest.model";
 import { Observable } from "rxjs";
 import { Reservation } from "./model/reservation.model";
+import { CommentReport } from "./model/commentReport.model";
 
 @Injectable({
   providedIn: 'root',
@@ -64,5 +65,8 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   }
   getComments(accommodationId: number){
     return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
+  }
+  addCommentReport(report: CommentReport){
+    return this._http.post<Review>(`http://localhost:8080/api/comment-reports`, report)
   }
 }

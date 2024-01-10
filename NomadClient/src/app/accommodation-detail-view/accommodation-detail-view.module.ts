@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { ReservationVerificationComponent } from './reservation-verification/reservation-verification.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReportCommentDialogComponent } from './report-comment-dialog/report-comment-dialog.component';
 
 
 
@@ -39,7 +40,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AccommodationDetailsComponent,
     AccommodationVerificationComponent,
     ReservationVerificationComponent,
-    GuestReservationsComponent
+    GuestReservationsComponent,
+    ReportCommentDialogComponent
   ],
   imports: [
     CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule,
