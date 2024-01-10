@@ -42,6 +42,9 @@ export class NavigationComponent {
   isHomePage(): boolean {
     return this.router.url === "/home";
   }
+  isRequestsPage():boolean{
+    return this.router.url === "/reservation-verification" || this.router.url === "/guest-reservation"
+  }
   showDropDownMenu(){
     if (this.navBar){
       this.navBar=false;

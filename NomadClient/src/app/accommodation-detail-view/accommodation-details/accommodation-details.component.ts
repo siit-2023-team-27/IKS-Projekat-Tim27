@@ -5,6 +5,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { AccommodationDetailsService } from '../accommodation-details.service';
 import { ActivatedRoute } from '@angular/router';
+import {CommentService} from "../comment.service";
 @Component({
   selector: 'app-accommodation-details',
   templateUrl: './accommodation-details.component.html',
@@ -21,7 +22,7 @@ export class AccommodationDetailsComponent implements OnInit{
   startDate:string = "";
   endDate:string = "";
   peopleNum:number = 0;
-	constructor(private service: AccommodationDetailsService, private route: ActivatedRoute) {
+	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
@@ -39,10 +40,10 @@ export class AccommodationDetailsComponent implements OnInit{
               error: (_) => {console.log("Greska!")}
           })
       });
-      
+
   }
   getComments(): void {
-    this.service.getComments(this.accommodation!.id!).subscribe({
+    this.commentService.getAccommodationComments(this.accommodation!.id!).subscribe({
       next: (data:Review[]) => {
         this.reviews = data;
       }

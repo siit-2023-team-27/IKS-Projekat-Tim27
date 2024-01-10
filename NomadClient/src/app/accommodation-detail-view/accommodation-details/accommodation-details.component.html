@@ -1,7 +1,7 @@
 <ng-container *ngIf="accommodation">
 <div class = "content ml-36 mr-36">
 
-    <h1 class="font-roboto font-bold text-3xl underline pb-4 pl-4 pt-2">{{accommodation.name}}, {{accommodation.address}}</h1>
+    <h1 class="font-sans text-2xl pb-4 pl-4 pt-2 tracking-wide">{{accommodation.name}}, {{accommodation.address}}</h1>
 
     <app-accommodation-images [images] = accommodation.images></app-accommodation-images>
 
@@ -19,13 +19,11 @@
         <app-map [searchBox]="false" [defaultLocation]="accommodation.address"></app-map>
 
     </div>
-    <div class = "grid lg:grid-cols-2 grid-cols-1">
 
     <app-accommodation-comments [reviews] = "reviews"></app-accommodation-comments>
 
-    <app-accommodation-comment-form [accommodationId] = "accommodation.id" (newCommentEvent) = "getComments()"></app-accommodation-comment-form>
+<!--    <app-accommodation-comment-form [accommodationId] = "accommodation.id" (newCommentEvent) = "getComments()"></app-accommodation-comment-form>-->
 
-    </div>
 
 </div>
 </ng-container>

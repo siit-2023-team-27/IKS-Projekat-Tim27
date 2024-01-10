@@ -12,12 +12,15 @@ import {SearchFilterForm} from "./model/searchFilterForm.model";
 import {AccommodationSearch} from "./model/accommodation-search.model";
 import {Amenity} from "./model/amenity.model";
 import {AccommodationDetails} from "../accommodation-detail-view/model/accommodationDetails.model";
+import {SearchFIlterFormReservations} from "./model/searchFIlterFormReservations";
+import {Reservation} from "../accommodation-detail-view/model/reservation.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchFilterService{
 
+  reservations$ = new BehaviorSubject<Reservation[]>([]);
   accommodations$ = new BehaviorSubject<AccommodationSearch[]>([]);
   accommodationsFilter$ = new BehaviorSubject<AccommodationDetails[]>([]);
   searchFilterForm$ = new BehaviorSubject<SearchFilterForm>({
@@ -31,12 +34,40 @@ export class SearchFilterService{
     accommodationType:""
   });
   constructor(private http: HttpClient,
-              private router: Router){}
+              private router: Router, private tokenStorage: TokenStorage){}
 
   getAllAmenities(): Observable<Amenity[]>{
     return this.http.get<Amenity[]>(environment.apiHost + "amenities");
   }
+  searchReservations(searchForm: SearchFIlterFormReservations){
+    let parameters: string = "";
+    if(searchForm.status != ""){
+      parameters += "&status=" +searchForm.status;
+    }
+    if(this.tokenStorage.getRole() == "GUEST"){
+      return this.http.get<Reservation[]>(environment.apiHost + "reservations/search-guest/"+this.tokenStorage.getId()+"?name="
+        +searchForm.name+"&minimumDate="+searchForm.startDate+"&maximumDate="+searchForm.finishDate+parameters);
+    }else{
+      return this.http.get<Reservation[]>(environment.apiHost + "reservations/search-host/"+this.tokenStorage.getId()+"?name="
+        +searchForm.name+"&minimumDate="+searchForm.startDate+"&maximumDate="+searchForm.finishDate+parameters);
+    }
 
+  }
+  getReservations(){
+    if(this.tokenStorage.getRole() == "GUEST") {
+      return this.http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/` + this.tokenStorage.getId())
+    }else{
+      return this.http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-host/` + this.tokenStorage.getId())
+
+    }
+  }
+  filterReservations(status: string){
+    if(this.tokenStorage.getRole() == "GUEST") {
+      return this.http.get<Reservation[]>(environment.apiHost + "reservations/filter-guest/" + this.tokenStorage.getId() + "?status=" + status);
+    }else{
+      return this.http.get<Reservation[]>(environment.apiHost + "reservations/filter-host/" + this.tokenStorage.getId() + "?status=" + status);
+    }
+  }
   search(searchForm: SearchFilterForm): Observable<AccommodationSearch[]> {
     return this.http.get<AccommodationSearch[]>(environment.apiHost + "accommodations/search-filter?city="
       +searchForm.city+"&from="+searchForm.startDate+"&to="+searchForm.finishDate+"&peopleNum="+searchForm.peopleNum);

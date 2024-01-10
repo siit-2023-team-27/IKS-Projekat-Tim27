@@ -1,4 +1,7 @@
-<div class="h-3/4">
+<div class="h-3/4 relative">
+  <div *ngIf="isGuest" (click)="onLikeClick()" [ngClass]="{'text-red-700': liked, 'text-gray-500 text-opacity-80': !liked}">
+    <i class="fa-solid fa-heart text-3xl absolute top-4 right-4"></i>
+  </div>
   <img *ngIf="!isSearchMode" src="images/{{accommodation.images[0]}}" alt="Accommodation image" class="w-full h-full object-cover rounded-2xl">
   <img *ngIf="isSearchMode" src="images/{{accommodationSearch.images[0]}}" alt="Accommodation image" class="w-full h-full object-center rounded-2xl">
 </div>

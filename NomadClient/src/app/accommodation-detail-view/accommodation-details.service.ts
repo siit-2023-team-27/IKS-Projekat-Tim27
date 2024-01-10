@@ -8,6 +8,8 @@ import { Observable } from "rxjs";
 import { Reservation } from "./model/reservation.model";
 import { CommentReport } from "./model/commentReport.model";
 
+import {User} from "../account/model/user.model";
+
 @Injectable({
   providedIn: 'root',
 })
@@ -42,17 +44,35 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   setAvailableForInterval(accommodationId:number, body:any){
     return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
   }
-  reserve(reservation:Reservation){
+
+  reserve(reservation: {
+    numGuests: number;
+    accommodation: number;
+    finishDate: Date;
+    user: number;
+    startDate: Date;
+    status: string
+  }){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
   getReservationsForUser(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-host/${+id}`)
   }
+  getAccommodation(id:number){
+    return this._http.get<AccommodationDetails>(`http://localhost:8080/api/accommodations/${+id}`)
+  }
+  getUser(id:number){
+    return this._http.get<User>(`http://localhost:8080/api/users/${+id}`)
+  }
   getReservationsForGuest(id:number){
     return this._http.get<Reservation[]>(`http://localhost:8080/api/reservations/with-guest/${+id}`)
   }
+
+  getReservation(id: number) {
+    return this._http.get<Reservation>(`http://localhost:8080/api/reservations/${+id}`)
+  }
   confirmReservation(id:number){
-    return this._http.put(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
+    return this._http.put<Reservation>(`http://localhost:8080/api/reservations/confirm/${+id}`, {})
   }
   rejectReservation(id:number){
     return this._http.put<Reservation>(`http://localhost:8080/api/reservations/reject/${+id}`, {})
@@ -60,13 +80,11 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   deleteReservation(id: number){
     return this._http.delete<Reservation>(`http://localhost:8080/api/reservations/${+id}`, {})
   }
-  addComment(comment: Review){
-    return this._http.post<Reservation>(`http://localhost:8080/api/accommodation-ratings`, comment)
-  }
-  getComments(accommodationId: number){
-    return this._http.get<Review[]>(`http://localhost:8080/api/accommodation-ratings/for-accommodation/${+accommodationId}`)
+  cancelReservation(id: number){
+    return this._http.put<Reservation>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
   }
   addCommentReport(report: CommentReport){
     return this._http.post<Review>(`http://localhost:8080/api/comment-reports`, report)
   }
+
 }

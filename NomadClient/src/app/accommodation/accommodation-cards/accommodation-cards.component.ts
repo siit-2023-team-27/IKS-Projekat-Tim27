@@ -5,6 +5,8 @@ import {SearchFilterService} from "../../layout/search-filter.service";
 import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
+import {User} from "../../account/model/user.model";
+import {AccountService} from "../../account/account.service";
 
 @Component({
   selector: 'app-accommodation-cards',
@@ -26,10 +28,21 @@ export class AccommodationCardsComponent implements OnInit{
     maxPrice:-1,
     accommodationType:''
   };
-  constructor(private searchFilterService: SearchFilterService,private service: AccommodationService, private searchService: SearchFilterService ) {
+
+  user:User = {} as User;
+
+  constructor(private searchFilterService: SearchFilterService,
+              private service: AccommodationService,
+              private searchService: SearchFilterService,
+              private accountService: AccountService) {
   }
 
   ngOnInit(): void {
+
+    this.accountService.getLoggedUser().subscribe({
+      next: (data: User) => { this.user = data; console.log(this.user.id) },
+      error: () => { console.log("Error while reading logged user!"); }
+    })
 
     this.service.getVerifiedAccommodations().subscribe({
       next: (data: AccommodationDetails[]) => { this.accommodations = data; this.accommodationsSearch = [];},

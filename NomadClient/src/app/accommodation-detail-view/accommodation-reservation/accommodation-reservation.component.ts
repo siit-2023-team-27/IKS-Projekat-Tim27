@@ -112,7 +112,7 @@ export class AccommodationReservationComponent implements OnInit{
     "startDate" : this.dateRange!.start!,
     "finishDate" : this.dateRange!.end!,
     "numGuests" : this.guests,
-    "status" : "PENDING"
+    "status" : "PENDING",
     }).subscribe({
       next: (data:Reservation) => {
         console.log(data);
