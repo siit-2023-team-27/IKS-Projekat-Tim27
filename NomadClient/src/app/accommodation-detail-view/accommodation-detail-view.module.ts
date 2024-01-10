@@ -46,7 +46,7 @@ import { ReservationComponent } from './reservation/reservation.component';
     AccommodationVerificationComponent,
     ReservationVerificationComponent,
     GuestReservationsComponent,
-    ReportCommentDialogComponent
+    ReportCommentDialogComponent,
 
     AccommodationHostComponent,
     ReservationComponent
