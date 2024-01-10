@@ -17,6 +17,7 @@ import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from "@angular/common/h
 import {AuthModule} from "./infrastructure/auth/auth.module";
 import {AuthService} from "./infrastructure/auth/auth.service";
 import {Interceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
+import {NotificationsModule} from "./notifications/notifications.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {Interceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
     NoopAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AuthModule
+    AuthModule,
+    NotificationsModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

@@ -37,7 +37,7 @@
           <i class = "fa fa-trash nomadButton"></i></button>
 
         <div class="absolute bottom-3">
-          <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request.id!)"
+          <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request)"
                   class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
             Cancel</button>
 

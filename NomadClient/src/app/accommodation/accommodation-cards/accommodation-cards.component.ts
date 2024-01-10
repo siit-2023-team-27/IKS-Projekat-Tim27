@@ -40,7 +40,7 @@ export class AccommodationCardsComponent implements OnInit{
   ngOnInit(): void {
 
     this.accountService.getLoggedUser().subscribe({
-      next: (data: User) => { this.user = data; console.log(this.user.id) },
+      next: (data: User) => { this.user = data; },
       error: () => { console.log("Error while reading logged user!"); }
     })
 

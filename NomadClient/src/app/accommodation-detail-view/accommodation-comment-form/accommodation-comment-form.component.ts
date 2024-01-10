@@ -6,6 +6,9 @@ import { EventEmitter } from '@angular/core';
 import { AccommodationDetailsService } from '../accommodation-details.service';
 import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 import {CommentService} from "../comment.service";
+import {NotificationService} from "../../notifications/notification.service";
+import {MyNotification} from "../../notifications/notification.model";
+import {AccommodationDetails} from "../model/accommodationDetails.model";
 @Component({
   selector: 'app-accommodation-comment-form',
   templateUrl: './accommodation-comment-form.component.html',
@@ -23,9 +26,18 @@ export class AccommodationCommentFormComponent {
   getFloatLabelValue(): FloatLabelType  {
     return 'auto';
   }
-  constructor(private service: CommentService, private tokenStorage: TokenStorage) {
+  constructor(private service: CommentService,
+              private tokenStorage: TokenStorage,
+              private notificationService: NotificationService,
+              private accommodationService: AccommodationDetailsService) {}
 
+  ngOnInit() {
+    if(this.accommodationId != 0) {
+
+      this.loadHostId();
+    }
   }
+
   setRating(n : number){
     this.rating = n
   }
@@ -49,7 +61,16 @@ export class AccommodationCommentFormComponent {
         this.newCommentEvent.emit("")
       },
       error: (_) => {console.log("Greska!")}
-  })
+    })
+
+    const notification: MyNotification = {
+      "date": new Date(),
+      "notificationType": "NEW_ACCOMMODATION_RATING",
+      "targetAppUser": +this.hostId!,
+      "text": "Your accommodation is rated ",
+      "title": "New accommodation rating"
+    }
+    this.sendNotification(notification);
   }
 
   postHostRating(): void {
@@ -61,12 +82,35 @@ export class AccommodationCommentFormComponent {
       "userId" : +this.tokenStorage!.getId()!,
       "ratedId" : +this.hostId!
     }
-    console.log("host id: ", this.hostId);
+
     this.service.addHostComment(comment).subscribe({
       next: () => {
         this.newCommentEvent.emit("")
       },
       error: (_) => {console.log("Greska!")}
+    })
+    const notification: MyNotification = {
+      "date": new Date(),
+      "notificationType": "NEW_RATING",
+      "targetAppUser": +this.hostId!,
+      "text": "You have been rated",
+      "title": "New rating"
+    }
+    this.sendNotification(notification);
+  }
+
+  sendNotification(notification: MyNotification) {
+    this.notificationService.addNotification(notification).subscribe({
+      next: () => {console.log("New notification successfully send");},
+      error: () => {console.log("Error while posting new notification! ", notification);}
+    })
+  }
+
+  loadHostId() {
+    this.accommodationService.getAccommodation(this.accommodationId).subscribe({
+      next: (data: AccommodationDetails) => {
+        this.hostId = data.hostId;
+      }
     })
   }
 }

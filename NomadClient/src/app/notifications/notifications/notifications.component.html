@@ -1,0 +1,14 @@
+<p class="text-center font-roboto decoration-1 text-2xl underline-offset-8 tracking-wider underline pt-8 mb-4">Notifications</p>
+
+<div *ngFor="let notification of notifications" class="w-[50%] m-auto mt-8 shadow-lg p-4 flex flex-row gap-5 items-center ">
+  <div>
+    <button class="bg-info-700 rounded-full w-12 h-12">
+      <i class="fa-solid fa-mountain-sun text-white text-lg"></i>
+    </button>
+  </div>
+  <div>
+    <p class="uppercase">{{notification.title}}</p>
+    <p class="text-sm">{{notification.text}}</p>
+    <p class="text-gray-600">{{ formatDate(notification.date) }}</p>
+  </div>
+</div>

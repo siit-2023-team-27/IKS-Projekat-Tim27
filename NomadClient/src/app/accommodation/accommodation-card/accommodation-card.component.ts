@@ -5,6 +5,7 @@ import {AccommodationDetails} from "../../accommodation-detail-view/model/accomm
 import {FavouriteService} from "../favourite.service";
 import {AccountService} from "../../account/account.service";
 import {User} from "../../account/model/user.model";
+import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
 
 @Component({
   selector: 'app-accommodation-card',
@@ -17,6 +18,7 @@ export class AccommodationCardComponent {
   @Input() accommodationSearch: AccommodationSearch = {} as AccommodationSearch;
   @Input() accommodation: AccommodationDetails = {} as AccommodationDetails;
   @Input() user: User = {} as User;
+  @Input() searchFilterForm: SearchFilterForm = {} as SearchFilterForm;
 
   liked: boolean = false;
   isGuest:boolean = false;
@@ -25,26 +27,32 @@ export class AccommodationCardComponent {
   }
 
   ngOnInit(): void {
+    if(this.user != undefined) {
+      if (this.user.roles[0] == 'GUEST') {this.isGuest = true;}
+    }
 
-    this.favouriteService.isLiked(this.accommodation.id, this.user.id).subscribe({
-      next: (result: boolean) => {
-        this.liked = result;
-        console.log(result);
-      },
-      error: () => {
-        console.log("Error");
-      }
-    })
 
-    if (this.user.roles[0] == 'GUEST') {this.isGuest = true; console.log("guest jee ")}
+    if (this.isGuest) {
+      this.favouriteService.isLiked(this.accommodation.id, this.user.id).subscribe({
+        next: (result: boolean) => {
+          this.liked = result;
+        },
+        error: () => {
+          console.log("Error");
+        }
+      })
+    }
+
+
   }
 
   onLikeClick() {
+    console.log(this.user.id);
     this.favouriteService.likeOrDislike(this.accommodation.id, this.user.id).subscribe({
       next: (result:boolean) => {
         this.liked = result;
       },
-      error: () => { console.log("Error"); }
+      error: (err) => { console.log(err); }
     })
   }
 }
