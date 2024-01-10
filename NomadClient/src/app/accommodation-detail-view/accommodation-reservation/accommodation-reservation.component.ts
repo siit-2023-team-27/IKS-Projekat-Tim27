@@ -27,7 +27,7 @@ export class AccommodationReservationComponent implements OnInit{
 
   fromDate:Date|null;
   toDate:Date|null;
-  datesToHighlight : string[];
+  datesToHighlight : string[]|null;
   dates : Date[];
   dateRange:DateRange<Date>|null;
   price: number = 0;
@@ -36,7 +36,7 @@ export class AccommodationReservationComponent implements OnInit{
 
   constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
     this.id = 1;
-    this.datesToHighlight = []
+    this.datesToHighlight = null
     this.dates = []
 
     this.fromDate = null;
@@ -69,7 +69,9 @@ export class AccommodationReservationComponent implements OnInit{
     this.snackService.errorMessage$.next(message)
   }
   ngOnInit(): void {
-    this.loadDates()
+    this.loadDates();
+    // this.cdr.detectChanges();
+    // this.calendar.updateTodaysDate()
     if(this.peopleNum!= -1){
       this.guests = this.peopleNum;
     }
@@ -83,6 +85,9 @@ export class AccommodationReservationComponent implements OnInit{
       this.toDate = null;
       this.dateRange = null
     }
+    this.calendar.updateTodaysDate();
+    this.calendar.activeDate = new Date();
+
   }
   dateClass(dates: string[]) {
     return (date: Date): MatCalendarCellCssClasses => {
@@ -119,7 +124,7 @@ export class AccommodationReservationComponent implements OnInit{
       }
     })
     this.loadDates();
-    this.calendar.dateClass = this.dateClass(this.datesToHighlight);
+    this.calendar.dateClass = this.dateClass(this.datesToHighlight!);
     this.cdr.detectChanges();
 
   }
@@ -163,7 +168,7 @@ export class AccommodationReservationComponent implements OnInit{
      },
       error: (_) => {console.log("Greska!")}
     })
-    if (this.datesToHighlight.indexOf(date.toDateString()) > -1){
+    if (this.datesToHighlight!.indexOf(date.toDateString()) > -1){
       this.openSnackBar("Accommodation is reserved for some of those dates!")
       return true;
     }
