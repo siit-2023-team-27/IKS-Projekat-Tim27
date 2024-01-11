@@ -25,6 +25,7 @@ import {
 import {FavoritesComponent} from "./accommodation/favorites/favorites.component";
 import { AdminAccountsViewComponent } from './account/admin-accounts-view/admin-accounts-view.component';
 import {ReservationComponent} from "./accommodation-detail-view/reservation/reservation.component";
+import {CreateReportComponent} from "./report/create-report/create-report.component";
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component:RegisterComponent},
@@ -40,7 +41,9 @@ const routes: Routes = [
   {path: 'accommodation-create/:id', component: CreateAccommodationComponent, canActivate: [HostGuard]},
   {path: 'host-accommodations', component: AccommodationCardsHostComponent, canActivate: [HostGuard]},
   {path: 'favourites', component: FavoritesComponent, canActivate: [GuestGuard]},
-  {path: 'reservation/:id', component: ReservationComponent}
+  {path: 'reservation/:id', component: ReservationComponent},
+  {path: 'report', component: CreateReportComponent, canActivate: [HostGuard]}
+
 ]
 @NgModule({
   declarations: [],
