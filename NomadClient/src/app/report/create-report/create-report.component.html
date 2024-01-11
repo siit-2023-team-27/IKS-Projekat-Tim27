@@ -47,6 +47,8 @@
       </div>
     </div>
   </div>
-  <button *ngIf="reportType != ''" (click)="submitForOne()" class="rounded-3xl bg-nomad-gray2 text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+  <button *ngIf="reportType == 'ALL'" (click)="generateForDateRange()" class="rounded-3xl bg-nomad-gray2 text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+    + Generate pdf</button>
+  <button *ngIf="reportType == 'ONE'" (click)="generateForMonthly()" class="rounded-3xl bg-nomad-gray2 text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
     + Generate pdf</button>
 </div>

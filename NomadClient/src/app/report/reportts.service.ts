@@ -29,6 +29,18 @@ export class ReportsService{
         day: '2-digit',
       }));
   }
+  generateDateRangeReport(startDate:Date, finishDate:Date): Observable<ReportModel[]> {
+    return this.httpClient.get<ReportModel[]>(environment.apiHost + "reports/generate-pdf/date-range/"
+      + this.tokenStorage.getId()+"?from="+startDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })+"&to="+finishDate.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }));
+  }
   getMonthlyReport(accommodationId:number, year:number): Observable<ReportModel[]> {
     return this.httpClient.get<ReportModel[]>(environment.apiHost + "reports/accommodation/"+ this.tokenStorage.getId()+"/"+accommodationId+"/" + year);
   }

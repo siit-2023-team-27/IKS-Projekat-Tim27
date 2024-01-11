@@ -11,14 +11,11 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MapComponent} from "../shared/map/map.component";
 import {SnackBarComponent} from "../shared/snack-bar/snack-bar.component";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
-import { ChartComponent } from './chart/chart.component';
-
 
 
 @NgModule({
   declarations: [
-    CreateReportComponent,
-    ChartComponent
+    CreateReportComponent
   ],
   imports: [
     CommonModule,

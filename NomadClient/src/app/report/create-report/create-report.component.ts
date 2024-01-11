@@ -3,6 +3,8 @@ import {AccommodationReport} from "../model/accommodation-report.model";
 import {ReportModel} from "../model/report.model";
 import {ReportsService} from "../reportts.service";
 import { Chart, registerables } from 'chart.js';
+import {environment} from "../../../env/env";
+import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 @Component({
   selector: 'app-create-report',
   templateUrl: './create-report.component.html',
@@ -19,7 +21,7 @@ export class CreateReportComponent {
   reports:ReportModel[] = [];
   private chart: Chart | undefined;
 
-  constructor(private reportAService:ReportsService) {
+  constructor(private reportAService:ReportsService, private tokenStorage: TokenStorage) {
     Chart.register(...registerables);
     this.fromDate = null;
     this.toDate = null;
@@ -123,6 +125,24 @@ export class CreateReportComponent {
         this.showDateRangeReport();
       },
     });
+  }
+  generateForDateRange():void{
+    const url: string = "http://localhost:8080/api/reports/generate-pdf/date-range/"
+      + this.tokenStorage.getId() + "?from=" + this.fromDate!.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }) + "&to=" + this.toDate!.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+    window.open(url, "_blank");
+  }
+  generateForMonthly():void{
+    const url: string = "http://localhost:8080/api/reports/generate-pdf/accommodation/"
+      + this.tokenStorage.getId() + "/" +this.accommodationId +"/"+this.year;
+    window.open(url, "_blank");
   }
   submitForOne():void{
     this.reportAService.getMonthlyReport(this.accommodationId, this.year).subscribe({
