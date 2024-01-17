@@ -15,7 +15,7 @@ export class AccommodationCardComponent {
   @Input() isSearchMode: boolean = false;
   @Input() accommodationSearch: AccommodationSearch = {} as AccommodationSearch;
   @Input() accommodation: AccommodationDetails = {} as AccommodationDetails;
-  @Input() user: User = {} as User;
+  @Input() user: User|undefined;
   @Input() searchFilterForm: SearchFilterForm = {} as SearchFilterForm;
 
   liked: boolean = false;
@@ -26,12 +26,13 @@ export class AccommodationCardComponent {
 
   ngOnInit(): void {
     if(this.user != undefined) {
+      console.log(this.user)
       if (this.user.roles[0] == 'GUEST') {this.isGuest = true;}
     }
 
 
     if (this.isGuest) {
-      this.favouriteService.isLiked(this.accommodation.id, this.user.id).subscribe({
+      this.favouriteService.isLiked(this.accommodation.id, this.user!.id).subscribe({
         next: (result: boolean) => {
           this.liked = result;
         },
@@ -44,8 +45,8 @@ export class AccommodationCardComponent {
   }
 
   onLikeClick() {
-    console.log(this.user.id);
-    this.favouriteService.likeOrDislike(this.accommodation.id, this.user.id).subscribe({
+    console.log(this.user!.id);
+    this.favouriteService.likeOrDislike(this.accommodation.id, this.user!.id).subscribe({
       next: (result:boolean) => {
         this.liked = result;
       },

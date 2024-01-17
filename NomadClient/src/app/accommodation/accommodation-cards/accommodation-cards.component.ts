@@ -6,6 +6,7 @@ import {AccommodationDetails} from "../../accommodation-detail-view/model/accomm
 import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
 import {User} from "../../account/model/user.model";
 import {AccountService} from "../../account/account.service";
+import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
 
 @Component({
   selector: 'app-accommodation-cards',
@@ -28,20 +29,24 @@ export class AccommodationCardsComponent implements OnInit{
     accommodationType:''
   };
 
-  user:User = {} as User;
+  user:User|undefined;
 
   constructor(private searchFilterService: SearchFilterService,
               private service: AccommodationService,
               private searchService: SearchFilterService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private tokenStorage: TokenStorage) {
   }
 
   ngOnInit(): void {
 
-    this.accountService.getLoggedUser().subscribe({
-      next: (data: User) => { this.user = data; },
-      error: () => { console.log("Error while reading logged user!"); }
-    })
+    if(this.tokenStorage.getId()) {
+      this.accountService.getLoggedUser().subscribe({
+        next: (data: User) => { this.user = data; },
+        error: () => { console.log("Error while reading logged user!"); }
+      })
+    }
+
 
     this.service.getVerifiedAccommodations().subscribe({
       next: (data: AccommodationDetails[]) => { this.accommodations = data; this.accommodationsSearch = [];},
