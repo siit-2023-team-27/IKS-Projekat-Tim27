@@ -1,11 +1,13 @@
 import {HttpClient} from "@angular/common/http";
-import {AccommodationDetails} from "./model/accommodationDetails.model";
+import {AccommodationDetails, Review} from "./model/accommodationDetails.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
 import {AbstractRestService} from "../abstract.service";
 import {AccommodationVerificationRequest} from "./model/accommodationVerificationRequest.model";
 import {Observable} from "rxjs";
-import {Reservation} from "./model/reservation.model";
+import { Reservation } from "./model/reservation.model";
+import { CommentReport } from "./model/commentReport.model";
+
 import {User} from "../account/model/user.model";
 
 @Injectable({
@@ -80,6 +82,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   }
   cancelReservation(id: number){
     return this._http.put<Reservation>(`http://localhost:8080/api/reservations/cancel/${+id}`, {})
+  }
+  addCommentReport(report: CommentReport){
+    return this._http.post<Review>(`http://localhost:8080/api/comment-reports`, report)
   }
 
 }
