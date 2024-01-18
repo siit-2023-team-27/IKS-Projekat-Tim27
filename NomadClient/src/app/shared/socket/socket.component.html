@@ -1,0 +1,6 @@
+<button (click)="sendMessageUsingSocket()">Klikni me</button>
+<ul class="list-group">
+  <li class="list-group-item list-group-item-success" *ngFor="let message of messages"
+      style="margin-bottom: 10px;">From: {{message.fromId}}, To: {{message.toId}}, Message:
+    {{message.message}}</li>
+</ul>

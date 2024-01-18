@@ -188,9 +188,10 @@ export class AccommodationReservationComponent implements OnInit{
      "text": "New reservation has been made.",
      "title": "New reservation"
    }
-   this.notificationService.addNotification(notification).subscribe({
-     next: () => {console.log("New notification successfully send");},
-     error: () => {console.log("Error while posting new notification! ", notification);}
-   })
+   // this.notificationService.addNotification(notification).subscribe({
+   //   next: () => {console.log("New notification successfully send");},
+   //   error: () => {console.log("Error while posting new notification! ", notification);}
+   // })
+   this.notificationService.addNotification(notification);
  }
 }

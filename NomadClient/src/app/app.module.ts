@@ -35,7 +35,7 @@ import {NotificationsModule} from "./notifications/notifications.module";
     ReactiveFormsModule,
     FormsModule,
     AuthModule,
-    NotificationsModule
+    NotificationsModule,
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

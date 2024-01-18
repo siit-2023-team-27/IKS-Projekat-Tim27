@@ -3,29 +3,20 @@ import {HttpClient} from "@angular/common/http";
 import {MyNotification, NotificationsPreferencesGuest, NotificationsPreferencesHost, Message} from "./notification.model";
 import {environment} from "../../env/env";
 import {map} from "rxjs";
+import {WebSocketService} from "../web-socket.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  urlSocket: string = environment.apiHost + "socket";
+  urlSocket: string = "http://localhost:8080/socket";
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private webSocketService: WebSocketService) { }
 
   addNotification(notification: MyNotification){
-    let message: Message = {
-      message: notification.text,
-      fromId: "1",
-      toId: notification.targetAppUser.toString()
-    };
-    //this.webSocketService.sendMessageUsingSocket(message);
-    return this._http.post<MyNotification>(`http://localhost:8080/api/notifications`, notification)
-  }
-
-  postNotification(data: Notification) {
-    return this._http.post<Notification>(this.urlSocket, data)
-        .pipe(map((data: Notification) => { return data; }));
+    this.webSocketService.sendMessageUsingSocket(notification);
+    //return this._http.post<MyNotification>(`http://localhost:8080/api/notifications`, notification)
   }
 
   getNotificationsForUser(userId: number) {

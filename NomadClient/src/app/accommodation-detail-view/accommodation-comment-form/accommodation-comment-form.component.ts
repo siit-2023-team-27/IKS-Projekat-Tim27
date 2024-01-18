@@ -98,10 +98,11 @@ export class AccommodationCommentFormComponent {
   }
 
   sendNotification(notification: MyNotification) {
-    this.notificationService.addNotification(notification).subscribe({
-      next: () => {console.log("New notification successfully send");},
-      error: () => {console.log("Error while posting new notification! ", notification);}
-    })
+    // this.notificationService.addNotification(notification).subscribe({
+    //   next: () => {console.log("New notification successfully send");},
+    //   error: () => {console.log("Error while posting new notification! ", notification);}
+    // })
+      this.notificationService.addNotification(notification)
   }
 
   loadHostId() {
