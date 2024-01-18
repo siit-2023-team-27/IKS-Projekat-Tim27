@@ -6,6 +6,7 @@ import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { AccommodationDetailsService } from '../accommodation-details.service';
 import { ActivatedRoute } from '@angular/router';
 import {CommentService} from "../comment.service";
+import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 @Component({
   selector: 'app-accommodation-details',
   templateUrl: './accommodation-details.component.html',
@@ -22,7 +23,8 @@ export class AccommodationDetailsComponent implements OnInit{
   startDate:string = "";
   endDate:string = "";
   peopleNum:number = 0;
-	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute) {
+  canComment: Boolean = false;
+	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute, public tokenStorage: TokenStorage, private cService: CommentService) {
 
   }
   ngOnInit(): void {
@@ -40,13 +42,17 @@ export class AccommodationDetailsComponent implements OnInit{
               error: (_) => {console.log("Greska!")}
           })
       });
-
+    
   }
   getComments(): void {
     this.commentService.getAccommodationComments(this.accommodation!.id!).subscribe({
       next: (data:Review[]) => {
         this.reviews = data;
-      }
+        this.commentService.canRate(this.accommodation!.id, +this.tokenStorage.getId()!).subscribe({
+          next: (data:Boolean) => {
+            this.canComment = data;
+          }
+        })      }
     })
   }
   protected readonly encodeURIComponent = encodeURIComponent;

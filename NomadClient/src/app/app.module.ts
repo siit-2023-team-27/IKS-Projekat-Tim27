@@ -20,7 +20,7 @@ import {Interceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
       ],
   imports: [
     AccommodationDetailViewModule,

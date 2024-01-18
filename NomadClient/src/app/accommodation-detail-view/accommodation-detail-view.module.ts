@@ -30,6 +30,7 @@ import { ReportCommentDialogComponent } from './report-comment-dialog/report-com
 
 import { AccommodationHostComponent } from './accommodation-host/accommodation-host.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { CommentReportsComponent } from './comment-reports/comment-reports.component';
 
 
 
@@ -49,7 +50,8 @@ import { ReservationComponent } from './reservation/reservation.component';
     ReportCommentDialogComponent,
 
     AccommodationHostComponent,
-    ReservationComponent
+    ReservationComponent,
+    CommentReportsComponent
   ],
   imports: [
     CommonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule,

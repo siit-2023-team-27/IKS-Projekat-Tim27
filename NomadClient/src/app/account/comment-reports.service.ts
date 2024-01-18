@@ -17,5 +17,10 @@ export class CommentReportsService{
   createReport(commentReport: CommentReport): Observable<void>{
     return this.httpClient.post<void>(environment.apiHost + "comment-reports", commentReport);
   }
-  
+  archive(id:number): Observable<ArrayBuffer>{
+    return this.httpClient.put<ArrayBuffer>(environment.apiHost + "comment-reports/archive/" +id, {});
+  }
+  accept(id:number): Observable<ArrayBuffer>{
+    return this.httpClient.put<ArrayBuffer>(environment.apiHost + "comment-reports/accept/" +id, {});
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FloatLabelType } from '@angular/material/form-field';
 import { Input } from '@angular/core';
 import { Output } from '@angular/core';
@@ -11,7 +11,7 @@ import {CommentService} from "../comment.service";
   templateUrl: './accommodation-comment-form.component.html',
   styleUrls: ['./accommodation-comment-form.component.css']
 })
-export class AccommodationCommentFormComponent {
+export class AccommodationCommentFormComponent implements OnInit{
   text: String = "";
   title: String = "";
   rating: number = 5;
@@ -19,7 +19,16 @@ export class AccommodationCommentFormComponent {
   @Input() hostId?: number;
   @Output() newCommentEvent = new EventEmitter<string>();
   @Input() ratingType: string = "accommodation";
+  @Input() canRate: Boolean = false;
+  hasComment: Boolean = false;
 
+  ngOnInit(): void {
+    // this.service.canRate(this.accommodationId, +this.tokenStorage.getId()!).subscribe({
+    //   next: (data:Boolean) => {
+    //     this.canRate = data;
+    //   }
+    // })
+  }
   getFloatLabelValue(): FloatLabelType  {
     return 'auto';
   }
@@ -46,6 +55,8 @@ export class AccommodationCommentFormComponent {
     }
     this.service.addAccommodationComment(comment).subscribe({
       next: () => {
+        // this.canRate = false;
+
         this.newCommentEvent.emit("")
       },
       error: (_) => {console.log("Greska!")}

@@ -1,5 +1,5 @@
 <div class = "p-5 ">
-    <mat-card class = "p-4 ">
+    <mat-card class = "p-4" *ngIf = "!hasComment">
         <div>
             <div class = "comment-form">
 
@@ -24,11 +24,10 @@
                     <mat-label>Comment Text</mat-label>
                     <input matInput placeholder="Input Comment Text" [(ngModel)] = "text">
                 </mat-form-field>
-                <button class="underline text-nomad-dark font-bold text-md" (click)="post()">Comment</button>
+                <button mat-button class="underline text-nomad-dark font-bold text-md" (click)="post()" [disabled] = "!canRate">Comment</button>
 
             </div>
 
         </div>
-
     </mat-card>
 </div>
