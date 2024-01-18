@@ -45,14 +45,7 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
     return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
   }
 
-  reserve(reservation: {
-    numGuests: number;
-    accommodation: number;
-    finishDate: Date;
-    user: number;
-    startDate: Date;
-    status: string
-  }){
+  reserve(reservation: Reservation){
     return this._http.post<Reservation>(`http://localhost:8080/api/reservations`, reservation)
   }
   getReservationsForUser(id:number){

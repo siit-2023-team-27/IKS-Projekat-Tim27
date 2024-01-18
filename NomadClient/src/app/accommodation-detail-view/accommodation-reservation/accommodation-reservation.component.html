@@ -8,7 +8,6 @@
               <input matStartDate [(ngModel)]="fromDate" placeholder="Start date" >
               <input matEndDate [(ngModel)]="toDate" placeholder="End date">
             </mat-date-range-input>
-            <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
             <mat-date-range-picker #picker></mat-date-range-picker>
             <mat-calendar [dateClass]="dateClass(this.datesToHighlight)" [selected] = "this.dateRange" (selectedChange)="this.onChange($event)"></mat-calendar>
             <button mat-mini-fab class="nomad-brown" (click) = "this.reset()">        <i class="fa fa-recycle text-3xl text-white"></i></button>
