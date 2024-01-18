@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "../../account/model/user.model";
 import {AccountService} from "../../account/account.service";
-import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
 import {FavouriteService} from "../favourite.service";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {FavouriteAccommodation} from "../model/favouriteAccommodation.model";

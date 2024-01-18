@@ -20,15 +20,12 @@ import {
   templateUrl: './accommodation-comments.component.html',
   styleUrls: ['./accommodation-comments.component.css']
 })
-
 export class AccommodationCommentsComponent implements OnInit {
   @Input() reviews?: Review[]
   @Input() accommodationId?:number;
   faCircleUser=faCircleUser;
-  
-  constructor(private service: AccommodationDetailsService, private dialog: MatDialog){
-    
-  }
+
+  constructor(private service: AccommodationDetailsService, private dialog: MatDialog){}
   openDialog(id : number): void {
     const dialogRef = this.dialog.open(ReportCommentDialogComponent, {
       data: {reason: "", commentId: id},
@@ -43,6 +40,6 @@ export class AccommodationCommentsComponent implements OnInit {
     return Array(Math.floor(n));
   }
   ngOnInit():void{
-    
+
   }
 }

@@ -1,10 +1,9 @@
-import {ChangeDetectorRef, Component, Input} from '@angular/core';
-import { Accommodation } from '../model/accommodation.model';
+import {Component, Input} from '@angular/core';
 import {AccommodationSearch} from "../../layout/model/accommodation-search.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 import {FavouriteService} from "../favourite.service";
-import {AccountService} from "../../account/account.service";
 import {User} from "../../account/model/user.model";
+import {SearchFilterForm} from "../../layout/model/searchFilterForm.model";
 
 @Component({
   selector: 'app-accommodation-card',
@@ -16,7 +15,8 @@ export class AccommodationCardComponent {
   @Input() isSearchMode: boolean = false;
   @Input() accommodationSearch: AccommodationSearch = {} as AccommodationSearch;
   @Input() accommodation: AccommodationDetails = {} as AccommodationDetails;
-  @Input() user: User = {} as User;
+  @Input() user: User|undefined;
+  @Input() searchFilterForm: SearchFilterForm = {} as SearchFilterForm;
 
   liked: boolean = false;
   isGuest:boolean = false;
@@ -25,26 +25,32 @@ export class AccommodationCardComponent {
   }
 
   ngOnInit(): void {
+    if(this.user != undefined) {
+      console.log(this.user)
+      if (this.user.roles[0] == 'GUEST') {this.isGuest = true;}
+    }
 
-    this.favouriteService.isLiked(this.accommodation.id, this.user.id).subscribe({
-      next: (result: boolean) => {
-        this.liked = result;
-        console.log(result);
-      },
-      error: () => {
-        console.log("Error");
-      }
-    })
 
-    if (this.user.roles[0] == 'GUEST') {this.isGuest = true; console.log("guest jee ")}
+    if (this.isGuest) {
+      this.favouriteService.isLiked(this.accommodation.id, this.user!.id).subscribe({
+        next: (result: boolean) => {
+          this.liked = result;
+        },
+        error: () => {
+          console.log("Error");
+        }
+      })
+    }
+
   }
 
   onLikeClick() {
-    this.favouriteService.likeOrDislike(this.accommodation.id, this.user.id).subscribe({
+    console.log(this.user!.id);
+    this.favouriteService.likeOrDislike(this.accommodation.id, this.user!.id).subscribe({
       next: (result:boolean) => {
         this.liked = result;
       },
-      error: () => { console.log("Error"); }
+      error: (err) => { console.log(err); }
     })
   }
 }

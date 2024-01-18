@@ -1,16 +1,6 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterContentInit, Component, EventEmitter, Input, Output} from '@angular/core';
 import * as L from 'leaflet';
 import {MapService} from "./map.service";
-import {Accommodation} from "../../accommodation/model/accommodation.model";
 
 @Component({
   selector: 'app-map',

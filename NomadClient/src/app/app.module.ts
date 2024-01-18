@@ -18,6 +18,7 @@ import {AuthModule} from "./infrastructure/auth/auth.module";
 import {AuthService} from "./infrastructure/auth/auth.service";
 import {Interceptor} from "./infrastructure/auth/jwt/jwt.inceptor";
 import {ReportModule} from "./report/report.module";
+import {NotificationsModule} from "./notifications/notifications.module";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ import {ReportModule} from "./report/report.module";
     NoopAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    AuthModule,
+    NotificationsModule,
     AuthModule,
     ReportModule
   ],

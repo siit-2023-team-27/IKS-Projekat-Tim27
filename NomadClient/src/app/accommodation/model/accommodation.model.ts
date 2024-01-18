@@ -1,5 +1,4 @@
 import {Amenity} from "../../amenity/amenity.model";
-import {Review} from "../../accommodation-detail-view/model/accommodationDetails.model";
 
 export interface Accommodation {
   id:number;

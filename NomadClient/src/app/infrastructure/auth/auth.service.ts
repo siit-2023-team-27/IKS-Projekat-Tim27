@@ -4,12 +4,11 @@ import {AuthResponse} from "./model/auth.response.module";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {TokenStorage} from "./jwt/token.service";
-import {JwtHelperService} from "@auth0/angular-jwt";
 import {Login} from "./model/login.model";
 import {environment} from "../../../env/env";
 import {Injectable} from "@angular/core";
-import {LoginResponse} from "./model/login.response.model";
 import {UserRegistration} from "../../account/model/user-registration.model";
+
 @Injectable({
   providedIn: 'root'
 })

@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { DateRange, MatCalendarCellCssClasses } from '@angular/material/datepicker';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { Reservation } from '../model/reservation.model';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
-import { MatCalendar } from '@angular/material/datepicker';
-import { ViewChild } from '@angular/core';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import { ChangeDetectorRef } from '@angular/core';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarService } from 'src/app/shared/snack-bar.service';
-import { SnackBarComponent } from 'src/app/shared/snack-bar/snack-bar.component';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {DateRange, MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {Reservation} from '../model/reservation.model';
+import {AccommodationDetails} from '../model/accommodationDetails.model';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackBarService} from 'src/app/shared/snack-bar.service';
+import {SnackBarComponent} from 'src/app/shared/snack-bar/snack-bar.component';
+import {NotificationService} from "../../notifications/notification.service";
+import {MyNotification} from "../../notifications/notification.model";
+
 @Component({
   selector: 'app-accommodation-reservation',
   templateUrl: './accommodation-reservation.component.html',
@@ -34,7 +31,12 @@ export class AccommodationReservationComponent implements OnInit{
   guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
 
-  constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
+  constructor(private service: AccommodationDetailsService,
+              private tokenStorage:TokenStorage,
+              private cdr: ChangeDetectorRef,
+              private snackService: SnackBarService,
+              private _snackBar: MatSnackBar,
+              private notificationService: NotificationService,){
     this.id = 1;
     this.datesToHighlight = null
     this.dates = []
@@ -117,6 +119,7 @@ export class AccommodationReservationComponent implements OnInit{
       next: (data:Reservation) => {
         console.log(data);
         this.openSnackBar("Reservation made successfully");
+        this.sendNotification();
       },
       error: (a) => {
         console.log(a);
@@ -180,5 +183,20 @@ export class AccommodationReservationComponent implements OnInit{
     return true;
   }
   return false;
+ }
+
+ sendNotification() {
+   const notification: MyNotification = {
+     "date": new Date(),
+     "notificationType": "NEW_RESERVATION",
+     "targetAppUser": this.accommodation.hostId,
+     "text": "New reservation has been made.",
+     "title": "New reservation"
+   }
+   // this.notificationService.addNotification(notification).subscribe({
+   //   next: () => {console.log("New notification successfully send");},
+   //   error: () => {console.log("Error while posting new notification! ", notification);}
+   // })
+   this.notificationService.addNotification(notification);
  }
 }

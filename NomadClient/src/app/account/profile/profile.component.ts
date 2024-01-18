@@ -2,7 +2,11 @@ import {Component, Input} from '@angular/core';
 import {User} from "../model/user.model";
 import {AccountService} from "../account.service";
 import {AuthService} from "../../infrastructure/auth/auth.service";
-import { Login } from 'src/app/infrastructure/auth/model/login.model';
+import {Login} from 'src/app/infrastructure/auth/model/login.model';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {SnackBarService} from "../../shared/snack-bar.service";
+import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,6 +21,11 @@ export class ProfileComponent {
   confirmedPassword: String = "";
   errors: String[] = [];
   passwordErrors: String[] = [];
+
+  profileForm :FormGroup= new FormGroup({});
+  resetPasswordForm: FormGroup = new FormGroup({});
+  get f() { return this.profileForm.controls; }
+
   validationPatterns = {
     "phoneNumber" : new RegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"),
     "userName" : new RegExp("[A-Za-z0-9]{3,20}"),
@@ -25,8 +34,10 @@ export class ProfileComponent {
   }
   @Input() user: User = {} as User;
   isEditMode:boolean=false;
-  constructor(private authService: AuthService, private service: AccountService) {
-  }
+  constructor(private authService: AuthService,
+              private service: AccountService,
+              private _formBuilder: FormBuilder,
+              private snackService: SnackBarService, private _snackBar: MatSnackBar) {}
   turnEditMode(){
     this.isEditMode = true;
   }
@@ -49,13 +60,18 @@ export class ProfileComponent {
     }
   }
   editUser(): void {
-    if(!this.validate()){
+    if(!this.profileForm.valid){ return; }
 
-      return;
-    }
+    this.user.username = this.profileForm.getRawValue().username;
+    this.user.firstName = this.profileForm.getRawValue().firstName;
+    this.user.lastName = this.profileForm.getRawValue().lastName;
+    this.user.address = this.profileForm.getRawValue().address;
+    this.user.phoneNumber = this.profileForm.getRawValue().phoneNumber;
+
     this.service.editUser(this.user).subscribe({
-      next: () => {
-
+      next: (res: User) => {
+        this.isEditMode = false;
+        this.openSnackBar("SUCCESS: User is successfully updated!");
       },
       error: () => { console.log("Error while editing user with id: ", this.user.id,  "!"); }
     });
@@ -87,11 +103,42 @@ export class ProfileComponent {
     this.authService.logout();
   }
   ngOnInit(): void {
+    this.setProfileForm();
+    this.setResetPasswordForm();
+
     this.service.getLoggedUser().subscribe({
-      next: (data: User) => { this.user = data; },
+      next: (data: User) => {
+        this.user = data;
+        this.profileForm.setValue({
+          firstName:data.firstName,
+          lastName:data.lastName,
+          address:data.address,
+          phoneNumber:data.phoneNumber,
+          username:data.username
+        });
+        },
       error: () => { console.log("Error while reading logged user!"); }
     })
   }
+
+  setProfileForm() {
+    this.profileForm = this._formBuilder.group({
+      firstName:['', [Validators.required, Validators.pattern("[A-Za-z]{3,20}")]],
+      lastName:['', [Validators.required, Validators.pattern("[A-Za-z]{3,20}")]],
+      address:['', [Validators.required, Validators.pattern("[A-Za-z0-9 ]{3,20}")]],
+      phoneNumber:['', [Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")]],
+      username:['', [Validators.required, Validators.pattern("[A-Za-z0-9]{3,20}")]]
+    })
+  }
+
+  setResetPasswordForm() {
+    this.resetPasswordForm = this._formBuilder.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+    }, { validator: this.passwordMatchValidator })
+  }
+
   enterResetPasswordMode() : void {
     this.isResetPasswordMode = true;
     this.isEditMode = false;
@@ -101,28 +148,19 @@ export class ProfileComponent {
     this.isEditMode = false;
   }
   resetPassword(): void{
-    let validated = true;
     this.passwordErrors = []
+    console.log(this.resetPasswordForm.getRawValue().oldPassword);
     var login: Login = {
       "username" : this.user.username,
-      "password" : this.oldPassword as string
+      "password" : this.resetPasswordForm.getRawValue().oldPassword
     }
     this.authService.reauthenticate(login).subscribe({
       next : (_) => {
-
-        //all good?
-        if(this.newPassword.length < 8){
-          this.passwordErrors.push("New password must be at least 8 characters")
-          validated = false;
-        }
-        if(this.newPassword != this.confirmedPassword){
-          this.passwordErrors.push("Passwords must match")
-          validated = false
-        }
-        if(!validated){
+        if(!this.resetPasswordForm.valid) {
           return;
         }
-        this.user.password = this.newPassword as string;
+
+        this.user.password = this.resetPasswordForm.getRawValue().newPassword;
         this.service.editUser(this.user).subscribe({
           next: (_) => {},
           error: (_) => {console.log("Error changing password")}
@@ -130,13 +168,27 @@ export class ProfileComponent {
       },
       error : (e) => {
         console.log(e)
-
         this.passwordErrors.push("Old Password Incorrect")
-        validated = false;
       }
 
   });
+  }
 
+  openSnackBar(message: string) {
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 5000,
+    });
+    this.snackService.errorMessage$.next(message)
+  }
 
+   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const newPassword = control.get('newPassword');
+    const confirmPassword = control.get('confirmPassword');
+
+    if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
+      return { passwordMismatch: true };
+    }
+
+    return null;
   }
 }

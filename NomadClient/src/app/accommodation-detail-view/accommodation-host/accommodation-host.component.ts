@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {UserReport} from "../model/userReport.model";
 import {AccountService} from "../../account/account.service";
 import {User} from "../../account/model/user.model";

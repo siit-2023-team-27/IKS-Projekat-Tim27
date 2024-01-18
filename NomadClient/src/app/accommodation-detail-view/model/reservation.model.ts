@@ -1,4 +1,4 @@
-import { AccommodationDetails } from "./accommodationDetails.model";
+import {AccommodationDetails} from "./accommodationDetails.model";
 import {User} from "../../account/model/user.model";
 
 export interface Reservation{

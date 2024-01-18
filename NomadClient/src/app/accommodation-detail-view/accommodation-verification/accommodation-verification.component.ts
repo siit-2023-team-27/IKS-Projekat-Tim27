@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AccommodationVerificationRequest } from '../model/accommodationVerificationRequest.model';
-import { AccommodationDetailsService } from '../accommodation-details.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {AccommodationVerificationRequest} from '../model/accommodationVerificationRequest.model';
+import {AccommodationDetailsService} from '../accommodation-details.service';
 
 @Component({
   selector: 'app-accommodation-verification',

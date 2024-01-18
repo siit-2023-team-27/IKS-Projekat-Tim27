@@ -1,7 +1,6 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {AmenityService} from "../../amenity/amenity.service";
 import {Amenity} from "../../amenity/amenity.model";
-import {Accommodation} from "../model/accommodation.model";
 import {AccommodationService} from "../accommodation.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
