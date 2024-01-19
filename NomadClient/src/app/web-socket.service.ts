@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
 import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+// import * as SockJS from 'sockjs-client';
 import {Message, MyNotification} from "./notifications/notification.model";
 import {TokenStorage} from "./infrastructure/auth/jwt/token.service";
 
@@ -24,8 +24,8 @@ export class WebSocketService {
 
   initializeWebSocketConnection() {
     // serverUrl je vrednost koju smo definisali u registerStompEndpoints() metodi na serveru
-    let ws = new SockJS("http://localhost:8080/socket");
-    this.stompClient = Stomp.over(ws);
+    // let ws = new SockJS("ws://localhost:8080/socket");
+    this.stompClient = Stomp.client("ws://localhost:8080/socket");
     let that = this;
 
     this.stompClient.connect({}, function () {
