@@ -27,9 +27,9 @@ export class AccommodationReservationComponent implements OnInit{
   price: number = 0;
   userId: () => string | null = () => {
     return '-1';
-  };  guests: number = 0;
+  };
+  guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
-
   constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
     this.id = 1;
     this.datesToHighlight = []
@@ -77,9 +77,13 @@ export class AccommodationReservationComponent implements OnInit{
       this.toDate = null;
       this.dateRange = null
     }
+    // this.calendar.updateTodaysDate();
+    // this.calendar.activeDate = new Date();
+    this.userId = this.tokenStorage.getId;
+  }
+  ngAfterViewInit(): void {
     this.calendar.updateTodaysDate();
     this.calendar.activeDate = new Date();
-    this.userId = this.tokenStorage.getId;
   }
   dateClass(dates: string[]) {
     return (date: Date): MatCalendarCellCssClasses => {
@@ -98,7 +102,6 @@ export class AccommodationReservationComponent implements OnInit{
   }
 
   invalid():boolean{
-    console.log(this.guests)
     if(this.dateRange == null){
       return true;
     }else if(this.dateRange.end == null){
@@ -110,7 +113,6 @@ export class AccommodationReservationComponent implements OnInit{
   }
   reserve():void{
     if(this.invalid()){
-      console.log("aaeraerf")
       this.openSnackBar("Data is not valid, not possible to make a reservation");
       return
     }

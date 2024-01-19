@@ -10,6 +10,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MaterialModule} from "../../infrastructure/material/material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TokenStorage} from "../../infrastructure/auth/jwt/token.service";
+import {AccommodationDetails, Review} from "../model/accommodationDetails.model";
+import {Amenity} from "../../amenity/amenity.model";
+import {User} from "../../account/model/user.model";
+import {Reservation} from "../model/reservation.model";
 
 describe('AccommodationReservationComponent', () => {
   let component: AccommodationReservationComponent;
@@ -34,9 +38,6 @@ describe('AccommodationReservationComponent', () => {
     tokenStorage = TestBed.inject(TokenStorage);
 
   });
-  // afterEach(() => {
-  //   httpTestingController.verify();
-  // });
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -54,35 +55,23 @@ describe('AccommodationReservationComponent', () => {
     spyOn(reservationService, "reserve");
     expect(reservationService.reserve).toHaveBeenCalledTimes(0);
   });
-  it("reservation form should be invalid because only start date is entered", async () => {
+  it("reservation form should be invalid because end date is not entered", async () => {
     component.onChange(new Date(2024, 1,1));
     component.guests = 1;
     component.id = 1;
     component.userId = () => {
       return '1';
     };
-
+    expect(component.invalid).toBeTruthy();
     component.reserve();
     spyOn(reservationService, "reserve");
     expect(reservationService.reserve).toHaveBeenCalledTimes(0);
   });
   it("reservation form should be invalid because date is in the past", async () => {
-    component.onChange(new Date(2024, 0,1));
-    component.onChange(new Date(2024, 2,1));
-    component.guests = 1;
-    component.id = 1;
-    component.userId = () => {
-      return '1';
-    };
-    spyOn(reservationService, "getPrice").and.returnValue(of(200));
-    component.reserve();
-
-    spyOn(reservationService, "reserve");
-    expect(reservationService.reserve).toHaveBeenCalledTimes(0);
-  });
-  it("reservation form should be invalid because end date is before start", async () => {
-    component.onChange(new Date(2024, 2,2));
-    component.onChange(new Date(2024, 2,1));
+    let startDate = new Date(2024, 0,1)
+    let endDate = new Date(2024, 2,1)
+    component.onChange(startDate);
+    component.onChange(endDate);
     component.guests = 1;
     component.id = 1;
     component.userId = () => {
@@ -94,9 +83,11 @@ describe('AccommodationReservationComponent', () => {
     spyOn(reservationService, "reserve");
     expect(reservationService.reserve).toHaveBeenCalledTimes(0);
   });
-  it("reservation form should be valid", async () => {
-    component.onChange(new Date(2024, 2,2));
-    component.onChange(new Date(2024, 2,5));
+  it("reservation form should be invalid because end date is before start", async () => {
+    let startDate = new Date(2024, 2,2);
+    let endDate = new Date(2024, 2,1);
+    component.onChange(startDate);
+    component.onChange(endDate);
     component.guests = 1;
     component.id = 1;
     component.userId = () => {
@@ -104,9 +95,9 @@ describe('AccommodationReservationComponent', () => {
     };
     spyOn(reservationService, "getPrice").and.returnValue(of(200));
     component.reserve();
-    expect(component.invalid).toBeFalse();
+    expect(component.invalid).toBeTruthy();
     spyOn(reservationService, "reserve");
-    expect(reservationService.reserve).toHaveBeenCalledTimes(1);
+    expect(reservationService.reserve).toHaveBeenCalledTimes(0);
   });
   it("reservation form should be invalid because number of guests is 0", async () => {
     component.onChange(new Date(2024, 2,2));
@@ -121,5 +112,49 @@ describe('AccommodationReservationComponent', () => {
     expect(component.invalid).toBeTruthy();
     spyOn(reservationService, "reserve");
     expect(reservationService.reserve).toHaveBeenCalledTimes(0);
+  });
+  it("reservation form should be valid", async () => {
+    component.accommodation = {
+      status: "ACCEPTED",
+      id:1,
+      hostId: 1,
+      name: "motel",
+      description: "fine place",
+      address: "adress",
+      minGuests: 1,
+      maxGuests: 4,
+      amenities: [],
+      images: [],
+      ratings: [],
+      verified: true,
+      accommodationType: "type1",
+      defaultPrice: 200,
+      priceType: "type2",
+      confirmationType: "type3",
+      deadlineForCancellation: 3
+    }
+    fixture.detectChanges();
+    component.onChange(new Date(2024, 2,2));
+    component.onChange(new Date(2024, 2,5));
+    component.guests = 1;
+    component.id = 1;
+    component.userId = () => {
+      return '1';
+    };
+    let reservation: Reservation =
+      { id : 1,
+      user : 1,
+      accommodation : 1,
+      startDate : new Date(),
+      finishDate : new Date(),
+      numGuests : 1,
+      status : "st",
+    }
+    spyOn(reservationService, "reserve").and.returnValue(of(reservation));
+    component.reserve();
+
+    fixture.whenStable().then(() => {
+      expect(reservationService.reserve).toEqual(reservation);
+    });
   });
 });
