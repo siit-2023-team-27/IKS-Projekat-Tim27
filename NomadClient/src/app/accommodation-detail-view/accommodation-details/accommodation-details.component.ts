@@ -3,6 +3,7 @@ import {AccommodationDetails, Review} from '../model/accommodationDetails.model'
 import {AccommodationDetailsService} from '../accommodation-details.service';
 import {ActivatedRoute} from '@angular/router';
 import {CommentService} from "../comment.service";
+import { throwIfEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-accommodation-details',
@@ -20,6 +21,7 @@ export class AccommodationDetailsComponent implements OnInit{
   startDate:string = "";
   endDate:string = "";
   peopleNum:number = 0;
+  averageRating:number = 0;
 	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute) {
 
   }
@@ -44,6 +46,11 @@ export class AccommodationDetailsComponent implements OnInit{
     this.commentService.getAccommodationComments(this.accommodation!.id!).subscribe({
       next: (data:Review[]) => {
         this.reviews = data;
+        this.averageRating = 0
+        for(var review of this.reviews){
+          this.averageRating += review.rating
+        }
+        this.averageRating /= this.reviews.length
       }
     })
   }
