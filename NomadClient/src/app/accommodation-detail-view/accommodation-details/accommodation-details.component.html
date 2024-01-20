@@ -19,7 +19,7 @@
         <app-map [searchBox]="false" [defaultLocation]="accommodation.address"></app-map>
 
     </div>
-
+    Average Rating: {{averageRating}}
     <app-accommodation-comments [reviews] = "reviews"></app-accommodation-comments>
 
    <app-accommodation-comment-form [accommodationId] = "accommodation.id" (newCommentEvent) = "getComments()"></app-accommodation-comment-form>
