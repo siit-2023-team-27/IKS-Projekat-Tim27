@@ -31,7 +31,7 @@ export class AccommodationReservationComponent implements OnInit{
   guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
   constructor(private service: AccommodationDetailsService,
-              private tokenStorage:TokenStorage,
+              public tokenStorage:TokenStorage,
               private cdr: ChangeDetectorRef,
               private snackService: SnackBarService,
               private _snackBar: MatSnackBar,

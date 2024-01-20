@@ -1,11 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
-import { FloatLabelType } from '@angular/material/form-field';
 import { AccommodationDetailsService } from '../accommodation-details.service';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {FloatLabelType} from '@angular/material/form-field';
-import {AccommodationDetailsService} from '../accommodation-details.service';
 import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
 import {CommentService} from "../comment.service";
 import {NotificationService} from "../../notifications/notification.service";
@@ -29,11 +25,15 @@ export class AccommodationCommentFormComponent implements OnInit{
   hasComment: Boolean = false;
 
   ngOnInit(): void {
-    // this.service.canRate(this.accommodationId, +this.tokenStorage.getId()!).subscribe({
-    //   next: (data:Boolean) => {
-    //     this.canRate = data;
-    //   }
-    // })
+    this.service.canRate(this.accommodationId, +this.tokenStorage.getId()!).subscribe({
+      next: (data:Boolean) => {
+        this.canRate = data;
+      }
+    })
+    if(this.accommodationId != 0) {
+
+      this.loadHostId();
+    }
   }
   getFloatLabelValue(): FloatLabelType  {
     return 'auto';
@@ -42,13 +42,6 @@ export class AccommodationCommentFormComponent implements OnInit{
               private tokenStorage: TokenStorage,
               private notificationService: NotificationService,
               private accommodationService: AccommodationDetailsService) {}
-
-  ngOnInit() {
-    if(this.accommodationId != 0) {
-
-      this.loadHostId();
-    }
-  }
 
   setRating(n : number){
     this.rating = n
