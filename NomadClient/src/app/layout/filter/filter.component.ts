@@ -1,16 +1,13 @@
 import {Component, Inject} from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef
-} from '@angular/material/dialog';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {FilterData} from "../model/filterData.model";
 import {SearchFilterForm} from "../model/searchFilterForm.model";
 import {AccommodationSearch} from "../model/accommodation-search.model";
 import {SearchFilterService} from "../search-filter.service";
-import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {Amenity} from "../model/amenity.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
+
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',

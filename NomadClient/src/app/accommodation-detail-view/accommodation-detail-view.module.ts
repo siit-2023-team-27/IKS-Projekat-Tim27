@@ -25,13 +25,10 @@ import { FormsModule } from '@angular/forms';
 import { ReservationVerificationComponent } from './reservation-verification/reservation-verification.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-import { ReportCommentDialogComponent } from './report-comment-dialog/report-comment-dialog.component';
-
 import { AccommodationHostComponent } from './accommodation-host/accommodation-host.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { CommentReportsComponent } from './comment-reports/comment-reports.component';
-
+import {ReportCommentDialogComponent} from "./report-comment-dialog/report-comment-dialog.component";
 
 
 
@@ -48,7 +45,6 @@ import { CommentReportsComponent } from './comment-reports/comment-reports.compo
     ReservationVerificationComponent,
     GuestReservationsComponent,
     ReportCommentDialogComponent,
-
     AccommodationHostComponent,
     ReservationComponent,
     CommentReportsComponent

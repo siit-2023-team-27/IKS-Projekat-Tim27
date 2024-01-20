@@ -1,15 +1,9 @@
-
-import {faLocationArrow, faPeopleGroup, faSearch, faFilter} from "@fortawesome/free-solid-svg-icons";
+import {faFilter, faLocationArrow, faPeopleGroup, faSearch} from "@fortawesome/free-solid-svg-icons";
 import {MatDialog} from "@angular/material/dialog";
 import {FilterComponent} from "../filter/filter.component";
-import {User} from "../../infrastructure/auth/model/user.model";
-import {FilterData} from "../model/filterData.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Login} from "../../infrastructure/auth/model/login.model";
+import {FormControl, FormGroup} from "@angular/forms";
 import {SearchFilterForm} from "../model/searchFilterForm.model";
-import {AuthService} from "../../infrastructure/auth/auth.service";
 import {SearchFilterService} from "../search-filter.service";
-import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {AccommodationSearch} from "../model/accommodation-search.model";
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {MapService} from "../../shared/map/map.service";

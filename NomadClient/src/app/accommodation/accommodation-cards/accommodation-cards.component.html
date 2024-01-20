@@ -1,20 +1,19 @@
 <div class="flex flex-row gap-8 flex-wrap justify-around w-[90%] m-auto mt-12 pb-12">
   <div *ngFor="let accommodation of accommodations" >
-    <app-accommodation-card [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
-                            class="w-[350px] h-[420px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
+    <app-accommodation-card class="w-[350px] h-[420px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
                             [accommodation] = "accommodation"
-                            [user]="user" >
+                            [user]="user"
+                            [searchFilterForm]="searchFilterForm" >
 
     </app-accommodation-card>
   </div>
   <div *ngFor="let accommodation of accommodationsSearch">
-    <app-accommodation-card [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
-                            class="w-[300px] h-[400px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
+    <app-accommodation-card class="w-[300px] h-[400px] flex flex-col rounded-2xl bg-gray-50 shadow-md cursor-pointer hover:translate-y-3.5 hover:scale-105 hover:shadow-nomad-nav-bar duration-75 ease-in-out"
                             [accommodationSearch] = "accommodation"
                             [user]="user"
-                            [isSearchMode] = "true">
+                            [isSearchMode] = "true"
+                            [searchFilterForm]="searchFilterForm" >
 
     </app-accommodation-card>
   </div>
 </div>
-

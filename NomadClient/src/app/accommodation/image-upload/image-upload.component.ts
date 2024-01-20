@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FileUploadService} from "../../shared/file-upload.service";
 
 

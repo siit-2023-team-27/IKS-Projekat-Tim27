@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { AccommodationDetails, Review } from '../model/accommodationDetails.model';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faWifi } from '@fortawesome/free-solid-svg-icons';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AccommodationDetails, Review} from '../model/accommodationDetails.model';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {ActivatedRoute} from '@angular/router';
 import {CommentService} from "../comment.service";
+
 import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+
+import { throwIfEmpty } from 'rxjs';
+
+
 @Component({
   selector: 'app-accommodation-details',
   templateUrl: './accommodation-details.component.html',
@@ -24,8 +26,9 @@ export class AccommodationDetailsComponent implements OnInit{
   endDate:string = "";
   peopleNum:number = 0;
   canComment: Boolean = false;
-	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute, public tokenStorage: TokenStorage, private cService: CommentService) {
+  averageRating:number = 0;
 
+	constructor(private service: AccommodationDetailsService, private commentService: CommentService, private route: ActivatedRoute, public tokenStorage: TokenStorage, private cService: CommentService) {
   }
   ngOnInit(): void {
       this.route.params.subscribe(params => {
@@ -52,7 +55,14 @@ export class AccommodationDetailsComponent implements OnInit{
           next: (data:Boolean) => {
             this.canComment = data;
           }
-        })      }
+        })      
+      }
+        this.averageRating = 0
+        for(var review of this.reviews){
+          this.averageRating += review.rating
+        }
+        this.averageRating /= this.reviews.length
+      }
     })
   }
   protected readonly encodeURIComponent = encodeURIComponent;

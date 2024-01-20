@@ -1,13 +1,9 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable, tap} from "rxjs";
-import {User} from "../infrastructure/auth/model/user.model";
+import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TokenStorage} from "../infrastructure/auth/jwt/token.service";
 import {Router} from "@angular/router";
-import {Login} from "../infrastructure/auth/model/login.model";
-import {LoginResponse} from "../infrastructure/auth/model/login.response.model";
 import {environment} from "../../env/env";
-import {AuthResponse} from "../infrastructure/auth/model/auth.response.module";
 import {SearchFilterForm} from "./model/searchFilterForm.model";
 import {AccommodationSearch} from "./model/accommodation-search.model";
 import {Amenity} from "./model/amenity.model";

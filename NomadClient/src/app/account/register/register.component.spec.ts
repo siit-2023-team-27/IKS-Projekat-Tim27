@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
 import { By } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { UserRegistration } from '../model/user-registration.model';
+
 
 
 describe('RegisterComponent', () => {

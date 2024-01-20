@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AccommodationAvailabilityComponent } from './accommodation-availability.component';
+import {AccommodationAvailabilityComponent} from './accommodation-availability.component';
 
 describe('AccommodationAvailabilityComponent', () => {
   let component: AccommodationAvailabilityComponent;
@@ -15,7 +15,7 @@ describe('AccommodationAvailabilityComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });

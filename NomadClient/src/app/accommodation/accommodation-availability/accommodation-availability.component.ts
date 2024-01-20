@@ -1,20 +1,9 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DateRange, MatCalendar, MatCalendarCellCssClasses} from "@angular/material/datepicker";
 import {AccommodationDetailsService} from "../../accommodation-detail-view/accommodation-details.service";
-import {DatePipe} from "@angular/common";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Accommodation} from "../model/accommodation.model";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
 
 @Component({

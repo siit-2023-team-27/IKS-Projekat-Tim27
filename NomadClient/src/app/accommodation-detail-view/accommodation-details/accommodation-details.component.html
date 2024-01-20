@@ -22,6 +22,9 @@
 
     <app-accommodation-comments [reviews] = "reviews" (deletedCommentEvent) = "getComments()"></app-accommodation-comments>
 
+    Average Rating: {{averageRating}}
+
+
    <app-accommodation-comment-form *ngIf="tokenStorage.getRole() && (tokenStorage.getRole() === 'GUEST')" [accommodationId] = "accommodation.id" [canRate] = "canComment" (newCommentEvent) = "getComments()"></app-accommodation-comment-form>
 
 

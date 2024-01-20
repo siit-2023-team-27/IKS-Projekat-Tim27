@@ -1,10 +1,10 @@
 import {HttpClient} from "@angular/common/http";
-import { AccommodationDetails, Review } from "./model/accommodationDetails.model";
+import {AccommodationDetails, Review} from "./model/accommodationDetails.model";
 import {environment} from "../../env/env";
 import {Injectable} from "@angular/core";
-import { AbstractRestService } from "../abstract.service";
-import { AccommodationVerificationRequest } from "./model/accommodationVerificationRequest.model";
-import { Observable } from "rxjs";
+import {AbstractRestService} from "../abstract.service";
+import {AccommodationVerificationRequest} from "./model/accommodationVerificationRequest.model";
+import {Observable} from "rxjs";
 import { Reservation } from "./model/reservation.model";
 import { CommentReport } from "./model/commentReport.model";
 

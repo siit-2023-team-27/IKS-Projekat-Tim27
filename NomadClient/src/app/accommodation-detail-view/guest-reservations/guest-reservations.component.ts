@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
-import { Reservation } from '../model/reservation.model';
-import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
-import { AccommodationDetailsService } from '../accommodation-details.service';
-import { AccommodationDetails } from '../model/accommodationDetails.model';
-import {User} from "../../infrastructure/auth/model/user.model";
+import {Component, Input} from '@angular/core';
+import {Reservation} from '../model/reservation.model';
+import {TokenStorage} from 'src/app/infrastructure/auth/jwt/token.service';
+import {AccommodationDetailsService} from '../accommodation-details.service';
+import {AccommodationDetails} from '../model/accommodationDetails.model';
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SearchFilterService} from "../../layout/search-filter.service";
+import {MyNotification} from "../../notifications/notification.model";
+import {NotificationService} from "../../notifications/notification.service";
+
 @Component({
   selector: 'app-guest-reservations',
   templateUrl: './guest-reservations.component.html',
@@ -26,7 +27,12 @@ export class GuestReservationsComponent {
     });
   }
 
-  constructor(private searchFilterService:SearchFilterService ,private snackService: SnackBarService, private _snackBar: MatSnackBar,private service: AccommodationDetailsService, private tokenStorage: TokenStorage){
+  constructor(private searchFilterService:SearchFilterService,
+              private snackService: SnackBarService,
+              private _snackBar: MatSnackBar,
+              private service: AccommodationDetailsService,
+              private notificationService: NotificationService,
+              private tokenStorage: TokenStorage){
     this.reservations = []
     this.loadReservations()
   }
@@ -61,13 +67,32 @@ export class GuestReservationsComponent {
     });
     this.snackService.errorMessage$.next("Not possible to cancel")
   }
-  cancel(id: number) : void{
-    this.service.cancelReservation(id).subscribe({
-      next: (_) => {this.loadReservations()},
+  cancel(request: Reservation) : void{
+    this.service.cancelReservation(request.id!).subscribe({
+      next: (_) => {
+        this.loadReservations();
+        const notification: MyNotification = {
+          "date": new Date(),
+          "notificationType": "RESERVATION_CANCELED",
+          "targetAppUser": request.accommodationDetails?.hostId!,
+          "text": "Your accommodation is canceled ",
+          "title": "Canceled reservation"
+        }
+        this.sendNotification(notification);
+      },
       error: (_) => {
         this.openSnackBar();
       }
     });
 
+
+  }
+
+  sendNotification(notification: MyNotification) {
+    // this.notificationService.addNotification(notification).subscribe({
+    //   next: () => {console.log("New notification successfully send");},
+    //   error: () => {console.log("Error while posting new notification! ", notification);}
+    // })
+    this.notificationService.addNotification(notification)
   }
 }

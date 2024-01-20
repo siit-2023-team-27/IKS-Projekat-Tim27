@@ -24,14 +24,12 @@ import { CommentService } from '../comment.service';
   templateUrl: './accommodation-comments.component.html',
   styleUrls: ['./accommodation-comments.component.css']
 })
-
 export class AccommodationCommentsComponent implements OnInit {
   @Input() reviews?: Review[]
   @Input() accommodationId?:number;
   @Output() deletedCommentEvent = new EventEmitter<string>();
 
-  faCircleUser=faCircleUser;
-  
+  faCircleUser=faCircleUser;  
   constructor(private service: AccommodationDetailsService, private dialog: MatDialog, public tokenService: TokenStorage, private commentService: CommentService){
   }
   openDialog(id : number): void {

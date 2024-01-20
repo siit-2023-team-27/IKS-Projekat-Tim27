@@ -29,7 +29,7 @@ export class AdminAccountsViewComponent implements OnInit{
           if(user.id == userId){
             user.suspended=true;
           }
-        }    
+        }
       },
       error(_){}
     })
@@ -43,7 +43,7 @@ export class AdminAccountsViewComponent implements OnInit{
           if(user.id == userId){
             user.suspended=false;
           }
-        }  
+        }
       },
       error(_){}
     })

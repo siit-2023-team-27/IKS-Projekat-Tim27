@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Reservation} from "../model/reservation.model";
-import {Accommodation} from "../../accommodation/model/accommodation.model";
 import {AccommodationDetails, Review} from "../model/accommodationDetails.model";
 import {AccommodationDetailsService} from "../accommodation-details.service";
 import {ActivatedRoute} from "@angular/router";
