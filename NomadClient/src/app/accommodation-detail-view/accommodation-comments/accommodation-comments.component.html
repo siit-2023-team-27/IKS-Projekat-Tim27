@@ -33,9 +33,8 @@
         </div>
       </div>
       <div fxFlex="10%">
-                        <button mat-mini-fab class="nomad-brown" (click) = "openDialog(review.id)">        <i class="fa fa-exclamation text-2xl text-white"></i>
-
-        </button>
+        <button mat-mini-fab class="nomad-brown" (click) = "openDialog(review.id)" *ngIf = "tokenService.getRole() === 'HOST'"><i class="fa fa-exclamation text-2xl text-white"></i></button>
+        <button mat-mini-fab class="nomad-brown" (click) = "delete(review.id)" *ngIf = "review.userId == +tokenService.getId()!"><i class="fa fa-trash text-2xl text-white"></i></button>
 
       </div>
     </div>

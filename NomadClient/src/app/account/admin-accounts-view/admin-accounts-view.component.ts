@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {User} from '../model/user.model';
-import {AccountService} from '../account.service';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../model/user.model';
+import { AccountService } from '../account.service';
+import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
 
 @Component({
   selector: 'app-admin-accounts-view',
@@ -9,7 +10,8 @@ import {AccountService} from '../account.service';
 })
 export class AdminAccountsViewComponent implements OnInit{
   users: User[] = [];
-  constructor(private userService: AccountService){}
+  constructor(private userService: AccountService, public tokenStorage: TokenStorage){
+  }
   ngOnInit(): void {
     this.userService.getUsers().subscribe({
       next: (data:User[]) => {
@@ -18,7 +20,7 @@ export class AdminAccountsViewComponent implements OnInit{
       error: (_) => {console.log("Greska!")}
   })
   }
-  displayedColumns: string[] = ['firstName', 'lastName', 'userName', 'address', 'phoneNumber', 'button'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'userName', 'address', 'phoneNumber', 'role', 'button'];
   block(userId:number): void{
     var self = this
     this.userService.suspendUser(userId).subscribe({

@@ -22,7 +22,7 @@ import {NotificationsModule} from "./notifications/notifications.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
       ],
   imports: [
     AccommodationDetailViewModule,

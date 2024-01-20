@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -37,10 +38,10 @@ export class RegisterComponent {
     });
     this.snackService.errorMessage$.next("Activation link is sent to the email adress")
   }
-  register(): void {
+  register(): void{
     if(this.registerForm.value.password != this.registerForm.value.passwordConfirm){
       this.passwordCheck = false;
-      return
+      return 
     }this.passwordCheck = true;
 
     const user: UserRegistration = {
@@ -53,12 +54,25 @@ export class RegisterComponent {
       phoneNumber:this.registerForm.value.phone || "",
       roles:[this.registerForm.value.options || ""],
     };
-
-    this.authService.register(user).subscribe({
+    this._register().subscribe({
       next: () => {
         this.router.navigate(['/login']);
         this.openSnackBar();
       },
     });
+  }
+  _register(): Observable<UserRegistration> {
+    const user: UserRegistration = {
+      firstName:this.registerForm.value.name || "",
+      lastName:this.registerForm.value.surname || "",
+      address:this.registerForm.value.adress || "",
+      username:this.registerForm.value.email || "",
+      password:this.registerForm.value.password || "",
+      passwordConfirmation:this.registerForm.value.passwordConfirm || "",
+      phoneNumber:this.registerForm.value.phone || "",
+      roles:[this.registerForm.value.options || ""],
+    };
+    var observable = this.authService.register(user);
+    return observable;
   }
 }

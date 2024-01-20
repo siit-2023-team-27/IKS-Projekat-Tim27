@@ -22,7 +22,8 @@
               placeholder="Guests" [(ngModel)]="guests" [max] = "accommodation.maxGuests" [min] = "accommodation.minGuests">
           </mat-form-field>
         <br>
-        <button mat-button class="nomad-button" (click) = "this.reserve()">Reserve</button>
+        <button mat-button class="nomad-button" (click) = "this.reserve()" [disabled] = "(tokenStorage.getRole() != 'GUEST') ||
+         (guests < accommodation.minGuests || guests > accommodation.maxGuests) || !dateRange">Reserve</button>
     </div>
 
 </div>

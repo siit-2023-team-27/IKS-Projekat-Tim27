@@ -30,13 +30,12 @@ export class AccommodationReservationComponent implements OnInit{
   price: number = 0;
   guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
-
   constructor(private service: AccommodationDetailsService,
               private tokenStorage:TokenStorage,
               private cdr: ChangeDetectorRef,
               private snackService: SnackBarService,
               private _snackBar: MatSnackBar,
-              private notificationService: NotificationService,){
+              private notificationService: NotificationService){
     this.id = 1;
     this.datesToHighlight = null
     this.dates = []
@@ -44,7 +43,6 @@ export class AccommodationReservationComponent implements OnInit{
     this.fromDate = null;
     this.toDate = null;
     this.dateRange = null
-
 
   }
   parseDate(dateString: string): Date | null {

@@ -15,6 +15,10 @@ import {
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { TokenStorage } from 'src/app/infrastructure/auth/jwt/token.service';
+import { CommentService } from '../comment.service';
 @Component({
   selector: 'app-accommodation-comments',
   templateUrl: './accommodation-comments.component.html',
@@ -23,9 +27,11 @@ import {
 export class AccommodationCommentsComponent implements OnInit {
   @Input() reviews?: Review[]
   @Input() accommodationId?:number;
-  faCircleUser=faCircleUser;
+  @Output() deletedCommentEvent = new EventEmitter<string>();
 
-  constructor(private service: AccommodationDetailsService, private dialog: MatDialog){}
+  faCircleUser=faCircleUser;  
+  constructor(private service: AccommodationDetailsService, private dialog: MatDialog, public tokenService: TokenStorage, private commentService: CommentService){
+  }
   openDialog(id : number): void {
     const dialogRef = this.dialog.open(ReportCommentDialogComponent, {
       data: {reason: "", commentId: id},
@@ -33,13 +39,22 @@ export class AccommodationCommentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
   numSequence(n: number): Array<number> {
     return Array(Math.floor(n));
   }
+ 
+  delete(id: number):void{
+    this.commentService.delete(id).subscribe({
+      next: () => {
+        this.deletedCommentEvent.emit("")
+      },
+      error: (_) => {console.log("Greska!")}
+    })
+  }
   ngOnInit():void{
 
   }
+  
 }

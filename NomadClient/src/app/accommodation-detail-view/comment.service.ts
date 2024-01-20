@@ -23,4 +23,13 @@ export class CommentService {
   getHostComments(accommodationId: number){
     return this._http.get<Review[]>(`http://localhost:8080/api/host-ratings/host/${+accommodationId}`)
   }
+  getComment(commentId: number){
+    return this._http.get<Review>(`http://localhost:8080/api/accommodation-ratings/${+commentId}`)
+  }
+  canRate(accommodationId: number, userId: number){
+    return this._http.get<Boolean>(`http://localhost:8080/api/accommodation-ratings/can-rate/${+accommodationId}/${+userId}`)
+  }
+  delete(commentId:number){
+    return this._http.delete<void>(`http://localhost:8080/api/accommodation-ratings/${+commentId}`)
+  }
 }
