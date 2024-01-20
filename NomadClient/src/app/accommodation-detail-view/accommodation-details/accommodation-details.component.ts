@@ -56,7 +56,6 @@ export class AccommodationDetailsComponent implements OnInit{
             this.canComment = data;
           }
         })      
-      }
         this.averageRating = 0
         for(var review of this.reviews){
           this.averageRating += review.rating
@@ -64,6 +63,6 @@ export class AccommodationDetailsComponent implements OnInit{
         this.averageRating /= this.reviews.length
       }
     })
-  }
-  protected readonly encodeURIComponent = encodeURIComponent;
+}
+protected readonly encodeURIComponent = encodeURIComponent;
 }
