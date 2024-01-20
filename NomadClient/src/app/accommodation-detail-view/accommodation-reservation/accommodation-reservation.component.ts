@@ -34,7 +34,7 @@ export class AccommodationReservationComponent implements OnInit{
   guests: number = 0;
   @ViewChild(MatCalendar, {static: false}) calendar!: MatCalendar<Date>;
 
-  constructor(private service: AccommodationDetailsService, private tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
+  constructor(private service: AccommodationDetailsService, public tokenStorage:TokenStorage, private cdr: ChangeDetectorRef, private snackService: SnackBarService, private _snackBar: MatSnackBar){
     this.id = 1;
     this.datesToHighlight = null
     this.dates = []
