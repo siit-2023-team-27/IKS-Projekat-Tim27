@@ -76,6 +76,67 @@ describe('RegisterComponent', () => {
     expect(component.registerForm.valid).toBeFalsy();
 
   });
+  it('should be invalid with non-matching passwords', () => {
+    
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("TestName")
+    component.registerForm.controls['surname'].setValue("TestSurName")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("AAAAAAA")
+    component.registerForm.controls['password'].setValue("Sifra12")
+    component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+    expect(component.registerForm.valid).toBeFalsy();
+
+  });
+  it('should be invalid with matching invalid password', () => {
+    
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("TestName")
+    component.registerForm.controls['surname'].setValue("TestSurName")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("AAAAAAA")
+    component.registerForm.controls['password'].setValue("1")
+    component.registerForm.controls['passwordConfirm'].setValue("1")
+    expect(component.registerForm.valid).toBeFalsy();
+
+  });
+  it('should be invalid with invalid first name', () => {
+    
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("")
+    component.registerForm.controls['surname'].setValue("TestSurName")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("AAAAAAA")
+    component.registerForm.controls['password'].setValue("Sifra12")
+    component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+    expect(component.registerForm.valid).toBeFalsy();
+
+  });
+  it('should be invalid with invalid last name', () => {
+    
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("TestName")
+    component.registerForm.controls['surname'].setValue("")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("AAAAAAA")
+    component.registerForm.controls['password'].setValue("Sifra12")
+    component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+    expect(component.registerForm.valid).toBeFalsy();
+
+  });
+  
+  it('should be invalid with empty adress', () => {
+    
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("TestName")
+    component.registerForm.controls['surname'].setValue("TestSurName")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("")
+    component.registerForm.controls['password'].setValue("Sifra12")
+    component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+    expect(component.registerForm.valid).toBeFalsy();
+
+  });
   it('should send post request when clicked and valid', () => {
     
     expect(component).toBeTruthy();
@@ -107,10 +168,8 @@ describe('RegisterComponent', () => {
       method : 'POST',
       url : `${url}/signup`
     })
-    
-    
-
   });
+  
 });
 
 //name

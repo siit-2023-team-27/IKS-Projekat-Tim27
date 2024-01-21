@@ -61,6 +61,9 @@ export class AccommodationDetailsComponent implements OnInit{
           this.averageRating += review.rating
         }
         this.averageRating /= this.reviews.length
+        if(!this.averageRating){
+          this.averageRating = 0;
+        }
       }
     })
 }
