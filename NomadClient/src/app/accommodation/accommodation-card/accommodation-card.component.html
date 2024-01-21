@@ -4,7 +4,7 @@
   </div>
   <img [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
        *ngIf="!isSearchMode" src="images/{{accommodation.images[0]}}" alt="Accommodation image" class="w-full h-full object-cover rounded-2xl">
-  <img [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
+  <img [routerLink]="['/accommodation-details', accommodationSearch.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
        *ngIf="isSearchMode" src="images/{{accommodationSearch.images[0]}}" alt="Accommodation image" class="w-full h-full object-center rounded-2xl">
 </div>
 
@@ -15,4 +15,6 @@
   <p *ngIf="!isSearchMode" class="text-md text-gray-600">$ {{accommodation.defaultPrice}} Night</p>
   <p *ngIf="isSearchMode" class="text-md text-gray-600">Price per night: {{accommodationSearch.pricePerNight}}</p>
   <p *ngIf="isSearchMode" class="text-md text-gray-600">Total price: {{accommodationSearch.totalPrice}}</p>
+  <p *ngIf="isSearchMode" class="text-md text-gray-600">Average rating: {{accommodationSearch.averageRating}}</p>
+
 </div>

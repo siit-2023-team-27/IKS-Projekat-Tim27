@@ -4,6 +4,7 @@ import {environment} from "../../env/env";
 import {AbstractRestService} from "../abstract.service";
 import {Observable} from "rxjs";
 import {FavouriteAccommodation} from "./model/favouriteAccommodation.model";
+import {AccommodationDetails} from "../accommodation-detail-view/model/accommodationDetails.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class FavouriteService extends AbstractRestService<FavouriteService> {
     super(httpClient, environment.apiHost + "favourites");
   }
 
-  getFavouritesForGuest(guestId: number): Observable<FavouriteAccommodation[]> {
-    return this.httpClient.get<FavouriteAccommodation[]>(`${this.actionUrl}/guest/${+guestId}`);
+  getFavouritesForGuest(guestId: number): Observable<AccommodationDetails[]> {
+    return this.httpClient.get<AccommodationDetails[]>(`${this.actionUrl}/guest/${+guestId}`);
   }
 
   likeOrDislike(accommodationId:number, guestId:number): Observable<boolean> {
