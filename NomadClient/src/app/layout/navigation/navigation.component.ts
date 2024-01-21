@@ -42,7 +42,7 @@ export class NavigationComponent {
   protected readonly faPeopleGroup = faPeopleGroup;
   faMagnifyingGlass= faMagnifyingGlass;
   navBar:boolean=true;
-  getScreenWidth: any;
+  getScreenWidth: number = 0;
   isHomePage(): boolean {
     return this.router.url === "/home";
   }

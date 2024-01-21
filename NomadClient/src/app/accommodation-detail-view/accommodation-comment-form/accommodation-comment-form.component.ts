@@ -63,7 +63,7 @@ export class AccommodationCommentFormComponent implements OnInit{
     }
     this.service.addAccommodationComment(comment).subscribe({
       next: () => {
-        // this.canRate = false;
+        this.canRate = false;
 
         this.newCommentEvent.emit("")
       },

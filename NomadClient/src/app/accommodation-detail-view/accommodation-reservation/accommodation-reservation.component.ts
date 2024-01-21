@@ -137,11 +137,11 @@ export class AccommodationReservationComponent implements OnInit{
       error: (_) => {console.log("Greska!")}
     })
   }
-  onChange(ev: any) {
-    let v = new Date(ev);
+  onChange(ev: Date|null) {
+    let v = new Date(ev!);
     if(this.dateRange == null){
       this.dateRange =  new DateRange((() => {
-        let v = new Date(ev);
+        let v = new Date(ev!);
 
         return v;
       })(), v);
@@ -150,7 +150,7 @@ export class AccommodationReservationComponent implements OnInit{
         this.dateRange = null;
       }
       this.dateRange =  new DateRange(this.dateRange!.start!, (() => {
-        let v = new Date(ev);
+        let v = new Date(ev!);
 
         return v;
       })());
