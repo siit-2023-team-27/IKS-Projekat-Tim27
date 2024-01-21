@@ -33,7 +33,6 @@ export class AccommodationDetailsComponent implements OnInit{
   ngOnInit(): void {
       this.route.params.subscribe(params => {
           this.id = +params['id']; // (+) converts string 'id' to a number
-
           this.startDate = params['startDate']
           this.endDate = params['endDate']
           this.peopleNum = +params['peopleNum']
@@ -45,7 +44,7 @@ export class AccommodationDetailsComponent implements OnInit{
               error: (_) => {console.log("Greska!")}
           })
       });
-    
+
   }
   getComments(): void {
     this.commentService.getAccommodationComments(this.accommodation!.id!).subscribe({
@@ -55,7 +54,7 @@ export class AccommodationDetailsComponent implements OnInit{
           next: (data:Boolean) => {
             this.canComment = data;
           }
-        })      
+        })
         this.averageRating = 0
         for(var review of this.reviews){
           this.averageRating += review.rating
