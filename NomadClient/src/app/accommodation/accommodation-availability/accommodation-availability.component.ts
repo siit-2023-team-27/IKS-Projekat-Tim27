@@ -5,6 +5,8 @@ import {SnackBarService} from "../../shared/snack-bar.service";
 import {SnackBarComponent} from "../../shared/snack-bar/snack-bar.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AccommodationDetails} from "../../accommodation-detail-view/model/accommodationDetails.model";
+import { PriceDateRange} from "../../accommodation-detail-view/model/priceDateRange.model";
+import {DateRangeModel} from "../../accommodation-detail-view/model/dateRange.model";
 
 @Component({
   selector: 'app-accommodation-availability',
@@ -21,7 +23,7 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
   @Output() defaultPriceEmitter = new EventEmitter<number> ();
   @Output() priceType = new EventEmitter<string> ();
   @Output() conformationType = new EventEmitter<string> ();
-  @Output() pricesForIntervals = new EventEmitter<any>();
+  @Output() pricesForIntervals = new EventEmitter<PriceDateRange>();
   @Output() unavailableIntervalsEmmiter = new EventEmitter<DateRange<Date>>();
   @Output() availableIntervalsEmmiter = new EventEmitter<DateRange<Date>>();
 
@@ -88,12 +90,16 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
       this.openSnackBar("WARNING! Enter price first!");
       return;
     }
-
-    this.pricesForIntervals.emit({
-      "price": this.intervalPrice.toFixed(2),
-      "startDate": this.dateRange.start,
-      "finishDate": this.dateRange.end
-    });
+    const priceDR: PriceDateRange = {
+      price:this.intervalPrice.toFixed(2),
+      dateRange: {startDate:this.dateRange.start!, finishDate:this.dateRange.end!}
+    }
+    // this.pricesForIntervals.emit({
+    //   "price": this.intervalPrice.toFixed(2),
+    //   "startDate": this.dateRange.start,
+    //   "finishDate": this.dateRange.end
+    // });
+    this.pricesForIntervals.emit(priceDR);
     this.openSnackBar("SUCCESS: Price will be updated!");
   }
 

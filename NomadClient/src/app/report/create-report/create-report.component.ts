@@ -48,49 +48,51 @@ export class CreateReportComponent {
       reservations.push(report.reservationNumber);
     });
     // Bar chart
-    const barCanvasEle: any = document.getElementById('line_chart')
-    this.chart = new Chart(barCanvasEle.getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: accommodationNames,
-        datasets: [{
-          label: 'Profit',
-          data: profits,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)'
-          ],
-          borderColor: [
-            'rgb(255, 99, 132)'
-          ],
-          borderWidth: 1
-        },
-          {
-            label: 'Reservations',
-            data: reservations,
+    const barCanvasEle: HTMLCanvasElement|null = <HTMLCanvasElement> document.getElementById('line_chart')
+      this.chart = new Chart(barCanvasEle.getContext('2d')!, {
+        type: 'bar',
+        data: {
+          labels: accommodationNames,
+          datasets: [{
+            label: 'Profit',
+            data: profits,
             backgroundColor: [
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
-              'rgb(255, 159, 64)'
+              'rgb(255, 99, 132)'
             ],
             borderWidth: 1
-          }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+          },
+            {
+              label: 'Reservations',
+              data: reservations,
+              backgroundColor: [
+                'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                'rgb(255, 159, 64)'
+              ],
+              borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
+
+
 
   }
   showMonthsReport():void{
     if(this.chart!=undefined)
       this.chart.destroy();
-    const lineCanvasEle: any = document.getElementById('line_chart');
+    const lineCanvasEle:  HTMLCanvasElement|null = <HTMLCanvasElement> document.getElementById('line_chart');
     const profits:number[] = [];
     this.reports.forEach((report: ReportModel) => {
       profits.push(report.profit);
@@ -99,7 +101,7 @@ export class CreateReportComponent {
     this.reports.forEach((report: ReportModel) => {
       reservations.push(report.reservationNumber);
     });
-    this.chart = new Chart(lineCanvasEle.getContext('2d'), {
+    this.chart = new Chart(lineCanvasEle!.getContext('2d')!, {
       type: 'line',
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Avgust','September','October','November','December'],

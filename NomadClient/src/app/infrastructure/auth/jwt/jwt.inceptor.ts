@@ -9,11 +9,10 @@ export class Interceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const accessToken: any = localStorage.getItem('token');
+    const accessToken: string|null = localStorage.getItem('token');
     if (req.headers.get('skip')) return next.handle(req);
 
     if (accessToken) {
-      //alert(accessToken);
       const cloned = req.clone({
 
         headers: req.headers.set('Authorization',"Bearer " + accessToken),

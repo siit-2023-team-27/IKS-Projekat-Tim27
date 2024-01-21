@@ -10,6 +10,8 @@ import {SnackBarService} from "../../shared/snack-bar.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AccommodationDetailsService} from "../../accommodation-detail-view/accommodation-details.service";
 import {DateRange} from "@angular/material/datepicker";
+import {DateRangeModel} from "../../accommodation-detail-view/model/dateRange.model";
+import {PriceDateRange} from "../../accommodation-detail-view/model/priceDateRange.model";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -36,9 +38,9 @@ export class CreateAccommodationComponent {
   conformationType:string = "MANUAL";
   priceType:string = "FOR_GUEST";
   defaultPrice: number = 0;
-  currentIntervalPrices:any[] = []
-  currentUnavailableIntervals: any[] = [];
-  currentAvailableIntervals: any[] = [];
+  currentIntervalPrices:PriceDateRange[] = []
+  currentUnavailableIntervals: DateRangeModel[] = [];
+  currentAvailableIntervals: DateRangeModel[] = [];
 
   isConformationVisible: boolean = false;
 
@@ -127,22 +129,30 @@ export class CreateAccommodationComponent {
     console.log("uhvatio sam ", currentConformationType);
   }
 
-  getCurrentIntervalPrices(currentIntervalPRices: any) {
+  getCurrentIntervalPrices(currentIntervalPRices: PriceDateRange) {
     this.currentIntervalPrices.push(currentIntervalPRices);
   }
 
-  getCurrentUnavailableIntervals(unavailableInterval: DateRange<any>) {
-    const interval = {
-      "startDate": unavailableInterval.start,
-      "finishDate": unavailableInterval.end
+  getCurrentUnavailableIntervals(unavailableInterval: DateRange<Date>) {
+    // const interval = {
+    //   "startDate": unavailableInterval.start,
+    //   "finishDate": unavailableInterval.end
+    // }
+    const interval:DateRangeModel = {
+      startDate:unavailableInterval.start!,
+      finishDate:unavailableInterval.end!
     }
     this.currentUnavailableIntervals.push(interval);
   }
 
-  getCurrentAvailableIntervals(availableInterval: DateRange<any>) {
-    const interval = {
-      "startDate": availableInterval.start,
-      "finishDate": availableInterval.end
+  getCurrentAvailableIntervals(availableInterval: DateRange<Date>) {
+    // const interval = {
+    //   "startDate": availableInterval.start,
+    //   "finishDate": availableInterval.end
+    // }
+    const interval:DateRangeModel = {
+      startDate:availableInterval.start!,
+      finishDate:availableInterval.end!
     }
     this.currentAvailableIntervals.push(interval);
   }
