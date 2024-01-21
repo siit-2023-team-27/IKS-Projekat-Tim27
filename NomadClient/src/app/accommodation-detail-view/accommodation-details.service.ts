@@ -33,6 +33,9 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   accept(id:number):Observable<AccommodationVerificationRequest>{
     return this._http.put<AccommodationVerificationRequest>(`${this.actionUrl}/verify/${+id}`, {})
   }
+  decline(id:number):Observable<AccommodationVerificationRequest>{
+    return this._http.put<AccommodationVerificationRequest>(`${this.actionUrl}/decline/${+id}`, {})
+  }
   getPrice(id:number, date:String){
     return this._http.get<number>(`${this.actionUrl}/price/${+id}/${date}`);
   }
@@ -40,6 +43,7 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
   setPriceInterval(accommodationId:number, body:PriceDateRange){
     return this._http.post<string>(`${this.actionUrl}/price/${+accommodationId}`, body);
   }
+
   setUnavailableForInterval(accommodationId:number, body:DateRangeModel){
     return this._http.post<string>(`${this.actionUrl}/unavailable/${+accommodationId}`, body);
   }
