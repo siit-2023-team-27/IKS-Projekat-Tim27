@@ -24,8 +24,9 @@ export class FavoritesComponent {
         console.log(this.user.id)
 
         this.favouriteService.getFavouritesForGuest(this.user.id).subscribe({
-          next: (data: FavouriteAccommodation[]) => {
-            this.accommodations = data.map(fa => fa.accommodation);
+          next: (data: AccommodationDetails[]) => {
+            //this.accommodations = data.map(fa => fa.accommodation);
+            this.accommodations = data;
           },
           error: () => {console.log("Error")}
         })
