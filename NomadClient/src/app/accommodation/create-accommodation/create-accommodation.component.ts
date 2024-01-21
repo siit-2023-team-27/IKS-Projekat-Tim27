@@ -161,6 +161,10 @@ export class CreateAccommodationComponent {
       this.openSnackBar("WARNING: Make sure you have filled in all the fields!");
       return false;
     }
+    if(!this.deadline || this.deadline < 1){
+      this.openSnackBar("WARNING: minimum deadline iz 1");
+      return false;
+    }
 
     if (this.minGuest > this.maxGuest) {
       this.openSnackBar("WARNING: Minimum number of guests must be less than maximum!");

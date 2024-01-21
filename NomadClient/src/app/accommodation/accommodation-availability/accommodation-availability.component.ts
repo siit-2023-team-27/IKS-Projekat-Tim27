@@ -84,7 +84,7 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
       this.openSnackBar("WARNING! Select date range first!");
       return;
     }
-    if(this.intervalPrice == 0) {
+    if(this.intervalPrice < 0 || !this.intervalPrice) {
       this.openSnackBar("WARNING! Enter price first!");
       return;
     }
