@@ -32,11 +32,18 @@ export class AccommodationVerificationComponent implements OnInit{
     })
   }
   deny(id:number):void{
-    this.service.delete(id).subscribe({
+    this.service.decline(id).subscribe({
       next: (data: AccommodationVerificationRequest) => {
-        this.loadRequests()
-     },
+        this.loadRequests();
+      },
       error: (_) => {console.log("Greska!")}
     })
   }
+  //   this.service.delete(id).subscribe({
+  //     next: (data: AccommodationVerificationRequest) => {
+  //       this.loadRequests()
+  //    },
+  //     error: (_) => {console.log("Greska!")}
+  //   })
+  // }
 }
