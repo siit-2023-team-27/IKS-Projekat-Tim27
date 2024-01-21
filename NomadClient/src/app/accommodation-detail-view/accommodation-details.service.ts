@@ -9,6 +9,8 @@ import { Reservation } from "./model/reservation.model";
 import { CommentReport } from "./model/commentReport.model";
 
 import {User} from "../account/model/user.model";
+import {PriceDateRange} from "./model/priceDateRange.model";
+import {DateRangeModel} from "./model/dateRange.model";
 
 @Injectable({
   providedIn: 'root',
@@ -35,13 +37,13 @@ export class AccommodationDetailsService extends AbstractRestService<Accommodati
     return this._http.get<number>(`${this.actionUrl}/price/${+id}/${date}`);
   }
 
-  setPriceInterval(accommodationId:number, body:any){
+  setPriceInterval(accommodationId:number, body:PriceDateRange){
     return this._http.post<string>(`${this.actionUrl}/price/${+accommodationId}`, body);
   }
-  setUnavailableForInterval(accommodationId:number, body:any){
+  setUnavailableForInterval(accommodationId:number, body:DateRangeModel){
     return this._http.post<string>(`${this.actionUrl}/unavailable/${+accommodationId}`, body);
   }
-  setAvailableForInterval(accommodationId:number, body:any){
+  setAvailableForInterval(accommodationId:number, body:DateRangeModel){
     return this._http.post<string>(`${this.actionUrl}/available/${+accommodationId}`, body);
   }
 
