@@ -56,7 +56,7 @@ export class RegisterComponent {
     };
     this._register().subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
         this.openSnackBar();
       },
     });
