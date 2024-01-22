@@ -65,7 +65,7 @@ export class GuestReservationsComponent {
     this._snackBar.openFromComponent(SnackBarComponent, {
       duration: 2000,
     });
-    this.snackService.errorMessage$.next("Not possible to cancel")
+    this.snackService.errorMessage$.next("WARNING! Not possible to cancel")
   }
   cancel(request: Reservation) : void{
     this.service.cancelReservation(request.id!).subscribe({

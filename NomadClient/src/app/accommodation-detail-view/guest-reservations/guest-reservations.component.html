@@ -34,10 +34,11 @@
         <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{request.status}}</p>
 
         <div class="absolute bottom-3">
-          <button *ngIf=" request.status == 'PENDING'" (click)="delete(request.id!)"
-                  class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
-            <i class = "fa fa-trash nomadButton"></i></button>
+<!--          <button *ngIf=" request.status == 'PENDING'" (click)="delete(request.id!)"-->
+<!--                  class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">-->
+<!--            <i class = "fa fa-trash nomadButton"></i></button>-->
           <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request)"
+                  id="cancelButton-{{request.id}}"
                   class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
             Cancel</button>
 
@@ -47,7 +48,7 @@
         </div>
       </div>
 
-      <p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{request.status}}</p>
+      <p id="status-{{request.id}}" class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{request.status}}</p>
 
     </div>
   </div>
