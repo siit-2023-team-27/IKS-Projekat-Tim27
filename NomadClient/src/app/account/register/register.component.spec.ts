@@ -163,17 +163,17 @@ describe('RegisterComponent', () => {
     component.registerForm.controls['phone'].setValue(testRegistration.phoneNumber)
     expect(component.registerForm.valid).toBeTruthy();
     component._register()!.subscribe((res) => {
-      console.log(res)
+      expect(res).toEqual(testRegistration)
     }
     )
     const req = httpClient.expectOne({
       method : 'POST',
       url : `${url}/signup`
     })
-    req.flush({status: 201, message: "CREATED"})
+    req.flush(testRegistration)
   });
-  it('should send post request when clicked and valid', () => {
-    
+  it('should call function when clicked and valid', () => {
+    spyOn(component, "_register")
     expect(component).toBeTruthy();
 
     var testRegistration : UserRegistration = {
@@ -197,12 +197,7 @@ describe('RegisterComponent', () => {
     button.nativeElement.click();
     expect(component.registerForm.valid).toBeTruthy();
     
-    const req = httpClient.expectOne({
-      method : 'POST',
-      url : `${url}/signup`
-    })
-    req.flush({status: 201, statusText: "CREATED"})
-    httpClient.verify()
+    expect(component._register).toHaveBeenCalledTimes(1);
   });
   it('should send post request with correct data when service function called and valid', () => {
     
@@ -219,14 +214,14 @@ describe('RegisterComponent', () => {
       "phoneNumber" : "0694251300"
     }    
     component.authService!.register(testRegistration).subscribe((res) => {
-      // expect(res).toEqual(testRegistration);
+      expect(res).toEqual(testRegistration);
     }
     )
     const req = httpClient.expectOne({
       method : 'POST',
       url : `${url}/signup`
     })
-    req.flush({status: 201, message: "CREATED"})
+    req.flush(testRegistration)
     httpClient.verify()
 
   });
