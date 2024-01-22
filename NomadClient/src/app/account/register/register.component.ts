@@ -18,7 +18,7 @@ export class RegisterComponent {
 
   windowHeight: number = window.innerHeight;
   windowWidth: number = window.innerWidth;
-  constructor(private snackService: SnackBarService, private _snackBar: MatSnackBar,private authService: AuthService,
+  constructor(private snackService: SnackBarService, private _snackBar: MatSnackBar,public authService: AuthService,
               private router: Router) {
   }
   registerForm = new FormGroup({
