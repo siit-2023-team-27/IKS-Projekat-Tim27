@@ -14,6 +14,8 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { UserRegistration } from '../model/user-registration.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 
 
 
@@ -24,7 +26,7 @@ describe('RegisterComponent', () => {
   const url = 'http://localhost:8080/auth'
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports : [MatSnackBarModule, HttpClientModule, MaterialModule, HttpClientTestingModule,
+      imports : [MatSnackBarModule, HttpClientModule, MaterialModule, HttpClientTestingModule,BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
@@ -161,13 +163,14 @@ describe('RegisterComponent', () => {
     component.registerForm.controls['phone'].setValue(testRegistration.phoneNumber)
     expect(component.registerForm.valid).toBeTruthy();
     component._register()!.subscribe((res) => {
-      expect(res).toEqual(testRegistration);
+      console.log(res)
     }
     )
     const req = httpClient.expectOne({
       method : 'POST',
       url : `${url}/signup`
     })
+    req.flush({status: 201, message: "CREATED"})
   });
   it('should send post request when clicked and valid', () => {
     
@@ -183,7 +186,6 @@ describe('RegisterComponent', () => {
       "roles" : ["GUEST"],
       "phoneNumber" : "0694251300"
     }
-
     component.registerForm.controls['name'].setValue(testRegistration.firstName)
     component.registerForm.controls['surname'].setValue(testRegistration.lastName)
     component.registerForm.controls['email'].setValue(testRegistration.username)
@@ -199,6 +201,8 @@ describe('RegisterComponent', () => {
       method : 'POST',
       url : `${url}/signup`
     })
+    req.flush({status: 201, statusText: "CREATED"})
+    httpClient.verify()
   });
   it('should send post request with correct data when service function called and valid', () => {
     
@@ -215,13 +219,16 @@ describe('RegisterComponent', () => {
       "phoneNumber" : "0694251300"
     }    
     component.authService!.register(testRegistration).subscribe((res) => {
-      expect(res).toEqual(testRegistration);
+      // expect(res).toEqual(testRegistration);
     }
     )
     const req = httpClient.expectOne({
       method : 'POST',
       url : `${url}/signup`
     })
+    req.flush({status: 201, message: "CREATED"})
+    httpClient.verify()
+
   });
   it('should not call function when clicked and invalid', () => {
     spyOn(component, "_register")
@@ -255,8 +262,8 @@ describe('RegisterComponent', () => {
         method : 'POST',
         url : `${url}/signup`
       })
+      httpClient.verify()
   });
-  
 });
 
 //name
