@@ -137,7 +137,7 @@ describe('RegisterComponent', () => {
     expect(component.registerForm.valid).toBeFalsy();
 
   });
-  it('should send post request when clicked and valid', () => {
+  it('should send post request with correct data when function called and valid', () => {
     
     expect(component).toBeTruthy();
 
@@ -168,6 +168,93 @@ describe('RegisterComponent', () => {
       method : 'POST',
       url : `${url}/signup`
     })
+  });
+  it('should send post request when clicked and valid', () => {
+    
+    expect(component).toBeTruthy();
+
+    var testRegistration : UserRegistration = {
+      "firstName" : "TestName",
+      "lastName" : "TestSurName",
+      "username" : "email@gmail.com",
+      "address" : "AAAAAA",
+      "password" : "Sifra123",
+      "passwordConfirmation" : "Sifra123",
+      "roles" : ["GUEST"],
+      "phoneNumber" : "0694251300"
+    }
+
+    component.registerForm.controls['name'].setValue(testRegistration.firstName)
+    component.registerForm.controls['surname'].setValue(testRegistration.lastName)
+    component.registerForm.controls['email'].setValue(testRegistration.username)
+    component.registerForm.controls['adress'].setValue(testRegistration.address)
+    component.registerForm.controls['password'].setValue(testRegistration.password)
+    component.registerForm.controls['passwordConfirm'].setValue(testRegistration.passwordConfirmation)
+    component.registerForm.controls['phone'].setValue(testRegistration.phoneNumber)
+    const button = fixture.debugElement.query(By.css("button[type='submit']"))
+    button.nativeElement.click();
+    expect(component.registerForm.valid).toBeTruthy();
+    
+    const req = httpClient.expectOne({
+      method : 'POST',
+      url : `${url}/signup`
+    })
+  });
+  it('should send post request with correct data when service function called and valid', () => {
+    
+    expect(component).toBeTruthy();
+
+    var testRegistration : UserRegistration = {
+      "firstName" : "TestName",
+      "lastName" : "TestSurName",
+      "username" : "email@gmail.com",
+      "address" : "AAAAAA",
+      "password" : "Sifra123",
+      "passwordConfirmation" : "Sifra123",
+      "roles" : ["GUEST"],
+      "phoneNumber" : "0694251300"
+    }    
+    component.authService!.register(testRegistration).subscribe((res) => {
+      expect(res).toEqual(testRegistration);
+    }
+    )
+    const req = httpClient.expectOne({
+      method : 'POST',
+      url : `${url}/signup`
+    })
+  });
+  it('should not call function when clicked and invalid', () => {
+    spyOn(component, "_register")
+    expect(component).toBeTruthy();
+    component.registerForm.controls['name'].setValue("TestName")
+    component.registerForm.controls['surname'].setValue("TestSurName")
+    component.registerForm.controls['email'].setValue("email")
+    component.registerForm.controls['adress'].setValue("")
+    component.registerForm.controls['password'].setValue("Sifra12")
+    component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+    expect(component.registerForm.valid).toBeFalsy();
+    const button = fixture.debugElement.query(By.css("button[type='submit']"))
+    button.nativeElement.click();
+    
+    expect(component._register).toHaveBeenCalledTimes(0);
+  });
+    it('should not be clickable when invalid', () => {
+    
+      expect(component).toBeTruthy();
+      component.registerForm.controls['name'].setValue("TestName")
+      component.registerForm.controls['surname'].setValue("TestSurName")
+      component.registerForm.controls['email'].setValue("email")
+      component.registerForm.controls['adress'].setValue("")
+      component.registerForm.controls['password'].setValue("Sifra12")
+      component.registerForm.controls['passwordConfirm'].setValue("Sifra123")
+      expect(component.registerForm.valid).toBeFalsy();
+      const button = fixture.debugElement.query(By.css("button[type='submit']"))
+      expect(button.nativeElement.clickable).toBeFalsy();
+      
+      const req = httpClient.expectNone({
+        method : 'POST',
+        url : `${url}/signup`
+      })
   });
   
 });

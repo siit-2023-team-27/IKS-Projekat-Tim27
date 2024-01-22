@@ -141,6 +141,8 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
       this.accommodationDetailsService.getPrice(this.accommodation.id, date.toDateString()).subscribe({
         next: (data: number) => {
           this.intervalPrice = data;
+          console.log(this.intervalPrice)
+          console.log("this.intervalPrice")
         },
         error: (_) => {console.log("Greska!")}
       });
@@ -175,12 +177,14 @@ export class AccommodationAvailabilityComponent implements AfterViewInit {
         return v;
       })(), v);
     }else if(v > this.dateRange!.start!){
+      this.setPriceForDate(this.dateRange!.start!);
+
       if (this.datesOverlap(this.dateRange.start!, v)){
         this.dateRange = null;
       }
       this.dateRange =  new DateRange(this.dateRange!.start!, (() => {
         let v = new Date(ev);
-
+ 
         return v;
       })());
     }
